@@ -1,0 +1,15 @@
+# ninja log v5
+55	320	7882077248682626	build/win64/_coder_solver_bruteforce_cuda_info.obj	8e9757faebc1ae00
+0	5325	7882077273847512	build/win64/MWCUBLASUtils.obj	519219d876d0dfe3
+60	5986	7882077301918271	build/win64/cpp_mexapi_version.obj	c7645f1f839829aa
+5	6619	7882077311397358	build/win64/rt_nonfinite.obj	823a395dfe9f0ec4
+24	6883	7882077313983662	build/win64/_coder_solver_bruteforce_cuda_api.obj	aaf0346fa2d3bb87
+19	6904	7882077314243672	build/win64/toc.obj	901f3dc89d327717
+42	6922	7882077314433653	build/win64/tic.obj	f6a58ce57ffbaf1a
+67	6946	7882077314673673	build/win64/solver_bruteforce_cuda_mexutil.obj	ef10425c087571aa
+14	6973	7882077314958701	build/win64/solver_bruteforce_cuda_data.obj	e8f3c00b2da638be
+9	6977	7882077314943662	build/win64/solver_bruteforce_cuda_initialize.obj	d6fb2fde645ff5ae
+30	7085	7882077316112319	build/win64/_coder_solver_bruteforce_cuda_mex.obj	f1e696beac8c40e9
+37	7256	7882077317842337	build/win64/solver_bruteforce_cuda_terminate.obj	647e2615aaf1823a
+48	7462	7882077319895180	build/win64/solver_bruteforce_cuda.obj	215ece91151dc8fa
+7465	9436	7882077335786919	solver_bf_cuda_mex.mexw64	dff7d27619c91f91

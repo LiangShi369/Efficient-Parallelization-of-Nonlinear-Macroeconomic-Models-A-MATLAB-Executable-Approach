@@ -39,29 +39,16 @@ w = b' .* q + exp(z).*m ;
 
 parfor is = 1:ns
     for ib = 1:nb
-        if def(is,ib) == 0
-            c1 = w(is,:) - b(ib) ;
-            u = (c1.^(1-sigg) -1) / (1-sigg) ;
-            u(c1<=0) = - Inf ;
-            [vp1(is,ib), bp(is,ib)] = max( u + evp(is,:)) ;
-        end
+        
+        c1 = w(is,:) - b(ib) ;
+        u = (c1.^(1-sigg) -1) / (1-sigg) ;
+        u(c1<=0) = - Inf ;
+        [vp1(is,ib), bp(is,ib)] = max( u + evp(is,:)) ;
+
     end
 end
 
-for is = 1:ns
-    for ib = 1:nb
-        if def(is,ib) == 1
-            vp1(is,ib) = vd1(is) ;
-            bp(is,ib) = 0 ;
-        else
-            if vp1(is,ib) > vd1(is)
-                def(is,ib) = 0 ;
-            else 
-                def(is,ib) = 1 ;
-            end
-        end
-    end
-end
+def = vp1 < repmat(vd1,1,nb); 
 
 qnew = (1- pdf*def) / (1+rstar);
 

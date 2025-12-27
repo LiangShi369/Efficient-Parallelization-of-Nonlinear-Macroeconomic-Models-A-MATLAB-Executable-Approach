@@ -8,7 +8,7 @@ close all
 format compact
 
 run_compile = 0 ;
-run_mex = 1 ;
+run_mex = 0 ;
 run_matlab = 1 ;
 
 n_a    = 1001; % Num of grid points 1001, 1501
@@ -108,22 +108,22 @@ end
 
 if run_matlab
 
-smctime = tic;
-
-if heteroagentoptions.do_GE==1
-    % Find GE prices
-    minoptions = optimset('TolX',heteroagentoptions.toleranceGEprices,'TolFun',heteroagentoptions.toleranceGEcondns,'MaxFunEvals',heteroagentoptions.maxiter);
-    p_eqm = fminsearch(@(p) model_subfuns(p, a_grid, z_grid, pi_z, Params, vfoptions, simoptions, heteroagentoptions),GEPrices0,minoptions);
-    [~,V,Policy,StatDist] = model_subfuns(p_eqm, a_grid, z_grid, pi_z, Params, vfoptions, simoptions, heteroagentoptions); % Recompute model objects at GE prices
-elseif heteroagentoptions.do_GE==0
-    p_eqm = GEPrices0;
-    [~,V,Policy,StatDist] = model_subfuns(p_eqm, a_grid, z_grid, pi_z, Params, vfoptions, simoptions, heteroagentoptions);
-end
-
-Outputs_serial = compute_targets(a_grid, z_grid, pi_z, Policy, StatDist, Params, p_eqm) ;
-totaltime_serial = toc(smctime)
-
-make_table(ResFolder,Outputs_serial,Params) ;
+% smctime = tic;
+% 
+% if heteroagentoptions.do_GE==1
+%     % Find GE prices
+%     minoptions = optimset('TolX',heteroagentoptions.toleranceGEprices,'TolFun',heteroagentoptions.toleranceGEcondns,'MaxFunEvals',heteroagentoptions.maxiter);
+%     p_eqm = fminsearch(@(p) model_subfuns(p, a_grid, z_grid, pi_z, Params, vfoptions, simoptions, heteroagentoptions),GEPrices0,minoptions);
+%     [~,V,Policy,StatDist] = model_subfuns(p_eqm, a_grid, z_grid, pi_z, Params, vfoptions, simoptions, heteroagentoptions); % Recompute model objects at GE prices
+% elseif heteroagentoptions.do_GE==0
+%     p_eqm = GEPrices0;
+%     [~,V,Policy,StatDist] = model_subfuns(p_eqm, a_grid, z_grid, pi_z, Params, vfoptions, simoptions, heteroagentoptions);
+% end
+% 
+% Outputs_serial = compute_targets(a_grid, z_grid, pi_z, Policy, StatDist, Params, p_eqm) ;
+% totaltime_serial = toc(smctime)
+% 
+% make_table(ResFolder,Outputs_serial,Params) ;
 
 %% Matlab parfor
 

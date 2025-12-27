@@ -2,15 +2,15 @@ clear
 
 format compact
 
-nb = 200 ;         % change number of nb within vector [200, 400]
+nb = 400 ;         % change number of nb within vector [200, 400]
 
-run_matlab = 0 ;   % 0 for false              % Run native matlab, can be very slow for matlab parfor, use average
+run_matlab = 1 ;   % 0 for false              % Run native matlab, can be very slow for matlab parfor, use average
 
 generate_mexserial = 0 ;   % 0 for false      % Generate CPU MEX code
 run_mexserial = 0 ;        % 0 for false      % Run MEX/CUDA compiled solvers
 
 generate_mex = 0 ;         % 0 for false      % Generate CPU MEX code and CUDA MEX code
-run_mex = 1 ;
+run_mex = 0 ;
 
 %% Calibration
 phi0 = 0.10  ; 
@@ -75,15 +75,13 @@ end
 %% --- matlab native solve ---
 
 if run_matlab
+% [vp,vd,q_serial,bp,bpr,default,rr,totaltime,avgtime] = solve_benchmark(z,m,b,pdf_joint,para) ;
+% disp(['Serial time total: ', num2str(totaltime)]) ;
+% disp(['Serial time average: ', num2str(avgtime)]) ;
 
-[vp,vd,q_serial,bp,bpr,default,rr,totaltime,avgtime] = solve_benchmark(z,m,b,pdf_joint,para) ;
-disp(['Serial time total: ', num2str(totaltime)]) ;
-disp(['Serial time average: ', num2str(avgtime)]) ;
-
-[vp,vd,q_parfor,bp,bpr,default,rr,totaltime,avgtime] = solve_benchmark_parfor( z,m,b,pdf_joint,para  ) ;
+[vp,vd,q_parfor,bp,bpr,default,rr,totaltime,avgtime] = solve_benchmark_parfor( z,m,b,pdf_joint,para ) ;
 disp(['Parfor time total: ', num2str(totaltime)]) ;
 disp(['Parfor time average: ', num2str(avgtime)]) ;
-
 end
 
 %% --- matlab mex serial solve ---

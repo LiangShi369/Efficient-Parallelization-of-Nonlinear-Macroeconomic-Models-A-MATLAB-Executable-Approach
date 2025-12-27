@@ -1,0 +1,57 @@
+# CompilerName=msvc160
+# Mode=optim
+ninja_required_version = 1.3
+
+# Basic folders
+root = .
+builddir = $root\build\win64
+matlabdir = C:\Program Files\MATLAB\R2023b
+startdir = D:\GitHub\Efficient-Parallelization-of-Nonlinear-Macroeconomic-Models-A-MATLAB-Executable-Approach\Code sovereignDefault
+
+# Toolchain information
+cc = cl
+cxx = cl
+linker = link
+linkerxx = link
+
+cflags =  /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I "$root" /I "$startdir" /I "$root\interface" /I "$matlabdir\extern\include" /I "." -DMODEL=solver_bruteforce_mex  
+
+cxxflags =   /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I "$root" /I "$startdir" /I "$root\interface" /I "$matlabdir\extern\include" /I "." -DMODEL=solver_bruteforce_mex  
+
+ldflags =  /nologo /manifest   /DLL /LIBPATH:"$matlabdir\extern\lib\win64\microsoft" libmx.lib libmex.lib libmat.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib  /out:"solver_bruteforce_mex.mexw64" /LIBPATH:"$matlabdir\extern\lib\win64\microsoft" libmwblas.lib libemlrt.lib libcovrt.lib libut.lib libmwmathutil.lib  /export:mexFunction /export:mexfilerequiredapiversion /export:emlrtMexFcnProperties /export:solver_bruteforce /export:solver_bruteforce_initialize /export:solver_bruteforce_terminate /export:solver_bruteforce_atexit /export:emlrt_marshallOut /export:b_emlrt_marshallIn /export:k_emlrt_marshallIn
+
+linkobjs = 
+
+# Build Rules
+rule cc
+    command = $cc $cflags $in /Fo$out
+
+rule cxx
+    command = $cxx $cxxflags $in /Fo$out
+
+rule link
+    command = $linker @$out.rsp $linkobjs $ldflags
+    rspfile = $out.rsp
+    rspfile_content = $in
+
+rule linkxx
+    command = $linkerxx $in $linkobjs $ldflags
+
+# Build
+build $builddir\solver_bruteforce_data.obj : cc $root\solver_bruteforce_data.c
+build $builddir\rt_nonfinite.obj : cc $root\rt_nonfinite.c
+build $builddir\solver_bruteforce_initialize.obj : cc $root\solver_bruteforce_initialize.c
+build $builddir\solver_bruteforce_terminate.obj : cc $root\solver_bruteforce_terminate.c
+build $builddir\solver_bruteforce.obj : cc $root\solver_bruteforce.c
+build $builddir\power.obj : cc $root\power.c
+build $builddir\tic.obj : cc $root\tic.c
+build $builddir\mtimes.obj : cc $root\mtimes.c
+build $builddir\toc.obj : cc $root\toc.c
+build $builddir\_coder_solver_bruteforce_api.obj : cc $root\interface\_coder_solver_bruteforce_api.c
+build $builddir\_coder_solver_bruteforce_mex.obj : cc $root\interface\_coder_solver_bruteforce_mex.c
+build $builddir\solver_bruteforce_mexutil.obj : cc $root\solver_bruteforce_mexutil.c
+build $builddir\_coder_solver_bruteforce_info.obj : cc $root\interface\_coder_solver_bruteforce_info.c
+build $builddir\c_mexapi_version.obj : cc $matlabdir\extern\version\c_mexapi_version.c
+
+# Link
+build $root\solver_bruteforce_mex.mexw64 : link $builddir\solver_bruteforce_data.obj $builddir\rt_nonfinite.obj $builddir\solver_bruteforce_initialize.obj $builddir\solver_bruteforce_terminate.obj $builddir\solver_bruteforce.obj $builddir\power.obj $builddir\tic.obj $builddir\mtimes.obj $builddir\toc.obj $builddir\_coder_solver_bruteforce_api.obj $builddir\_coder_solver_bruteforce_mex.obj $builddir\solver_bruteforce_mexutil.obj $builddir\_coder_solver_bruteforce_info.obj $builddir\c_mexapi_version.obj 

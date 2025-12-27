@@ -1,0 +1,66 @@
+# CompilerName=msvcpp160
+# Mode=optim
+ninja_required_version = 1.3
+
+# Basic folders
+root = .
+builddir = $root\build\win64
+matlabdir = C:\Program Files\MATLAB\R2023b
+startdir = D:\GitHub\Efficient-Parallelization-of-Nonlinear-Macroeconomic-Models-A-MATLAB-Executable-Approach\Code sovereignDefault
+
+# Toolchain information
+cc = cl
+cxx = cl
+linker = link
+linkerxx = link
+
+cflags =  /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I "$root" /I "$startdir" /I "$matlabdir\sys\cuda\win64\cuda\include" /I "$root\interface" /I "$matlabdir\extern\include" /I "." -DMW_CUDA_ARCH=350 -DMODEL=solver_bf_cuda_mex -DMW_NEEDS_VERSION_H  
+
+cxxflags =   /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I "$root" /I "$startdir" /I "$matlabdir\sys\cuda\win64\cuda\include" /I "$root\interface" /I "$matlabdir\extern\include" /I "." -DMW_CUDA_ARCH=350 -DMODEL=solver_bf_cuda_mex -DMW_NEEDS_VERSION_H  
+
+ldflags =  -Xlinker /nologo -Xlinker /manifest -Xlinker /DLL -L"$matlabdir\extern\lib\win64\microsoft" libmx.lib libmex.lib libmat.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib libMatlabDataArray.lib libMatlabEngine.lib   -L"$matlabdir\sys\cuda\win64\cuda\lib\x64" -L"$matlabdir\bin\win64" libemlrt.lib libcovrt.lib libut.lib libmwmathutil.lib -arch sm_35  -I"$matlabdir\sys\cuda\win64\cuda\include" -lcublas -lcusolver -lcufft -lcurand -lcusparse -Xnvlink -w  -Wno-deprecated-gpu-targets -Xlinker /NODEFAULTLIB:libcmt.lib
+
+linkobjs = 
+
+# Build Rules
+rule cc
+    command = $cc $cflags $in /Fo$out
+
+rule cxx
+    command = $cxx $cxxflags $in /Fo$out
+
+rule link
+    command = $linker @$out.rsp $linkobjs $ldflags
+    rspfile = $out.rsp
+    rspfile_content = $in
+
+rule linkxx
+    command = $linkerxx $in $linkobjs $ldflags
+
+cudac = nvcc
+linkercuda = nvcc
+
+cudaflags =  -c -rdc=true -Wno-deprecated-gpu-targets -Xcompiler "/wd 4819" -Xcompiler "/MD" -Xcudafe "--display_error_number --diag_suppress=2381 --diag_suppress=unsigned_compare_with_zero --diag_suppress=useless_type_qualifier_on_return_type" -D_GNU_SOURCE -DMATLAB_MEX_FILE --no-exceptions -Xcompiler "/EHa" -noprof -ldir "$matlabdir/bin/win64" -Xcompiler "/utf-8" -I "$root" -I "$startdir" -I "$matlabdir\sys\cuda\win64\cuda\include" -I "$root\interface" -I "$matlabdir\extern\include" -I "." -DMW_CUDA_ARCH=350 -DMODEL=solver_bf_cuda_mex -DMW_NEEDS_VERSION_H  -arch sm_35  -I "$matlabdir/simulink/include" -I "$matlabdir/toolbox/shared/simtargets"
+rule cudac
+    command = $cudac $cudaflags $in -o $out
+
+rule linkcuda
+    command = $linkercuda $linkobjs $ldflags -o $out $in
+
+# Build
+build $builddir\MWCUBLASUtils.obj : cudac $root\MWCUBLASUtils.cpp
+build $builddir\solver_bruteforce_cuda_data.obj : cudac $root\solver_bruteforce_cuda_data.cu
+build $builddir\rt_nonfinite.obj : cudac $root\rt_nonfinite.cu
+build $builddir\solver_bruteforce_cuda_initialize.obj : cudac $root\solver_bruteforce_cuda_initialize.cu
+build $builddir\solver_bruteforce_cuda_terminate.obj : cudac $root\solver_bruteforce_cuda_terminate.cu
+build $builddir\solver_bruteforce_cuda.obj : cudac $root\solver_bruteforce_cuda.cu
+build $builddir\tic.obj : cudac $root\tic.cu
+build $builddir\toc.obj : cudac $root\toc.cu
+build $builddir\_coder_solver_bruteforce_cuda_api.obj : cudac $root\interface\_coder_solver_bruteforce_cuda_api.cu
+build $builddir\_coder_solver_bruteforce_cuda_mex.obj : cudac $root\interface\_coder_solver_bruteforce_cuda_mex.cu
+build $builddir\solver_bruteforce_cuda_mexutil.obj : cudac $root\solver_bruteforce_cuda_mexutil.cu
+build $builddir\_coder_solver_bruteforce_cuda_info.obj : cxx $root\interface\_coder_solver_bruteforce_cuda_info.cpp
+build $builddir\cpp_mexapi_version.obj : cudac $root\cpp_mexapi_version.cpp
+
+# Link
+build $root\solver_bf_cuda_mex.mexw64 : linkcuda $builddir\MWCUBLASUtils.obj $builddir\solver_bruteforce_cuda_data.obj $builddir\rt_nonfinite.obj $builddir\solver_bruteforce_cuda_initialize.obj $builddir\solver_bruteforce_cuda_terminate.obj $builddir\solver_bruteforce_cuda.obj $builddir\tic.obj $builddir\toc.obj $builddir\_coder_solver_bruteforce_cuda_api.obj $builddir\_coder_solver_bruteforce_cuda_mex.obj $builddir\solver_bruteforce_cuda_mexutil.obj $builddir\_coder_solver_bruteforce_cuda_info.obj $builddir\cpp_mexapi_version.obj 

@@ -1,0 +1,86 @@
+[
+  {
+    "directory": "D:\\GitHub\\Efficient-Parallelization-of-Nonlinear-Macroeconomic-Models-A-MATLAB-Executable-Approach\\Code sovereignDefault\\codegen\\mex\\solver_bf_parfor",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\GitHub\\Efficient-Parallelization-of-Nonlinear-Macroeconomic-Models-A-MATLAB-Executable-Approach\\Code sovereignDefault\" /I \".\\interface\" /I \"C:\\Program Files\\MATLAB\\R2023b\\extern\\include\" /I \".\" -DMODEL=solver_bf_parfor_mex /openmp /wd4101  solver_bf_parfor_data.c /Fobuild\\win64\\solver_bf_parfor_data.obj",
+    "file": "solver_bf_parfor_data.c",
+    "output": "build/win64/solver_bf_parfor_data.obj"
+  },
+  {
+    "directory": "D:\\GitHub\\Efficient-Parallelization-of-Nonlinear-Macroeconomic-Models-A-MATLAB-Executable-Approach\\Code sovereignDefault\\codegen\\mex\\solver_bf_parfor",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\GitHub\\Efficient-Parallelization-of-Nonlinear-Macroeconomic-Models-A-MATLAB-Executable-Approach\\Code sovereignDefault\" /I \".\\interface\" /I \"C:\\Program Files\\MATLAB\\R2023b\\extern\\include\" /I \".\" -DMODEL=solver_bf_parfor_mex /openmp /wd4101  rt_nonfinite.c /Fobuild\\win64\\rt_nonfinite.obj",
+    "file": "rt_nonfinite.c",
+    "output": "build/win64/rt_nonfinite.obj"
+  },
+  {
+    "directory": "D:\\GitHub\\Efficient-Parallelization-of-Nonlinear-Macroeconomic-Models-A-MATLAB-Executable-Approach\\Code sovereignDefault\\codegen\\mex\\solver_bf_parfor",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\GitHub\\Efficient-Parallelization-of-Nonlinear-Macroeconomic-Models-A-MATLAB-Executable-Approach\\Code sovereignDefault\" /I \".\\interface\" /I \"C:\\Program Files\\MATLAB\\R2023b\\extern\\include\" /I \".\" -DMODEL=solver_bf_parfor_mex /openmp /wd4101  solver_bf_parfor_initialize.c /Fobuild\\win64\\solver_bf_parfor_initialize.obj",
+    "file": "solver_bf_parfor_initialize.c",
+    "output": "build/win64/solver_bf_parfor_initialize.obj"
+  },
+  {
+    "directory": "D:\\GitHub\\Efficient-Parallelization-of-Nonlinear-Macroeconomic-Models-A-MATLAB-Executable-Approach\\Code sovereignDefault\\codegen\\mex\\solver_bf_parfor",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\GitHub\\Efficient-Parallelization-of-Nonlinear-Macroeconomic-Models-A-MATLAB-Executable-Approach\\Code sovereignDefault\" /I \".\\interface\" /I \"C:\\Program Files\\MATLAB\\R2023b\\extern\\include\" /I \".\" -DMODEL=solver_bf_parfor_mex /openmp /wd4101  solver_bf_parfor_terminate.c /Fobuild\\win64\\solver_bf_parfor_terminate.obj",
+    "file": "solver_bf_parfor_terminate.c",
+    "output": "build/win64/solver_bf_parfor_terminate.obj"
+  },
+  {
+    "directory": "D:\\GitHub\\Efficient-Parallelization-of-Nonlinear-Macroeconomic-Models-A-MATLAB-Executable-Approach\\Code sovereignDefault\\codegen\\mex\\solver_bf_parfor",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\GitHub\\Efficient-Parallelization-of-Nonlinear-Macroeconomic-Models-A-MATLAB-Executable-Approach\\Code sovereignDefault\" /I \".\\interface\" /I \"C:\\Program Files\\MATLAB\\R2023b\\extern\\include\" /I \".\" -DMODEL=solver_bf_parfor_mex /openmp /wd4101  solver_bf_parfor.c /Fobuild\\win64\\solver_bf_parfor.obj",
+    "file": "solver_bf_parfor.c",
+    "output": "build/win64/solver_bf_parfor.obj"
+  },
+  {
+    "directory": "D:\\GitHub\\Efficient-Parallelization-of-Nonlinear-Macroeconomic-Models-A-MATLAB-Executable-Approach\\Code sovereignDefault\\codegen\\mex\\solver_bf_parfor",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\GitHub\\Efficient-Parallelization-of-Nonlinear-Macroeconomic-Models-A-MATLAB-Executable-Approach\\Code sovereignDefault\" /I \".\\interface\" /I \"C:\\Program Files\\MATLAB\\R2023b\\extern\\include\" /I \".\" -DMODEL=solver_bf_parfor_mex /openmp /wd4101  power.c /Fobuild\\win64\\power.obj",
+    "file": "power.c",
+    "output": "build/win64/power.obj"
+  },
+  {
+    "directory": "D:\\GitHub\\Efficient-Parallelization-of-Nonlinear-Macroeconomic-Models-A-MATLAB-Executable-Approach\\Code sovereignDefault\\codegen\\mex\\solver_bf_parfor",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\GitHub\\Efficient-Parallelization-of-Nonlinear-Macroeconomic-Models-A-MATLAB-Executable-Approach\\Code sovereignDefault\" /I \".\\interface\" /I \"C:\\Program Files\\MATLAB\\R2023b\\extern\\include\" /I \".\" -DMODEL=solver_bf_parfor_mex /openmp /wd4101  tic.c /Fobuild\\win64\\tic.obj",
+    "file": "tic.c",
+    "output": "build/win64/tic.obj"
+  },
+  {
+    "directory": "D:\\GitHub\\Efficient-Parallelization-of-Nonlinear-Macroeconomic-Models-A-MATLAB-Executable-Approach\\Code sovereignDefault\\codegen\\mex\\solver_bf_parfor",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\GitHub\\Efficient-Parallelization-of-Nonlinear-Macroeconomic-Models-A-MATLAB-Executable-Approach\\Code sovereignDefault\" /I \".\\interface\" /I \"C:\\Program Files\\MATLAB\\R2023b\\extern\\include\" /I \".\" -DMODEL=solver_bf_parfor_mex /openmp /wd4101  mtimes.c /Fobuild\\win64\\mtimes.obj",
+    "file": "mtimes.c",
+    "output": "build/win64/mtimes.obj"
+  },
+  {
+    "directory": "D:\\GitHub\\Efficient-Parallelization-of-Nonlinear-Macroeconomic-Models-A-MATLAB-Executable-Approach\\Code sovereignDefault\\codegen\\mex\\solver_bf_parfor",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\GitHub\\Efficient-Parallelization-of-Nonlinear-Macroeconomic-Models-A-MATLAB-Executable-Approach\\Code sovereignDefault\" /I \".\\interface\" /I \"C:\\Program Files\\MATLAB\\R2023b\\extern\\include\" /I \".\" -DMODEL=solver_bf_parfor_mex /openmp /wd4101  toc.c /Fobuild\\win64\\toc.obj",
+    "file": "toc.c",
+    "output": "build/win64/toc.obj"
+  },
+  {
+    "directory": "D:\\GitHub\\Efficient-Parallelization-of-Nonlinear-Macroeconomic-Models-A-MATLAB-Executable-Approach\\Code sovereignDefault\\codegen\\mex\\solver_bf_parfor",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\GitHub\\Efficient-Parallelization-of-Nonlinear-Macroeconomic-Models-A-MATLAB-Executable-Approach\\Code sovereignDefault\" /I \".\\interface\" /I \"C:\\Program Files\\MATLAB\\R2023b\\extern\\include\" /I \".\" -DMODEL=solver_bf_parfor_mex /openmp /wd4101  interface\\_coder_solver_bf_parfor_api.c /Fobuild\\win64\\_coder_solver_bf_parfor_api.obj",
+    "file": "interface/_coder_solver_bf_parfor_api.c",
+    "output": "build/win64/_coder_solver_bf_parfor_api.obj"
+  },
+  {
+    "directory": "D:\\GitHub\\Efficient-Parallelization-of-Nonlinear-Macroeconomic-Models-A-MATLAB-Executable-Approach\\Code sovereignDefault\\codegen\\mex\\solver_bf_parfor",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\GitHub\\Efficient-Parallelization-of-Nonlinear-Macroeconomic-Models-A-MATLAB-Executable-Approach\\Code sovereignDefault\" /I \".\\interface\" /I \"C:\\Program Files\\MATLAB\\R2023b\\extern\\include\" /I \".\" -DMODEL=solver_bf_parfor_mex /openmp /wd4101  interface\\_coder_solver_bf_parfor_mex.c /Fobuild\\win64\\_coder_solver_bf_parfor_mex.obj",
+    "file": "interface/_coder_solver_bf_parfor_mex.c",
+    "output": "build/win64/_coder_solver_bf_parfor_mex.obj"
+  },
+  {
+    "directory": "D:\\GitHub\\Efficient-Parallelization-of-Nonlinear-Macroeconomic-Models-A-MATLAB-Executable-Approach\\Code sovereignDefault\\codegen\\mex\\solver_bf_parfor",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\GitHub\\Efficient-Parallelization-of-Nonlinear-Macroeconomic-Models-A-MATLAB-Executable-Approach\\Code sovereignDefault\" /I \".\\interface\" /I \"C:\\Program Files\\MATLAB\\R2023b\\extern\\include\" /I \".\" -DMODEL=solver_bf_parfor_mex /openmp /wd4101  solver_bf_parfor_mexutil.c /Fobuild\\win64\\solver_bf_parfor_mexutil.obj",
+    "file": "solver_bf_parfor_mexutil.c",
+    "output": "build/win64/solver_bf_parfor_mexutil.obj"
+  },
+  {
+    "directory": "D:\\GitHub\\Efficient-Parallelization-of-Nonlinear-Macroeconomic-Models-A-MATLAB-Executable-Approach\\Code sovereignDefault\\codegen\\mex\\solver_bf_parfor",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\GitHub\\Efficient-Parallelization-of-Nonlinear-Macroeconomic-Models-A-MATLAB-Executable-Approach\\Code sovereignDefault\" /I \".\\interface\" /I \"C:\\Program Files\\MATLAB\\R2023b\\extern\\include\" /I \".\" -DMODEL=solver_bf_parfor_mex /openmp /wd4101  interface\\_coder_solver_bf_parfor_info.c /Fobuild\\win64\\_coder_solver_bf_parfor_info.obj",
+    "file": "interface/_coder_solver_bf_parfor_info.c",
+    "output": "build/win64/_coder_solver_bf_parfor_info.obj"
+  },
+  {
+    "directory": "D:\\GitHub\\Efficient-Parallelization-of-Nonlinear-Macroeconomic-Models-A-MATLAB-Executable-Approach\\Code sovereignDefault\\codegen\\mex\\solver_bf_parfor",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\GitHub\\Efficient-Parallelization-of-Nonlinear-Macroeconomic-Models-A-MATLAB-Executable-Approach\\Code sovereignDefault\" /I \".\\interface\" /I \"C:\\Program Files\\MATLAB\\R2023b\\extern\\include\" /I \".\" -DMODEL=solver_bf_parfor_mex /openmp /wd4101  \"C:\\Program Files\\MATLAB\\R2023b\\extern\\version\\c_mexapi_version.c\" /Fobuild\\win64\\c_mexapi_version.obj",
+    "file": "C:/Program Files/MATLAB/R2023b/extern/version/c_mexapi_version.c",
+    "output": "build/win64/c_mexapi_version.obj"
+  }
+]

@@ -46,40 +46,24 @@ w = b' .* q + exp(z).*m ;
 coder.gpu.kernel()
 for is = 1:ns
     for ib = 1:nb
-        if def(is,ib) == 0
-            tmpmax = - Inf ; 
-            maxidx = 0 ;
-            coder.gpu.constantMemory(b); 
-            for i = 1:nb
-                c =  w(is,i)  - b(ib) ;
-                if c <= 0
-                    u = - Inf ; 
-                else
-                    u = (c^(1-sigg)-1)/(1-sigg) + evp(is,i);
-                end
-                if tmpmax < u; tmpmax = u; maxidx = i ;end
+        tmpmax = - Inf ; 
+        maxidx = 0 ;
+        coder.gpu.constantMemory(b); 
+        for i = 1:nb
+            c =  w(is,i)  - b(ib) ;
+            if c <= 0
+                u = - Inf ; 
+            else
+                u = (c^(1-sigg)-1)/(1-sigg) + evp(is,i);
             end
-            vp1(is,ib) = tmpmax;
-            bp(is,ib) = maxidx;
+            if tmpmax < u; tmpmax = u; maxidx = i ;end
         end
+        vp1(is,ib) = tmpmax;
+        bp(is,ib) = maxidx;
     end
 end
 
-coder.gpu.kernel()
-for is = 1:ns
-    for ib = 1:nb
-        if def(is,ib) == 1
-            vp1(is,ib) = vd1(is) ;
-            bp(is,ib) = 0 ;
-        else
-            if vp1(is,ib) > vd1(is)
-                def(is,ib) = 0 ;
-            else 
-                def(is,ib) = 1 ;
-            end
-        end
-    end
-end
+def = vp1 < repmat(vd1,1,nb); 
 
 qnew = (1- pdf*def)/(1+rstar);
 

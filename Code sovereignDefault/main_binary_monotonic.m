@@ -5,7 +5,7 @@ clear
 format compact
 
 %%
-nb = 200;   % change number of nb within vector [200, 400]
+nb = 400;   % change number of nb within vector [200, 400]
 
 run_bruteforce_matlab = 0 ;  % 0 for false, 1 for true
 
