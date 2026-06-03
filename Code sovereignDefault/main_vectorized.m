@@ -64,7 +64,7 @@ if run_matlab
 disp(['Matlab vec time total: ', num2str(totaltime)]) ;
 disp(['Matlab vec time average: ', num2str(avgtime)]) ;
 
-reset(gpuDevice)
+wait(gpuDevice)
 [q1,bp1,vp1,def1,totaltime1,avgtime1] = solver_vec_gpu(b,z,m,pdf,para) ;
 disp(['gpuArray time total: ', num2str(totaltime1)]) ;
 disp(['gpuArray time average: ', num2str(avgtime1)]) ;
@@ -74,10 +74,13 @@ end
 %% Matlab native GPU
 
 if compile_mex
+
 cfg = coder.gpuConfig('mex');
 cfg.GenerateReport = true;
 codegen -config cfg solver_vec_cuda -args {b,z,m,pdf,para} -o solver_vec_cuda_mex
+
 end
+
 
 if run_mex
 

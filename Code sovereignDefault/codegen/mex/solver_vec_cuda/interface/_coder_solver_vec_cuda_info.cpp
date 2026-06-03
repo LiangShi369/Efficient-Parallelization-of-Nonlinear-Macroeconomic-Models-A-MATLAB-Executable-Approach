@@ -20,27 +20,28 @@ static const mxArray *c_emlrtMexFcnResolvedFunctionsI();
 static const mxArray *c_emlrtMexFcnResolvedFunctionsI()
 {
   const mxArray *nameCaptureInfo;
-  const char_T *data[6]{
-      "789ced564b6fd340101e5b4949255ad20be2c0c1474e154848148e7d01aad2544a05088c"
-      "52d7de26267ee1471eff801bfc048e3d728cb8c0919f8004dcfb33d8"
-      "c45ec71965d810a92907465aed7e99ddf96667c73301e5694d01807548e5db4a3aaf65b8"
-      "9acd2a4c0bd62bc42ca40ca5a97342ff3e9b4ddf8b593f4e8167b82c",
-      "3f697b41121f0f02167110b2c877bacc1a6bce6c871ddb2e6b14c1e108b9fb05550e46aa"
-      "d17aa7cdcc4e2371216c47130f9d22c8e37142dcb7248907161c0fbc"
-      "4ff0050bf209fb37247c423f0e63d8ec32b369269691f37f27ec6f207bd8be927958dba9"
-      "37529c26521487b6d79adcaf4fd8171808fd0ae2c5fc427f6bf2d32f",
-      "35db571cb27bce1be798f0a38af4aff65eef3ed2b70ddb4a1a03cfb4eca8a3f7fcb0c383"
-      "a20546c0c2483f3242c37198a399becb53dd886ddfd37a76dcd66aac"
-      "af9bbec59a2d8e92537d87afb5c8e70fc7ec96b7cbce8cc48975f4949b2e803c7f451ec8"
-      "ee49c57b0d2ae3f9cb8f9fca32f93e3fdbbcbd4c3e2157c5477d2ff3",
-      "e6e94d82af8af42f1f9becf0edd69beec3fa83debdfd83fb770fea9ded891f47121e991f"
-      "40e065d97f52997d7e754efb17d766db57911e503f1d5e723f5d457a"
-      "81451d1622fcb943f8f3f7f57ddacea8af3e0f8d8057b466b3c0372ccfe693bdabacde0b"
-      "fb9a32fbbcec5dbf4aecab685f29fb6d8b8f1790f6e98f7c9c17c627",
-      "3e0c6f90f73c4af0db0b7e31fe240ab19eb56f58c0eb482ff045362f5acf3610c6fbdf21"
-      "bd8a70961ef97bcb660b7c48e0141c6073ad23de89438eccac23e7f5"
-      "86c81b595e62ffa9bca4fec7cdfbdd0381c577ffaff39f10f6af4bf865f12d137df2ff7b"
-      "5e2e7f65c13a2bec9d13f655a4c7fdf30361f7aafaa790df939ea38e",
+  const char_T *data[7]{
+      "789ced563d6f134110dd3bd9c19148701a4479255584446144479c38448ac1c89140e2d0"
+      "65b9dbd82bdf97ee23b1ff011d94949429295d5222f10728a04fcf1f"
+      "60edbb3d9f471ed6588a43c148abbde7b7376f76766ec7443b6a6b84906d92d9d78d6cde"
+      "ca713d9f75326f90d790595a9554e6de93fcfb7cb6033f61c324033e",
+      "f558f126f7c3343919852c16206271e09e3367ca9c71979d708f75cbe0d90479ad125580"
+      "0935796ef6993de8a61e89faf12c42b70c8a7c9c22fbad28f2010de6"
+      "03ae937ae18a7ad2ff1d859ee4a7698cac73665b76ead042ff3be27f07f883feb53cc276"
+      "f37937c35921c549c4fdde6c7f43c4bfc404e137802ed497fcbdd94f",
+      "3ff57c5d79a8f6b96c9e53248e3ae05f1fbcd97f6cee51eea4dd916f3b3c1e9817413410"
+      "4931421ab228363b34a2aecb5cc30e3c51ea34e1816f5cf0a46fb4d9"
+      "d0b40387593d9e442c0ccca600461c889363bce7efb3339aba8909ce72d723eafa9575a0"
+      "da2796ef2d529bce1f7ffd9852ebd23bdeed7d5ba79eb49bd2c3be97",
+      "65ebf42ea25707fc83bde3c346b7411f36472f78e3093f6ab55ac1c12c8e8e4247150741"
+      "f0bafc3fad2d7e7f7349ff57b716fbd7014f403f1d5f733fdd04bcc4"
+      "f21e9626e3b98fc4f3f7f7fbbc9f495f7d19d150dc689655d21b5717eba9ce5575df4bff"
+      "86b6f87dd5b97e51f8d7c1ba4afedb23315e91ac4f7f12e3b2343e8b",
+      "41fd51d1f33083672ff5e5f89369c8f3a275e312de06bcc457f9bcea7db603305cff0ef0"
+      "3ac0797914e7ad9a1d1288defa96b8842df51c93844402d92499db77"
+      "07a91b555dc2f8b1bac4fec72dfbdd1304cbeffe5fd73f45fcdf56e8abf25b45fae4fff3"
+      "bc5efdda8af7acf47789f8d7010ffbe707c4ef4df54f69bf012287a3",
+      "e7",
       ""};
   nameCaptureInfo = nullptr;
   emlrtNameCaptureMxArrayR2016a(&data[0], 3896U, &nameCaptureInfo);
@@ -91,18 +92,18 @@ mxArray *emlrtMexFcnProperties()
       xEntryPoints, 0, "ResolvedFilePath",
       emlrtMxCreateString(
           "D:\\BaiduSyncdisk\\working papers\\Parallel computation with "
-          "Mex\\code_github\\Code sovereignDefault\\solver_vec_cuda.m"));
+          "Mex\\code_gitrepo\\Code sovereignDefault\\solver_vec_cuda.m"));
   emlrtSetField(xEntryPoints, 0, "TimeStamp",
-                emlrtMxCreateDoubleScalar(740106.5495023148));
+                emlrtMxCreateDoubleScalar(740136.9010185185));
   emlrtSetField(xEntryPoints, 0, "Visible", emlrtMxCreateLogicalScalar(true));
   xResult =
       emlrtCreateStructMatrix(1, 1, 7, (const char_T **)&propFieldName[0]);
   emlrtSetField(xResult, 0, "Version",
-                emlrtMxCreateString("26.1.0.3203278 (R2026a)"));
+                emlrtMxCreateString("26.1.0.3251617 (R2026a) Update 2"));
   emlrtSetField(xResult, 0, "ResolvedFunctions",
                 (mxArray *)c_emlrtMexFcnResolvedFunctionsI());
   emlrtSetField(xResult, 0, "Checksum",
-                emlrtMxCreateString("QA0BPnyqrtukbp7ETQGnyF"));
+                emlrtMxCreateString("OxfFXDUiiL03fpxAK8Xg6D"));
   emlrtSetField(xResult, 0, "EntryPoints", xEntryPoints);
   emlrtSetField(xResult, 0, "AuxData",
                 emlrtMxCreateRowVectorUINT8((const uint8_T *)&v, 216U));

@@ -77,94 +77,88 @@ static __global__ void solver_vec_cuda_kernel07(const real_T b[200],
 static __global__ void solver_vec_cuda_kernel08(const real_T b[200],
                                                 real_T bptry[25000000]);
 
-static __global__ void solver_vec_cuda_kernel09(const real_T vd[625],
-                                                real_T vo[625]);
+static __global__ void solver_vec_cuda_kernel09(real_T vp[125000]);
 
-static __global__ void solver_vec_cuda_kernel10(const struct0_T para,
-                                                real_T q[125000]);
+static __global__ void solver_vec_cuda_kernel10(real_T vd[625], real_T vo[625]);
 
-static __global__ void solver_vec_cuda_kernel11(const real_T q[125000],
+static __global__ void solver_vec_cuda_kernel11(const struct0_T para,
+                                                real_T q[125000],
+                                                real_T bp[125000],
+                                                real_T def[125000]);
+
+static __global__ void solver_vec_cuda_kernel12(const real_T q[125000],
                                                 real_T qtry[25000000]);
 
-static __global__ void solver_vec_cuda_kernel12(
+static __global__ void solver_vec_cuda_kernel13(
     const real_T btry[25000000], const real_T bptry[25000000],
     const real_T mtry[25000000], const real_T ztry[25000000], const real_T *b,
     real_T qtry[25000000], real_T utry[25000000]);
 
-static __global__ void solver_vec_cuda_kernel13(const real_T m[625],
+static __global__ void solver_vec_cuda_kernel14(const real_T m[625],
                                                 const real_T *b, real_T y[625]);
 
-static __global__ void solver_vec_cuda_kernel14(const real_T pdf[390625],
+static __global__ void solver_vec_cuda_kernel15(const real_T pdf[390625],
                                                 const real_T y[625],
                                                 real_T a[390625]);
 
-static __global__ void solver_vec_cuda_kernel15(const real_T mtry[125000],
+static __global__ void solver_vec_cuda_kernel16(const real_T mtry[125000],
                                                 real_T qtry[25000000]);
 
-static __global__ void solver_vec_cuda_kernel16(const real_T *betta,
+static __global__ void solver_vec_cuda_kernel17(const real_T *betta,
                                                 const real_T qtry[25000000],
                                                 real_T utry[25000000]);
 
-static __global__ void solver_vec_cuda_kernel17(uint8_T idx[125000]);
+static __global__ void solver_vec_cuda_kernel18(uint8_T idx[125000]);
 
-static __global__ void solver_vec_cuda_kernel18(const real_T utry[25000000],
+static __global__ void solver_vec_cuda_kernel19(const real_T utry[25000000],
                                                 real_T ex[125000],
                                                 uint8_T idx[125000]);
 
-static __global__ void solver_vec_cuda_kernel19(const uint8_T idx[125000],
+static __global__ void solver_vec_cuda_kernel20(const uint8_T idx[125000],
                                                 real_T bp[125000]);
 
-static __global__ void solver_vec_cuda_kernel20(const real_T pdf[390625],
+static __global__ void solver_vec_cuda_kernel21(const real_T pdf[390625],
                                                 const real_T *betta,
                                                 const real_T y[625],
                                                 real_T a[390625]);
 
-static __global__ void solver_vec_cuda_kernel21(const real_T theta,
+static __global__ void solver_vec_cuda_kernel22(const real_T theta,
                                                 const real_T vd[625],
                                                 const real_T b, real_T vo[625]);
 
-static __global__ void solver_vec_cuda_kernel22(const real_T ua[625],
+static __global__ void solver_vec_cuda_kernel23(const real_T ua[625],
                                                 real_T vd1[625]);
 
-static __global__ void solver_vec_cuda_kernel23(const real_T vd1[625],
+static __global__ void solver_vec_cuda_kernel24(const real_T vd1[625],
                                                 real_T mtry[125000]);
 
-static __global__ void solver_vec_cuda_kernel24(const real_T mtry[125000],
+static __global__ void solver_vec_cuda_kernel25(const real_T mtry[125000],
                                                 const real_T ex[125000],
-                                                boolean_T def[125000]);
-
-static __global__ void solver_vec_cuda_kernel25(const int32_T coffset,
-                                                real_T qnew[125000]);
-
-static __global__ void solver_vec_cuda_kernel26(const real_T pdf[390625],
-                                                const int32_T coffset,
-                                                const int32_T aoffset,
-                                                const boolean_T bkj,
-                                                real_T qnew[125000]);
+                                                real_T def[125000]);
 
 static __global__ void
-solver_vec_cuda_kernel27(const real_T diff, const real_T ex[125000],
+solver_vec_cuda_kernel26(const real_T diff, const real_T ex[125000],
                          real_T q[125000], real_T mtry[125000],
                          real_T qnew[125000], real_T vp_1[125000]);
 
-static __global__ void solver_vec_cuda_kernel28(const real_T vp_1[125000],
+static __global__ void solver_vec_cuda_kernel27(const real_T vp_1[125000],
                                                 real_T vp[125000],
                                                 real_T mtry[125000]);
 
-static __global__ void solver_vec_cuda_kernel29(const real_T vd1[625],
+static __global__ void solver_vec_cuda_kernel28(const real_T vd1[625],
                                                 real_T vd[625], real_T y[625]);
 
-static __global__ void solver_vec_cuda_kernel30(const int32_T nb0,
+static __global__ void solver_vec_cuda_kernel29(const int32_T nb0,
                                                 const real_T vp_1[125000],
                                                 real_T vo[625]);
 
-static __global__ void solver_vec_cuda_kernel31(const real_T vp_1[125000],
+static __global__ void solver_vec_cuda_kernel30(const real_T vp_1[125000],
                                                 real_T vp[125000]);
 
-static __global__ void solver_vec_cuda_kernel32(const real_T vd1[625],
+static __global__ void solver_vec_cuda_kernel31(const real_T vd1[625],
                                                 real_T vd[625]);
 
-static __global__ void solver_vec_cuda_kernel33(const real_T qnew[125000],
+static __global__ void solver_vec_cuda_kernel32(const real_T qnew[125000],
                                                 real_T q[125000]);
 
 // Function Definitions
@@ -339,27 +333,42 @@ static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel08(
   }
 }
 
-static __global__ __launch_bounds__(128, 1) void solver_vec_cuda_kernel09(
-    const real_T vd[625], real_T vo[625])
-{
-  int32_T ibmat;
-  ibmat = static_cast<int32_T>(mwGetGlobalThreadIndex());
-  if (ibmat < 625) {
-    vo[ibmat] = vd[ibmat];
-  }
-}
-
-static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel10(
-    const struct0_T para, real_T q[125000])
+static __global__
+    __launch_bounds__(256, 1) void solver_vec_cuda_kernel09(real_T vp[125000])
 {
   int32_T ibmat;
   ibmat = static_cast<int32_T>(mwGetGlobalThreadIndex());
   if (ibmat < 125000) {
-    q[ibmat] = 1.0 / (para.rstar + 1.0);
+    vp[ibmat] = 0.0;
+  }
+}
+
+static __global__
+    __launch_bounds__(128, 1) void solver_vec_cuda_kernel10(real_T vd[625],
+                                                            real_T vo[625])
+{
+  int32_T ibmat;
+  ibmat = static_cast<int32_T>(mwGetGlobalThreadIndex());
+  if (ibmat < 625) {
+    vd[ibmat] = 0.0;
+    vo[ibmat] = 0.0;
   }
 }
 
 static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel11(
+    const struct0_T para, real_T q[125000], real_T bp[125000],
+    real_T def[125000])
+{
+  int32_T ibmat;
+  ibmat = static_cast<int32_T>(mwGetGlobalThreadIndex());
+  if (ibmat < 125000) {
+    def[ibmat] = 0.0;
+    bp[ibmat] = 0.0;
+    q[ibmat] = 1.0 / (para.rstar + 1.0);
+  }
+}
+
+static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel12(
     const real_T q[125000], real_T qtry[25000000])
 {
   uint64_T gThreadId;
@@ -377,7 +386,7 @@ static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel11(
   }
 }
 
-static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel12(
+static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel13(
     const real_T btry[25000000], const real_T bptry[25000000],
     const real_T mtry[25000000], const real_T ztry[25000000], const real_T *b,
     real_T qtry[25000000], real_T utry[25000000])
@@ -395,7 +404,7 @@ static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel12(
   }
 }
 
-static __global__ __launch_bounds__(128, 1) void solver_vec_cuda_kernel13(
+static __global__ __launch_bounds__(128, 1) void solver_vec_cuda_kernel14(
     const real_T m[625], const real_T *b, real_T y[625])
 {
   int32_T ibmat;
@@ -405,7 +414,7 @@ static __global__ __launch_bounds__(128, 1) void solver_vec_cuda_kernel13(
   }
 }
 
-static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel14(
+static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel15(
     const real_T pdf[390625], const real_T y[625], real_T a[390625])
 {
   uint64_T gThreadId;
@@ -421,7 +430,7 @@ static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel14(
   }
 }
 
-static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel15(
+static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel16(
     const real_T mtry[125000], real_T qtry[25000000])
 {
   uint64_T gThreadId;
@@ -439,7 +448,7 @@ static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel15(
   }
 }
 
-static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel16(
+static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel17(
     const real_T *betta, const real_T qtry[25000000], real_T utry[25000000])
 {
   int32_T ibmat;
@@ -450,7 +459,7 @@ static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel16(
 }
 
 static __global__
-    __launch_bounds__(256, 1) void solver_vec_cuda_kernel17(uint8_T idx[125000])
+    __launch_bounds__(256, 1) void solver_vec_cuda_kernel18(uint8_T idx[125000])
 {
   int32_T ibmat;
   ibmat = static_cast<int32_T>(mwGetGlobalThreadIndex());
@@ -459,7 +468,7 @@ static __global__
   }
 }
 
-static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel18(
+static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel19(
     const real_T utry[25000000], real_T ex[125000], uint8_T idx[125000])
 {
   real_T b;
@@ -490,7 +499,7 @@ static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel18(
   }
 }
 
-static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel19(
+static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel20(
     const uint8_T idx[125000], real_T bp[125000])
 {
   int32_T ibmat;
@@ -500,7 +509,7 @@ static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel19(
   }
 }
 
-static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel20(
+static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel21(
     const real_T pdf[390625], const real_T *betta, const real_T y[625],
     real_T a[390625])
 {
@@ -517,7 +526,7 @@ static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel20(
   }
 }
 
-static __global__ __launch_bounds__(128, 1) void solver_vec_cuda_kernel21(
+static __global__ __launch_bounds__(128, 1) void solver_vec_cuda_kernel22(
     const real_T theta, const real_T vd[625], const real_T b, real_T vo[625])
 {
   int32_T ibmat;
@@ -527,7 +536,7 @@ static __global__ __launch_bounds__(128, 1) void solver_vec_cuda_kernel21(
   }
 }
 
-static __global__ __launch_bounds__(128, 1) void solver_vec_cuda_kernel22(
+static __global__ __launch_bounds__(128, 1) void solver_vec_cuda_kernel23(
     const real_T ua[625], real_T vd1[625])
 {
   int32_T ibmat;
@@ -537,7 +546,7 @@ static __global__ __launch_bounds__(128, 1) void solver_vec_cuda_kernel22(
   }
 }
 
-static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel23(
+static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel24(
     const real_T vd1[625], real_T mtry[125000])
 {
   uint64_T gThreadId;
@@ -551,40 +560,17 @@ static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel23(
   }
 }
 
-static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel24(
-    const real_T mtry[125000], const real_T ex[125000], boolean_T def[125000])
+static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel25(
+    const real_T mtry[125000], const real_T ex[125000], real_T def[125000])
 {
   int32_T ibmat;
   ibmat = static_cast<int32_T>(mwGetGlobalThreadIndex());
   if (ibmat < 125000) {
-    def[ibmat] = (ex[ibmat] < mtry[ibmat]);
+    def[ibmat] = static_cast<real_T>(ex[ibmat] < mtry[ibmat]);
   }
 }
 
-static __global__ __launch_bounds__(128, 1) void solver_vec_cuda_kernel25(
-    const int32_T coffset, real_T qnew[125000])
-{
-  int32_T jcol;
-  jcol = static_cast<int32_T>(mwGetGlobalThreadIndex());
-  if (jcol < 625) {
-    qnew[coffset + jcol] = 0.0;
-  }
-}
-
-static __global__ __launch_bounds__(128, 1) void solver_vec_cuda_kernel26(
-    const real_T pdf[390625], const int32_T coffset, const int32_T aoffset,
-    const boolean_T bkj, real_T qnew[125000])
-{
-  int32_T ibtile;
-  int32_T jcol;
-  jcol = static_cast<int32_T>(mwGetGlobalThreadIndex());
-  if (jcol < 625) {
-    ibtile = coffset + jcol;
-    qnew[ibtile] += pdf[aoffset + jcol] * static_cast<real_T>(bkj);
-  }
-}
-
-static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel27(
+static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel26(
     const real_T diff, const real_T ex[125000], real_T q[125000],
     real_T mtry[125000], real_T qnew[125000], real_T vp_1[125000])
 {
@@ -601,7 +587,7 @@ static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel27(
   }
 }
 
-static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel28(
+static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel27(
     const real_T vp_1[125000], real_T vp[125000], real_T mtry[125000])
 {
   real_T b;
@@ -614,7 +600,7 @@ static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel28(
   }
 }
 
-static __global__ __launch_bounds__(128, 1) void solver_vec_cuda_kernel29(
+static __global__ __launch_bounds__(128, 1) void solver_vec_cuda_kernel28(
     const real_T vd1[625], real_T vd[625], real_T y[625])
 {
   real_T b;
@@ -627,7 +613,7 @@ static __global__ __launch_bounds__(128, 1) void solver_vec_cuda_kernel29(
   }
 }
 
-static __global__ __launch_bounds__(128, 1) void solver_vec_cuda_kernel30(
+static __global__ __launch_bounds__(128, 1) void solver_vec_cuda_kernel29(
     const int32_T nb0, const real_T vp_1[125000], real_T vo[625])
 {
   int32_T ibmat;
@@ -637,7 +623,7 @@ static __global__ __launch_bounds__(128, 1) void solver_vec_cuda_kernel30(
   }
 }
 
-static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel31(
+static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel30(
     const real_T vp_1[125000], real_T vp[125000])
 {
   int32_T ibmat;
@@ -647,7 +633,7 @@ static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel31(
   }
 }
 
-static __global__ __launch_bounds__(128, 1) void solver_vec_cuda_kernel32(
+static __global__ __launch_bounds__(128, 1) void solver_vec_cuda_kernel31(
     const real_T vd1[625], real_T vd[625])
 {
   int32_T ibmat;
@@ -657,7 +643,7 @@ static __global__ __launch_bounds__(128, 1) void solver_vec_cuda_kernel32(
   }
 }
 
-static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel33(
+static __global__ __launch_bounds__(256, 1) void solver_vec_cuda_kernel32(
     const real_T qnew[125000], real_T q[125000])
 {
   int32_T ibmat;
@@ -671,8 +657,7 @@ void solver_vec_cuda(const real_T cpu_b[200], const real_T cpu_z[625],
                      const real_T cpu_m[625], const real_T cpu_pdf[390625],
                      const struct0_T *para, real_T cpu_q[125000],
                      real_T cpu_bp[125000], real_T cpu_vp[125000],
-                     boolean_T cpu_def[125000], real_T *totaltime,
-                     real_T *avgtime)
+                     real_T cpu_def[125000], real_T *totaltime, real_T *avgtime)
 {
   static const int32_T iv1[2]{1, 7};
   static const int32_T iv2[2]{1, 31};
@@ -694,6 +679,7 @@ void solver_vec_cuda(const real_T cpu_b[200], const real_T cpu_z[625],
   real_T(*gpu_a)[390625];
   real_T(*gpu_pdf)[390625];
   real_T(*gpu_bp)[125000];
+  real_T(*gpu_def)[125000];
   real_T(*gpu_ex)[125000];
   real_T(*gpu_mtry)[125000];
   real_T(*gpu_q)[125000];
@@ -720,17 +706,11 @@ void solver_vec_cuda(const real_T cpu_b[200], const real_T cpu_z[625],
   real_T theta;
   real_T *gpu_betta;
   real_T *gpu_tmp;
-  int32_T boffset;
-  int32_T coffset;
   int32_T its;
-  int32_T j;
   int32_T k;
   int32_T nb0;
   uint8_T(*gpu_idx)[125000];
-  boolean_T(*gpu_def)[125000];
-  boolean_T bkj;
-  boolean_T bp_outdatedOnCpu;
-  boolean_T def_outdatedOnCpu;
+  boolean_T p;
   boolean_T pdf_outdatedOnGpu;
   checkCudaError(mwCudaMalloc(&gpu_tmp, sizeof(real_T)), __FILE__, __LINE__);
   checkCudaError(mwCudaMalloc(&gpu_vp_1, 125000ULL * sizeof(real_T)), __FILE__,
@@ -768,8 +748,8 @@ void solver_vec_cuda(const real_T cpu_b[200], const real_T cpu_z[625],
   checkCudaError(mwCudaMalloc(&gpu_ua, 625ULL * sizeof(real_T)), __FILE__,
                  __LINE__);
   checkCudaError(mwCudaMalloc(&gpu_betta, sizeof(real_T)), __FILE__, __LINE__);
-  checkCudaError(mwCudaMalloc(&gpu_def, 125000ULL * sizeof(boolean_T)),
-                 __FILE__, __LINE__);
+  checkCudaError(mwCudaMalloc(&gpu_def, 125000ULL * sizeof(real_T)), __FILE__,
+                 __LINE__);
   checkCudaError(mwCudaMalloc(&gpu_vp, 125000ULL * sizeof(real_T)), __FILE__,
                  __LINE__);
   checkCudaError(mwCudaMalloc(&gpu_bp, 125000ULL * sizeof(real_T)), __FILE__,
@@ -791,23 +771,23 @@ void solver_vec_cuda(const real_T cpu_b[200], const real_T cpu_z[625],
   solver_vec_cuda_kernel01<<<dim3(1U, 1U, 1U), dim3(32U, 1U, 1U)>>>(*para,
                                                                     gpu_betta);
   // discount factor
-  for (coffset = 0; coffset < 200; coffset++) {
-    y[coffset] = std::abs(cpu_b[coffset]);
+  for (k = 0; k < 200; k++) {
+    y[k] = std::abs(cpu_b[k]);
   }
   nb0 = 0;
   ex = y[0];
-  for (coffset = 0; coffset < 199; coffset++) {
-    b = y[coffset + 1];
+  for (k = 0; k < 199; k++) {
+    b = y[k + 1];
     if (std::isnan(b)) {
-      bkj = false;
+      p = false;
     } else if (std::isnan(ex)) {
-      bkj = true;
+      p = true;
     } else {
-      bkj = (ex > b);
+      p = (ex > b);
     }
-    if (bkj) {
+    if (p) {
       ex = b;
-      nb0 = coffset + 1;
+      nb0 = k + 1;
     }
   }
   // force the element closest to zero to be exactly zero
@@ -835,15 +815,13 @@ void solver_vec_cuda(const real_T cpu_b[200], const real_T cpu_z[625],
   solver_vec_cuda_kernel08<<<dim3(97657U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
       *gpu_b, *gpu_bptry);
   //  Initialize the Value functions
-  bkj = false;
+  solver_vec_cuda_kernel09<<<dim3(489U, 1U, 1U), dim3(256U, 1U, 1U)>>>(*gpu_vp);
   // continue repaying
-  solver_vec_cuda_kernel09<<<dim3(5U, 1U, 1U), dim3(128U, 1U, 1U)>>>(*gpu_vd,
+  solver_vec_cuda_kernel10<<<dim3(5U, 1U, 1U), dim3(128U, 1U, 1U)>>>(*gpu_vd,
                                                                      *gpu_vo);
-  def_outdatedOnCpu = false;
-  bp_outdatedOnCpu = false;
   // debt policy function (expressed in indices)
-  solver_vec_cuda_kernel10<<<dim3(489U, 1U, 1U), dim3(256U, 1U, 1U)>>>(*para,
-                                                                       *gpu_q);
+  solver_vec_cuda_kernel11<<<dim3(489U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
+      *para, *gpu_q, *gpu_bp, *gpu_def);
   // q is price of debt; it is a function of  (y_t, d_{t+1})
   diff = 1.0;
   its = 1;
@@ -853,134 +831,117 @@ void solver_vec_cuda(const real_T cpu_b[200], const real_T cpu_z[625],
   *totaltime = 0.0;
   *avgtime = 0.0;
   while ((diff > 1.0E-7) && (its < 2000)) {
-    solver_vec_cuda_kernel11<<<dim3(97657U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
-        *gpu_q, *gpu_qtry);
     solver_vec_cuda_kernel12<<<dim3(97657U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
+        *gpu_q, *gpu_qtry);
+    solver_vec_cuda_kernel13<<<dim3(97657U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
         *gpu_btry, *gpu_bptry, *b_gpu_mtry, *gpu_ztry, gpu_tmp, *gpu_qtry,
         *gpu_utry);
-    solver_vec_cuda_kernel13<<<dim3(5U, 1U, 1U), dim3(128U, 1U, 1U)>>>(
+    solver_vec_cuda_kernel14<<<dim3(5U, 1U, 1U), dim3(128U, 1U, 1U)>>>(
         *gpu_m, gpu_tmp, *gpu_y);
     if (pdf_outdatedOnGpu) {
       checkCudaError(cudaMemcpy(*gpu_pdf, cpu_pdf, 390625ULL * sizeof(real_T),
                                 cudaMemcpyHostToDevice),
                      __FILE__, __LINE__);
     }
-    solver_vec_cuda_kernel14<<<dim3(1526U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
+    solver_vec_cuda_kernel15<<<dim3(1526U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
         *gpu_pdf, *gpu_y, *gpu_a);
     diff = 1.0;
     ex = 0.0;
     cublasDgemm(getCublasGlobalHandle(), CUBLAS_OP_N, CUBLAS_OP_N, 625, 200,
                 625, &diff, &(*gpu_a)[0], 625, &(*gpu_vp)[0], 625, &ex,
                 &(*gpu_mtry)[0], 625);
-    solver_vec_cuda_kernel15<<<dim3(97657U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
-        *gpu_mtry, *gpu_qtry);
     solver_vec_cuda_kernel16<<<dim3(97657U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
+        *gpu_mtry, *gpu_qtry);
+    solver_vec_cuda_kernel17<<<dim3(97657U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
         gpu_betta, *gpu_qtry, *gpu_utry);
-    solver_vec_cuda_kernel17<<<dim3(489U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
-        *gpu_idx);
     solver_vec_cuda_kernel18<<<dim3(489U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
-        *gpu_utry, *gpu_ex, *gpu_idx);
+        *gpu_idx);
     solver_vec_cuda_kernel19<<<dim3(489U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
+        *gpu_utry, *gpu_ex, *gpu_idx);
+    solver_vec_cuda_kernel20<<<dim3(489U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
         *gpu_idx, *gpu_bp);
-    bp_outdatedOnCpu = true;
-    pdf_outdatedOnGpu = false;
-    solver_vec_cuda_kernel20<<<dim3(1526U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
+    solver_vec_cuda_kernel21<<<dim3(1526U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
         *gpu_pdf, gpu_betta, *gpu_y, *gpu_a);
-    solver_vec_cuda_kernel21<<<dim3(5U, 1U, 1U), dim3(128U, 1U, 1U)>>>(
+    solver_vec_cuda_kernel22<<<dim3(5U, 1U, 1U), dim3(128U, 1U, 1U)>>>(
         theta, *gpu_vd, 1.0 - theta, *gpu_vo);
     cublasDgemm(getCublasGlobalHandle(), CUBLAS_OP_N, CUBLAS_OP_N, 625, 1, 625,
                 &diff, &(*gpu_a)[0], 625, &(*gpu_vo)[0], 625, &ex,
                 &(*gpu_vd1)[0], 625);
-    solver_vec_cuda_kernel22<<<dim3(5U, 1U, 1U), dim3(128U, 1U, 1U)>>>(
+    solver_vec_cuda_kernel23<<<dim3(5U, 1U, 1U), dim3(128U, 1U, 1U)>>>(
         *gpu_ua, *gpu_vd1);
-    solver_vec_cuda_kernel23<<<dim3(489U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
-        *gpu_vd1, *gpu_mtry);
     solver_vec_cuda_kernel24<<<dim3(489U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
+        *gpu_vd1, *gpu_mtry);
+    solver_vec_cuda_kernel25<<<dim3(489U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
         *gpu_mtry, *gpu_ex, *gpu_def);
-    def_outdatedOnCpu = true;
-    for (j = 0; j < 200; j++) {
-      coffset = j * 625;
-      boffset = j * 625;
-      solver_vec_cuda_kernel25<<<dim3(5U, 1U, 1U), dim3(128U, 1U, 1U)>>>(
-          coffset, *gpu_qnew);
-      for (k = 0; k < 625; k++) {
-        if (def_outdatedOnCpu) {
-          checkCudaError(cudaMemcpy(cpu_def, *gpu_def,
-                                    125000ULL * sizeof(boolean_T),
-                                    cudaMemcpyDeviceToHost),
-                         __FILE__, __LINE__);
-        }
-        def_outdatedOnCpu = false;
-        solver_vec_cuda_kernel26<<<dim3(5U, 1U, 1U), dim3(128U, 1U, 1U)>>>(
-            *gpu_pdf, coffset, k * 625, cpu_def[boffset + k], *gpu_qnew);
-      }
-    }
-    solver_vec_cuda_kernel27<<<dim3(489U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
+    pdf_outdatedOnGpu = false;
+    cublasDgemm(getCublasGlobalHandle(), CUBLAS_OP_N, CUBLAS_OP_N, 625, 200,
+                625, &diff, &(*gpu_pdf)[0], 625, &(*gpu_def)[0], 625, &ex,
+                &(*gpu_qnew)[0], 625);
+    solver_vec_cuda_kernel26<<<dim3(489U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
         rstar + 1.0, *gpu_ex, *gpu_q, *gpu_mtry, *gpu_qnew, *gpu_vp_1);
     checkCudaError(cudaMemcpy(cpu_vp, *gpu_mtry, 125000ULL * sizeof(real_T),
                               cudaMemcpyDeviceToHost),
                    __FILE__, __LINE__);
     ex = cpu_vp[0];
-    for (coffset = 0; coffset < 124999; coffset++) {
-      b = cpu_vp[coffset + 1];
+    for (k = 0; k < 124999; k++) {
+      b = cpu_vp[k + 1];
       if (std::isnan(b)) {
-        bkj = false;
+        p = false;
       } else if (std::isnan(ex)) {
-        bkj = true;
+        p = true;
       } else {
-        bkj = (ex < b);
+        p = (ex < b);
       }
-      if (bkj) {
+      if (p) {
         ex = b;
       }
     }
-    solver_vec_cuda_kernel28<<<dim3(489U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
+    solver_vec_cuda_kernel27<<<dim3(489U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
         *gpu_vp_1, *gpu_vp, *gpu_mtry);
     checkCudaError(cudaMemcpy(cpu_vp, *gpu_mtry, 125000ULL * sizeof(real_T),
                               cudaMemcpyDeviceToHost),
                    __FILE__, __LINE__);
     b_ex = cpu_vp[0];
-    for (coffset = 0; coffset < 124999; coffset++) {
-      b = cpu_vp[coffset + 1];
+    for (k = 0; k < 124999; k++) {
+      b = cpu_vp[k + 1];
       if (std::isnan(b)) {
-        bkj = false;
+        p = false;
       } else if (std::isnan(b_ex)) {
-        bkj = true;
+        p = true;
       } else {
-        bkj = (b_ex < b);
+        p = (b_ex < b);
       }
-      if (bkj) {
+      if (p) {
         b_ex = b;
       }
     }
-    solver_vec_cuda_kernel29<<<dim3(5U, 1U, 1U), dim3(128U, 1U, 1U)>>>(
+    solver_vec_cuda_kernel28<<<dim3(5U, 1U, 1U), dim3(128U, 1U, 1U)>>>(
         *gpu_vd1, *gpu_vd, *gpu_y);
     checkCudaError(cudaMemcpy(cpu_y, *gpu_y, 625ULL * sizeof(real_T),
                               cudaMemcpyDeviceToHost),
                    __FILE__, __LINE__);
     diff = cpu_y[0];
-    for (coffset = 0; coffset < 624; coffset++) {
-      b = cpu_y[coffset + 1];
+    for (k = 0; k < 624; k++) {
+      b = cpu_y[k + 1];
       if (std::isnan(b)) {
-        bkj = false;
+        p = false;
       } else if (std::isnan(diff)) {
-        bkj = true;
+        p = true;
       } else {
-        bkj = (diff < b);
+        p = (diff < b);
       }
-      if (bkj) {
+      if (p) {
         diff = b;
       }
     }
     diff += ex + b_ex;
-    solver_vec_cuda_kernel30<<<dim3(5U, 1U, 1U), dim3(128U, 1U, 1U)>>>(
+    solver_vec_cuda_kernel29<<<dim3(5U, 1U, 1U), dim3(128U, 1U, 1U)>>>(
         nb0, *gpu_vp_1, *gpu_vo);
-    solver_vec_cuda_kernel31<<<dim3(489U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
+    solver_vec_cuda_kernel30<<<dim3(489U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
         *gpu_vp_1, *gpu_vp);
-    bkj = true;
-    solver_vec_cuda_kernel32<<<dim3(5U, 1U, 1U), dim3(128U, 1U, 1U)>>>(*gpu_vd1,
+    solver_vec_cuda_kernel31<<<dim3(5U, 1U, 1U), dim3(128U, 1U, 1U)>>>(*gpu_vd1,
                                                                        *gpu_vd);
-    solver_vec_cuda_kernel33<<<dim3(489U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
+    solver_vec_cuda_kernel32<<<dim3(489U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
         *gpu_qnew, *gpu_q);
     *totaltime += coder::toc(smctime_tv_sec, smctime_tv_nsec);
     *avgtime = *totaltime / static_cast<real_T>(its);
@@ -1011,21 +972,15 @@ void solver_vec_cuda(const real_T cpu_b[200], const real_T cpu_z[625],
   checkCudaError(cudaMemcpy(cpu_q, *gpu_q, 125000ULL * sizeof(real_T),
                             cudaMemcpyDeviceToHost),
                  __FILE__, __LINE__);
-  if (bp_outdatedOnCpu) {
-    checkCudaError(cudaMemcpy(cpu_bp, *gpu_bp, 125000ULL * sizeof(real_T),
-                              cudaMemcpyDeviceToHost),
-                   __FILE__, __LINE__);
-  }
-  if (bkj) {
-    checkCudaError(cudaMemcpy(cpu_vp, *gpu_vp, 125000ULL * sizeof(real_T),
-                              cudaMemcpyDeviceToHost),
-                   __FILE__, __LINE__);
-  }
-  if (def_outdatedOnCpu) {
-    checkCudaError(cudaMemcpy(cpu_def, *gpu_def, 125000ULL * sizeof(boolean_T),
-                              cudaMemcpyDeviceToHost),
-                   __FILE__, __LINE__);
-  }
+  checkCudaError(cudaMemcpy(cpu_bp, *gpu_bp, 125000ULL * sizeof(real_T),
+                            cudaMemcpyDeviceToHost),
+                 __FILE__, __LINE__);
+  checkCudaError(cudaMemcpy(cpu_vp, *gpu_vp, 125000ULL * sizeof(real_T),
+                            cudaMemcpyDeviceToHost),
+                 __FILE__, __LINE__);
+  checkCudaError(cudaMemcpy(cpu_def, *gpu_def, 125000ULL * sizeof(real_T),
+                            cudaMemcpyDeviceToHost),
+                 __FILE__, __LINE__);
   checkCudaError(mwCudaFree(*gpu_b), __FILE__, __LINE__);
   checkCudaError(mwCudaFree(*gpu_z), __FILE__, __LINE__);
   checkCudaError(mwCudaFree(*gpu_m), __FILE__, __LINE__);

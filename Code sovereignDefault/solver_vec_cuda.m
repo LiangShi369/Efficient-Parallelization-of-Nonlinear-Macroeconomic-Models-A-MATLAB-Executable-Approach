@@ -27,15 +27,15 @@ btry = reshape(btry,n,nb);
 bptry = repmat(b',n,1);
 
 %% Initialize the Value functions
-vp = coder.nullcopy(zeros(ns,nb)) ;  %continue repaying
-vd = coder.nullcopy(zeros(ns,1)) ; 
+vp = zeros(ns,nb) ;  %continue repaying
+vd = zeros(ns,1) ; 
 
 vo = vd;
 vp1 = vp;  
 vd1 = vd;
-def = coder.nullcopy(false(ns,nb)) ;
+def = zeros(ns,nb) ;
 
-bp = coder.nullcopy(zeros(ns,nb)) ; %debt policy function (expressed in indices)  
+bp = zeros(ns,nb) ; %debt policy function (expressed in indices)  
 bp1 = bp;
 q = ones(ns,nb)/(1+rstar); %q is price of debt; it is a function of  (y_t, d_{t+1}) 
 
@@ -65,7 +65,7 @@ Evgood = repmat(Evgood,nb,1);
 
 vd1 = ua + m.^(1-sigg).*betta.*pdf*(theta*vo + (1-theta)*vd);
 
-def = vp1 < repmat(vd1,1,nb); 
+def = double(vp1 < repmat(vd1,1,nb));
 
 qnew = (1- pdf*def)/(1+rstar);
 

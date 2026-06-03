@@ -31,7 +31,7 @@ void solver_vec_cuda(const real_T cpu_b[200], const real_T cpu_z[625],
                      const real_T cpu_m[625], const real_T cpu_pdf[390625],
                      const struct0_T *para, real_T cpu_q[125000],
                      real_T cpu_bp[125000], real_T cpu_vp[125000],
-                     boolean_T cpu_def[125000], real_T *totaltime,
+                     real_T cpu_def[125000], real_T *totaltime,
                      real_T *avgtime);
 
 // End of code generation (solver_vec_cuda.h)

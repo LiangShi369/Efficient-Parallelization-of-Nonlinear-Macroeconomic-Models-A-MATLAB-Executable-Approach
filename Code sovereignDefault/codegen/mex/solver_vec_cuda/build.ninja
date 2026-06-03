@@ -6,7 +6,7 @@ ninja_required_version = 1.3
 root = .
 builddir = $root\build\win64
 matlabdir = D:\Matlab_2026a
-startdir = D:\BaiduSyncdisk\working papers\Parallel computation with Mex\code_github\Code sovereignDefault
+startdir = D:\BaiduSyncdisk\working papers\Parallel computation with Mex\code_gitrepo\Code sovereignDefault
 
 # Toolchain information
 cc = cl

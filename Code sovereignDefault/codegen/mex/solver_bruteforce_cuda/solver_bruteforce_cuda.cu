@@ -52,8 +52,7 @@ static void gpuThrowError(uint32_T errorCode, const char_T *errorName,
                           int32_T b_line);
 
 static __global__ void solver_bruteforce_cuda_kernel01(const struct0_T para,
-                                                       real_T *betta,
-                                                       real_T *sigg);
+                                                       real_T *betta);
 
 static __global__ void solver_bruteforce_cuda_kernel02(const real_T b[400],
                                                        real_T y[400]);
@@ -94,9 +93,11 @@ static __global__ void solver_bruteforce_cuda_kernel12(const real_T b[400],
                                                        const real_T x[625],
                                                        real_T w[250000]);
 
-static __global__ void solver_bruteforce_cuda_kernel13(
-    const real_T b[400], const real_T *sigg, const real_T evp[250000],
-    const real_T w[250000], real_T bp[250000], real_T vp1[250000]);
+static __global__ void solver_bruteforce_cuda_kernel13(const real_T b[400],
+                                                       const real_T evp[250000],
+                                                       const real_T w[250000],
+                                                       real_T bp[250000],
+                                                       real_T vp1[250000]);
 
 static __global__ void solver_bruteforce_cuda_kernel14(const real_T vp1[250000],
                                                        const real_T vd1[625],
@@ -197,13 +198,12 @@ static void gpuThrowError(uint32_T errorCode, const char_T *errorName,
 }
 
 static __global__ __launch_bounds__(32, 1) void solver_bruteforce_cuda_kernel01(
-    const struct0_T para, real_T *betta, real_T *sigg)
+    const struct0_T para, real_T *betta)
 {
   int32_T tmpIdx;
   tmpIdx = static_cast<int32_T>(mwGetGlobalThreadIndex());
   if (tmpIdx < 1) {
     *betta = para.betta;
-    *sigg = para.sigg;
   }
 }
 
@@ -351,8 +351,8 @@ static __global__ __launch_bounds__(
 
 static __global__
     __launch_bounds__(256, 1) void solver_bruteforce_cuda_kernel13(
-        const real_T b[400], const real_T *sigg, const real_T evp[250000],
-        const real_T w[250000], real_T bp[250000], real_T vp1[250000])
+        const real_T b[400], const real_T evp[250000], const real_T w[250000],
+        real_T bp[250000], real_T vp1[250000])
 {
   real_T c;
   real_T d;
@@ -374,7 +374,7 @@ static __global__
       ib = is + 625 * i;
       c = w[ib] - d;
       if (c > 0.0) {
-        c = (pow(c, 1.0 - *sigg) - 1.0) / (1.0 - *sigg) + evp[ib];
+        c = (1.0 - 1.0 / c) + evp[ib];
       } else {
         c = -CUDART_INF;
       }
@@ -547,7 +547,6 @@ void solver_bruteforce_cuda(const real_T cpu_b[400], const real_T cpu_z[625],
   real_T timer_tv_nsec;
   real_T timer_tv_sec;
   real_T *gpu_betta;
-  real_T *gpu_sigg;
   int32_T i;
   int32_T its;
   int32_T nb0;
@@ -573,7 +572,6 @@ void solver_bruteforce_cuda(const real_T cpu_b[400], const real_T cpu_z[625],
                  __LINE__);
   checkCudaError(mwCudaMalloc(&gpu_y, 400ULL * sizeof(real_T)), __FILE__,
                  __LINE__);
-  checkCudaError(mwCudaMalloc(&gpu_sigg, sizeof(real_T)), __FILE__, __LINE__);
   checkCudaError(mwCudaMalloc(&gpu_betta, sizeof(real_T)), __FILE__, __LINE__);
   checkCudaError(mwCudaMalloc(&gpu_def, 250000ULL * sizeof(real_T)), __FILE__,
                  __LINE__);
@@ -594,7 +592,7 @@ void solver_bruteforce_cuda(const real_T cpu_b[400], const real_T cpu_z[625],
   pdf_outdatedOnGpu = true;
   theta = para->theta;
   solver_bruteforce_cuda_kernel01<<<dim3(1U, 1U, 1U), dim3(32U, 1U, 1U)>>>(
-      *para, gpu_betta, gpu_sigg);
+      *para, gpu_betta);
   rstar = para->rstar;
   //  dpgrid = b';
   checkCudaError(cudaMemcpy(*gpu_b, cpu_b, 400ULL * sizeof(real_T),
@@ -677,7 +675,7 @@ void solver_bruteforce_cuda(const real_T cpu_b[400], const real_T cpu_z[625],
     solver_bruteforce_cuda_kernel12<<<dim3(977U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
         *gpu_b, *gpu_q, *gpu_x, *gpu_w);
     solver_bruteforce_cuda_kernel13<<<dim3(977U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
-        *gpu_b, gpu_sigg, *gpu_evp, *gpu_w, *gpu_bp, *gpu_vp1);
+        *gpu_b, *gpu_evp, *gpu_w, *gpu_bp, *gpu_vp1);
     //  def = vp1 < repmat(vd1,1,nb);
     solver_bruteforce_cuda_kernel14<<<dim3(977U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
         *gpu_vp1, *gpu_vd1, *gpu_def);
@@ -803,7 +801,6 @@ void solver_bruteforce_cuda(const real_T cpu_b[400], const real_T cpu_z[625],
   checkCudaError(mwCudaFree(*gpu_vp), __FILE__, __LINE__);
   checkCudaError(mwCudaFree(*gpu_def), __FILE__, __LINE__);
   checkCudaError(mwCudaFree(gpu_betta), __FILE__, __LINE__);
-  checkCudaError(mwCudaFree(gpu_sigg), __FILE__, __LINE__);
   checkCudaError(mwCudaFree(*gpu_y), __FILE__, __LINE__);
   checkCudaError(mwCudaFree(*gpu_vd), __FILE__, __LINE__);
   checkCudaError(mwCudaFree(*gpu_vo), __FILE__, __LINE__);

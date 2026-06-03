@@ -23,8 +23,6 @@ static real_T (*b_emlrt_marshallIn(const mxArray *b_nullptr,
 static real_T (*b_emlrt_marshallIn(const mxArray *u,
                                    const emlrtMsgIdentifier *parentId))[200];
 
-static const mxArray *b_emlrt_marshallOut(boolean_T u[125000]);
-
 static real_T (*c_emlrt_marshallIn(const mxArray *b_nullptr,
                                    const char_T *identifier))[625];
 
@@ -74,25 +72,6 @@ static real_T (*b_emlrt_marshallIn(const mxArray *u,
   real_T(*y)[200];
   y = g_emlrt_marshallIn(emlrtAlias(u), parentId);
   emlrtDestroyArray(&u);
-  return y;
-}
-
-static const mxArray *b_emlrt_marshallOut(boolean_T u[125000])
-{
-  static const int32_T iv[2]{0, 0};
-  static const int32_T iv1[2]{625, 200};
-  const mxArray *m;
-  const mxArray *y;
-  void *existingData;
-  y = nullptr;
-  m = emlrtCreateLogicalArray(2, &iv[0]);
-  existingData = emlrtMxGetData((mxArray *)m);
-  if (existingData != (void *)&u[0]) {
-    emlrtFreeMex(existingData);
-  }
-  emlrtMxSetData((mxArray *)m, &u[0]);
-  emlrtSetDimensions((mxArray *)m, &iv1[0], 2);
-  emlrtAssign(&y, m);
   return y;
 }
 
@@ -257,6 +236,7 @@ void solver_vec_cuda_api(const mxArray *const prhs[5], int32_T nlhs,
   struct0_T para;
   real_T(*pdf)[390625];
   real_T(*bp)[125000];
+  real_T(*def)[125000];
   real_T(*q)[125000];
   real_T(*vp)[125000];
   real_T(*m)[625];
@@ -264,11 +244,10 @@ void solver_vec_cuda_api(const mxArray *const prhs[5], int32_T nlhs,
   real_T(*b)[200];
   real_T avgtime;
   real_T totaltime;
-  boolean_T(*def)[125000];
   q = (real_T(*)[125000])mxMalloc(sizeof(real_T[125000]));
   bp = (real_T(*)[125000])mxMalloc(sizeof(real_T[125000]));
   vp = (real_T(*)[125000])mxMalloc(sizeof(real_T[125000]));
-  def = (boolean_T(*)[125000])mxMalloc(sizeof(boolean_T[125000]));
+  def = (real_T(*)[125000])mxMalloc(sizeof(real_T[125000]));
   prhs_copy_idx_0 = emlrtProtectR2012b(prhs[0], 0, false, -1);
   // Marshall function inputs
   b = b_emlrt_marshallIn(emlrtAlias(prhs_copy_idx_0), "b");
@@ -288,7 +267,7 @@ void solver_vec_cuda_api(const mxArray *const prhs[5], int32_T nlhs,
     plhs[2] = emlrt_marshallOut(*vp);
   }
   if (nlhs > 3) {
-    plhs[3] = b_emlrt_marshallOut(*def);
+    plhs[3] = emlrt_marshallOut(*def);
   }
   if (nlhs > 4) {
     plhs[4] = emlrt_marshallOut(totaltime);
