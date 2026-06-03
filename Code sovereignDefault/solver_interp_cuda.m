@@ -14,14 +14,14 @@ nb = size(b,1);
 [~,nb0] = min(abs(b)) ;
 
 %Initialize the Value functions
-vp = coder.nullcopy(zeros(ns,nb)) ;  %continue repaying
-vd = coder.nullcopy(zeros(ns,1)) ; 
-def = coder.nullcopy(false(ns,nb)) ; 
+vp = zeros(ns,nb) ;  %continue repaying
+vd = zeros(ns,1) ; 
+def = zeros(ns,nb) ; 
 % vgood = vp ;
 vo = vd;
 vp1 = vp;  
 
-bp = coder.nullcopy(zeros(ns,nb)) ; %debt policy function (expressed in indices) 
+bp = zeros(ns,nb) ; %debt policy function (expressed in indices) 
 q = ones(ns,nb)/(1+rstar); %q is price of debt; it is a function of  (y_t, d_{t+1}) 
 % u = zeros(1,nb) ;
 bp_l = -0.05 ;
@@ -100,8 +100,6 @@ end
 function F = rhs_bellman(bprime,c_vec,b_grid,evp_y)
 
 coder.gpu.kernelfun;
-
-coder.gpu.constantMemory(b_grid); 
 
 eta = 2 ;
 

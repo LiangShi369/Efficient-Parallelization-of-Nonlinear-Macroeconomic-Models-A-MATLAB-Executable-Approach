@@ -1,0 +1,70 @@
+/*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
+ *
+ * solver_divide_data.c
+ *
+ * Code generation for function 'solver_divide_data'
+ *
+ */
+
+/* Include files */
+#include "solver_divide_data.h"
+#include "rt_nonfinite.h"
+
+/* Variable Definitions */
+emlrtCTX emlrtRootTLSGlobal = NULL;
+
+const volatile char_T *emlrtBreakCheckR2012bFlagVar = NULL;
+
+emlrtContext emlrtContextGlobal = {
+    true,                                                 /* bFirstTime */
+    false,                                                /* bInitialized */
+    131690U,                                              /* fVersionInfo */
+    NULL,                                                 /* fErrorFunction */
+    "solver_divide",                                      /* fFunctionName */
+    NULL,                                                 /* fRTCallStack */
+    false,                                                /* bDebugMode */
+    {2045744189U, 2170104910U, 2743257031U, 4284093946U}, /* fSigWrd */
+    NULL                                                  /* fSigMem */
+};
+
+emlrtRSInfo k_emlrtRSI = {
+    7,         /* lineNo */
+    "getTime", /* fcnName */
+    "D:\\Matlab_2026a\\toolbox\\shared\\coder\\coder\\lib\\+coder\\+internal\\+"
+    "time\\getTime.m" /* pathName */
+};
+
+emlrtRSInfo l_emlrtRSI = {
+    21,                     /* lineNo */
+    "CoderTimeAPI/getTime", /* fcnName */
+    "D:\\Matlab_2026a\\toolbox\\shared\\coder\\coder\\lib\\+coder\\+internal\\+"
+    "time\\CoderTimeAPI.m" /* pathName */
+};
+
+emlrtRSInfo m_emlrtRSI = {
+    148,                                  /* lineNo */
+    "CoderTimeAPI/callEMLRTClockGettime", /* fcnName */
+    "D:\\Matlab_2026a\\toolbox\\shared\\coder\\coder\\lib\\+coder\\+internal\\+"
+    "time\\CoderTimeAPI.m" /* pathName */
+};
+
+omp_lock_t emlrtLockGlobal;
+
+omp_nest_lock_t solver_divide_nestLockGlobal;
+
+emlrtRTEInfo b_emlrtRTEI = {
+    159,                    /* lineNo */
+    13,                     /* colNo */
+    "coderTimeCheckStatus", /* fName */
+    "D:\\Matlab_2026a\\toolbox\\shared\\coder\\coder\\lib\\+coder\\+internal\\+"
+    "time\\CoderTimeAPI.m" /* pName */
+};
+
+const char_T cv[26] = {'e', 'm', 'l', 'r', 't', 'C', 'l', 'o', 'c',
+                       'k', 'G', 'e', 't', 't', 'i', 'm', 'e', 'M',
+                       'o', 'n', 'o', 't', 'o', 'n', 'i', 'c'};
+
+/* End of code generation (solver_divide_data.c) */

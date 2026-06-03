@@ -37,15 +37,12 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
   /* Initialize the memory manager. */
   omp_init_lock(&emlrtLockGlobal);
   omp_init_nest_lock(&solver_bf_parfor_nestLockGlobal);
-  /* Module initialization. */
   solver_bf_parfor_initialize();
   st.tls = emlrtRootTLSGlobal;
   emlrtSetJmpBuf(&st, &emlrtJBEnviron);
   if (setjmp(emlrtJBEnviron) == 0) {
-    /* Dispatch the entry-point. */
     solver_bf_parfor_mexFunction(solver_bf_parforStackDataGlobal, nlhs, plhs,
                                  nrhs, prhs);
-    /* Module termination. */
     solver_bf_parfor_terminate();
     omp_destroy_lock(&emlrtLockGlobal);
     omp_destroy_nest_lock(&solver_bf_parfor_nestLockGlobal);

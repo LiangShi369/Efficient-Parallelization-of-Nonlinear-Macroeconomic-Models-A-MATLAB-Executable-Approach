@@ -12,22 +12,35 @@
 /* Include files */
 #include "power.h"
 #include "rt_nonfinite.h"
-#include "solver_bf_parfor_data.h"
 #include "mwmathutil.h"
+
+/* Variable Definitions */
+static emlrtRSInfo h_emlrtRSI = {
+    71,                                                         /* lineNo */
+    "power",                                                    /* fcnName */
+    "D:\\Matlab_2026a\\toolbox\\eml\\lib\\matlab\\ops\\power.m" /* pathName */
+};
+
+static emlrtRTEInfo emlrtRTEI = {
+    82,                                                         /* lineNo */
+    5,                                                          /* colNo */
+    "fltpower",                                                 /* fName */
+    "D:\\Matlab_2026a\\toolbox\\eml\\lib\\matlab\\ops\\power.m" /* pName */
+};
 
 /* Function Definitions */
 void power(const emlrtStack *sp, const real_T a[625], real_T b, real_T y[625])
 {
   emlrtStack st;
-  int32_T k;
+  int32_T i;
   boolean_T p;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &i_emlrtRSI;
-  if ((!muDoubleScalarIsNaN(b)) && (muDoubleScalarFloor(b) != b)) {
+  st.site = &h_emlrtRSI;
+  if (!muDoubleScalarIsNaN(b) && (muDoubleScalarFloor(b) != b)) {
     p = false;
-    for (k = 0; k < 625; k++) {
-      if (p || (a[k] < 0.0)) {
+    for (i = 0; i < 625; i++) {
+      if (p || (a[i] < 0.0)) {
         p = true;
       }
     }
@@ -39,8 +52,8 @@ void power(const emlrtStack *sp, const real_T a[625], real_T b, real_T y[625])
                                   "Coder:toolbox:power_domainError",
                                   "Coder:toolbox:power_domainError", 0);
   }
-  for (k = 0; k < 625; k++) {
-    y[k] = muDoubleScalarPower(a[k], b);
+  for (i = 0; i < 625; i++) {
+    y[i] = muDoubleScalarPower(a[i], b);
   }
 }
 

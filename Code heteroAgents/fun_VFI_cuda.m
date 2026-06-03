@@ -81,26 +81,25 @@ while err > vfoptions.tolerance
 
     EV = V0*pi_z_tranposed; %EV(a',z)
     
-    coder.gpu.kernel()
-    for z_c = 1:n_z
-        for a_c = 1:n_a
-            tmpmax = - Inf ;
-            maxid = 1 ;
-            for aprime_c = 1 : n_a
+coder.gpu.kernel()
+for z_c = 1:n_z
+    for a_c = 1:n_a
+        tmpmax = -Inf;
+        maxid = 1;
 
-                coder.gpu.constantMemory(ReturnMatrix);
-                coder.gpu.constantMemory(EV);
-
-                entireRHS = ReturnMatrix(aprime_c,a_c,z_c) + beta*EV(aprime_c,z_c);
-                if tmpmax < entireRHS 
-                    tmpmax = entireRHS ;
-                    maxid = aprime_c ;
-                end
-                V(a_c,z_c)      = tmpmax;
-                Policy(a_c,z_c) = maxid;
+        coder.gpu.nokernel();
+        for aprime_c = 1:n_a
+            entireRHS = ReturnMatrix(aprime_c,a_c,z_c) + beta*EV(aprime_c,z_c);
+            if entireRHS > tmpmax
+                tmpmax = entireRHS;
+                maxid = aprime_c;
             end
         end
+
+        V(a_c,z_c) = tmpmax;
+        Policy(a_c,z_c) = maxid;
     end
+end
 
     % -------------------------- Howard ----------------------------------%
     for h_c = 1 : vfoptions.howards

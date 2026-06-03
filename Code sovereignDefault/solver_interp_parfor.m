@@ -14,7 +14,7 @@ nb = size(b,1);
 %Initialize the Value functions
 vp = zeros(ns,nb);  %continue repaying
 vd = zeros(ns,1); 
-def = false(ns,nb); 
+def = zeros(ns,nb); 
 % vgood = vp ;
 vo = vd;
 vp1 = vp;  

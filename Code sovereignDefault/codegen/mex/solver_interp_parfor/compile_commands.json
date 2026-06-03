@@ -1,0 +1,98 @@
+[
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\\codegen\\mex\\solver_interp_parfor",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solver_interp_parfor_mex /openmp /wd4101  solver_interp_parfor_data.c /Fobuild\\win64\\solver_interp_parfor_data.obj",
+    "file": "solver_interp_parfor_data.c",
+    "output": "build/win64/solver_interp_parfor_data.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\\codegen\\mex\\solver_interp_parfor",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solver_interp_parfor_mex /openmp /wd4101  rt_nonfinite.c /Fobuild\\win64\\rt_nonfinite.obj",
+    "file": "rt_nonfinite.c",
+    "output": "build/win64/rt_nonfinite.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\\codegen\\mex\\solver_interp_parfor",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solver_interp_parfor_mex /openmp /wd4101  solver_interp_parfor_initialize.c /Fobuild\\win64\\solver_interp_parfor_initialize.obj",
+    "file": "solver_interp_parfor_initialize.c",
+    "output": "build/win64/solver_interp_parfor_initialize.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\\codegen\\mex\\solver_interp_parfor",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solver_interp_parfor_mex /openmp /wd4101  solver_interp_parfor_terminate.c /Fobuild\\win64\\solver_interp_parfor_terminate.obj",
+    "file": "solver_interp_parfor_terminate.c",
+    "output": "build/win64/solver_interp_parfor_terminate.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\\codegen\\mex\\solver_interp_parfor",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solver_interp_parfor_mex /openmp /wd4101  solver_interp_parfor.c /Fobuild\\win64\\solver_interp_parfor.obj",
+    "file": "solver_interp_parfor.c",
+    "output": "build/win64/solver_interp_parfor.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\\codegen\\mex\\solver_interp_parfor",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solver_interp_parfor_mex /openmp /wd4101  power.c /Fobuild\\win64\\power.obj",
+    "file": "power.c",
+    "output": "build/win64/power.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\\codegen\\mex\\solver_interp_parfor",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solver_interp_parfor_mex /openmp /wd4101  tic.c /Fobuild\\win64\\tic.obj",
+    "file": "tic.c",
+    "output": "build/win64/tic.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\\codegen\\mex\\solver_interp_parfor",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solver_interp_parfor_mex /openmp /wd4101  mtimes.c /Fobuild\\win64\\mtimes.obj",
+    "file": "mtimes.c",
+    "output": "build/win64/mtimes.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\\codegen\\mex\\solver_interp_parfor",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solver_interp_parfor_mex /openmp /wd4101  interp1_scal.c /Fobuild\\win64\\interp1_scal.obj",
+    "file": "interp1_scal.c",
+    "output": "build/win64/interp1_scal.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\\codegen\\mex\\solver_interp_parfor",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solver_interp_parfor_mex /openmp /wd4101  toc.c /Fobuild\\win64\\toc.obj",
+    "file": "toc.c",
+    "output": "build/win64/toc.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\\codegen\\mex\\solver_interp_parfor",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solver_interp_parfor_mex /openmp /wd4101  interface\\_coder_solver_interp_parfor_api.c /Fobuild\\win64\\_coder_solver_interp_parfor_api.obj",
+    "file": "interface/_coder_solver_interp_parfor_api.c",
+    "output": "build/win64/_coder_solver_interp_parfor_api.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\\codegen\\mex\\solver_interp_parfor",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solver_interp_parfor_mex /openmp /wd4101  interface\\_coder_solver_interp_parfor_mex.c /Fobuild\\win64\\_coder_solver_interp_parfor_mex.obj",
+    "file": "interface/_coder_solver_interp_parfor_mex.c",
+    "output": "build/win64/_coder_solver_interp_parfor_mex.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\\codegen\\mex\\solver_interp_parfor",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solver_interp_parfor_mex /openmp /wd4101  brent_min.c /Fobuild\\win64\\brent_min.obj",
+    "file": "brent_min.c",
+    "output": "build/win64/brent_min.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\\codegen\\mex\\solver_interp_parfor",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solver_interp_parfor_mex /openmp /wd4101  solver_interp_parfor_mexutil.c /Fobuild\\win64\\solver_interp_parfor_mexutil.obj",
+    "file": "solver_interp_parfor_mexutil.c",
+    "output": "build/win64/solver_interp_parfor_mexutil.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\\codegen\\mex\\solver_interp_parfor",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solver_interp_parfor_mex /openmp /wd4101  interface\\_coder_solver_interp_parfor_info.c /Fobuild\\win64\\_coder_solver_interp_parfor_info.obj",
+    "file": "interface/_coder_solver_interp_parfor_info.c",
+    "output": "build/win64/_coder_solver_interp_parfor_info.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\\codegen\\mex\\solver_interp_parfor",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_github\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solver_interp_parfor_mex /openmp /wd4101  D:\\Matlab_2026a\\extern\\version\\c_mexapi_version.c /Fobuild\\win64\\c_mexapi_version.obj",
+    "file": "D:/Matlab_2026a/extern/version/c_mexapi_version.c",
+    "output": "build/win64/c_mexapi_version.obj"
+  }
+]

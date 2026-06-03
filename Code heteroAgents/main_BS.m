@@ -11,7 +11,7 @@ run_compile = 0 ;
 run_mex = 0 ;
 run_matlab = 1 ;
 
-n_a    = 1001; % Num of grid points 1001, 1501
+n_a    = 2001; % Num of grid points 1001, 1501
 
 %% Set folders
 ResFolder = 'results'; % Folder to save results
@@ -163,7 +163,7 @@ make_table(ResFolder,Outputs_vec,Params) ;
 
 %% Matlab gpuarray
 
-reset(gpuDevice)
+wait(gpuDevice)
 smctime = tic;
 
 if heteroagentoptions.do_GE==1
@@ -198,6 +198,12 @@ codegen -config cfg fun_VFI_parfor2 -args {zeros(1,2), a_grid, z_grid, pi_z, Par
 cfg = coder.gpuConfig('mex');
 cfg.GenerateReport = true;
 codegen -config cfg fun_VFI_cuda -args {zeros(1,2), a_grid, z_grid, pi_z, Params, vfoptions} -o fun_VFI_cuda_mex
+
+cfg = coder.gpuConfig('mex');
+cfg.GenerateReport = true;
+codegen -config cfg model_subfuns_cuda_fused ...
+    -args {zeros(1,2), a_grid, z_grid, pi_z, Params, vfoptions, simoptions, heteroagentoptions} ...
+    -o model_subfuns_cuda_fused_mex
 
 end
 
@@ -242,7 +248,6 @@ make_table(ResFolder,Outputs_parfor_mex,Params) ;
 
 %% run Mex cuda
 
-reset(gpuDevice)
 smctime = tic;
 if heteroagentoptions.do_GE==1
     % Find GE prices
@@ -259,19 +264,17 @@ totaltime_cuda = toc(smctime)
 make_table(ResFolder,Outputs_cuda,Params) ;
 
 
-%% run Mex cuda vec
+%% run Mex cuda fused
 
-reset(gpuDevice)
-smctime = tic; 
-
+smctime = tic;
 if heteroagentoptions.do_GE==1
     % Find GE prices
     minoptions = optimset('TolX',heteroagentoptions.toleranceGEprices,'TolFun',heteroagentoptions.toleranceGEcondns,'MaxFunEvals',heteroagentoptions.maxiter);
-    p_eqm = fminsearch(@(p) model_subfuns_vec_cuda(p, a_grid, z_grid, pi_z, Params, vfoptions, simoptions, heteroagentoptions),GEPrices0,minoptions);
-    [~,V,Policy,StatDist] = model_subfuns_vec_cuda(p_eqm, a_grid, z_grid, pi_z, Params, vfoptions, simoptions, heteroagentoptions); % Recompute model objects at GE prices
+    p_eqm = fminsearch(@(p) model_subfuns_cuda_fused_mex(p, a_grid, z_grid, pi_z, Params, vfoptions, simoptions, heteroagentoptions),GEPrices0,minoptions);
+    [~,V,Policy,StatDist] = model_subfuns_cuda_fused_mex(p_eqm, a_grid, z_grid, pi_z, Params, vfoptions, simoptions, heteroagentoptions); % Recompute model objects at GE prices
 elseif heteroagentoptions.do_GE==0
     p_eqm = GEPrices0;
-    [~,V,Policy,StatDist] = model_subfuns_vec_cuda(p_eqm, a_grid, z_grid, pi_z, Params, vfoptions, simoptions, heteroagentoptions);
+    [~,V,Policy,StatDist] = model_subfuns_cuda(p_eqm, a_grid, z_grid, pi_z, Params, vfoptions, simoptions, heteroagentoptions);
 end
 
 Outputs_cuda = compute_targets(a_grid, z_grid, pi_z, Policy, StatDist, Params, p_eqm) ;

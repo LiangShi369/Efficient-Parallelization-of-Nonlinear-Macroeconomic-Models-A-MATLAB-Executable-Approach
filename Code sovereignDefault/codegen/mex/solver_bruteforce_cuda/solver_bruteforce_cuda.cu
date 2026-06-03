@@ -18,128 +18,126 @@
 #include "toc.h"
 #include "MWCUBLASUtils.hpp"
 #include "MWCudaDimUtility.hpp"
+#include "MWCudaMemoryFunctions.hpp"
 #include "emlrt.h"
 #include "math_constants.h"
 #include <cmath>
 
 // Variable Definitions
 static emlrtMCInfo emlrtMCI{
-    66,        // lineNo
-    18,        // colNo
-    "fprintf", // fName
-    "C:\\Program "
-    "Files\\MATLAB\\R2023b\\toolbox\\eml\\lib\\matlab\\iofun\\fprintf.m" // pName
+    66,                                                             // lineNo
+    18,                                                             // colNo
+    "fprintf",                                                      // fName
+    "D:\\Matlab_2026a\\toolbox\\eml\\lib\\matlab\\iofun\\fprintf.m" // pName
 };
 
-__constant__ static real_T const_b[400];
-
 // Function Declarations
+static void checkCudaError(cudaError_t errorCode, const char_T *file,
+                           int32_T b_line);
+
 static real_T emlrt_marshallIn(const mxArray *a__output_of_feval_,
                                const char_T *identifier);
+
+static const mxArray *feval(const mxArray *m1, const mxArray *m2,
+                            const mxArray *m3, const mxArray *m4,
+                            const mxArray *m5, emlrtMCInfo *location);
 
 static const mxArray *feval(const mxArray *m1, const mxArray *m2,
                             const mxArray *m3, const mxArray *m4,
                             const mxArray *m5, const mxArray *m6,
                             emlrtMCInfo *location);
 
-static const mxArray *feval(const mxArray *m1, const mxArray *m2,
-                            const mxArray *m3, const mxArray *m4,
-                            const mxArray *m5, emlrtMCInfo *location);
+static void gpuThrowError(uint32_T errorCode, const char_T *errorName,
+                          const char_T *errorString, const char_T *file,
+                          int32_T b_line);
 
-static __global__ void solver_bruteforce_cuda_kernel1(const struct0_T para,
-                                                      real_T *sigg,
-                                                      real_T *betta);
+static __global__ void solver_bruteforce_cuda_kernel01(const struct0_T para,
+                                                       real_T *betta,
+                                                       real_T *sigg);
 
-static __global__ void solver_bruteforce_cuda_kernel10(const real_T vd[625],
-                                                       const real_T d,
-                                                       const real_T theta,
-                                                       real_T vo[625]);
+static __global__ void solver_bruteforce_cuda_kernel02(const real_T b[400],
+                                                       real_T y[400]);
 
-static __global__ void solver_bruteforce_cuda_kernel11(const real_T z[625],
-                                                       const real_T ua[625],
-                                                       real_T x[625],
-                                                       real_T vd1[625]);
+static __global__ void solver_bruteforce_cuda_kernel03(real_T vp[250000]);
 
-static __global__ void solver_bruteforce_cuda_kernel12(const real_T m[625],
-                                                       const real_T x[625],
-                                                       const real_T q[250000],
-                                                       real_T w[250000]);
+static __global__ void solver_bruteforce_cuda_kernel04(real_T vd[625]);
 
-static __global__ void solver_bruteforce_cuda_kernel13(const real_T evp[250000],
-                                                       const real_T *sigg,
-                                                       const real_T w[250000],
-                                                       real_T vp1[250000],
+static __global__ void solver_bruteforce_cuda_kernel05(real_T def[250000]);
+
+static __global__ void solver_bruteforce_cuda_kernel06(real_T vo[625]);
+
+static __global__ void solver_bruteforce_cuda_kernel07(const struct0_T para,
+                                                       real_T q[250000],
                                                        real_T bp[250000]);
 
-static __global__ void solver_bruteforce_cuda_kernel14(const real_T vd1[625],
-                                                       real_T evp[250000]);
-
-static __global__ void solver_bruteforce_cuda_kernel15(const real_T evp[250000],
-                                                       const real_T vp1[250000],
-                                                       boolean_T def[250000]);
-
 static __global__ void
-solver_bruteforce_cuda_kernel16(const boolean_T def[250000],
-                                const real_T pdf[390625], const real_T diff,
-                                real_T evp[250000]);
+solver_bruteforce_cuda_kernel08(const real_T z[625], const real_T m[625],
+                                const real_T diff, const real_T b,
+                                const real_T c, real_T ua[625], real_T x[625]);
 
-static __global__ void solver_bruteforce_cuda_kernel17(const real_T q[250000],
-                                                       const real_T evp[250000],
-                                                       real_T y[250000]);
+static __global__ void solver_bruteforce_cuda_kernel09(const real_T m[625],
+                                                       const real_T pdf[390625],
+                                                       const real_T *betta,
+                                                       const real_T b,
+                                                       real_T a[390625]);
 
-static __global__ void solver_bruteforce_cuda_kernel18(const real_T vp[250000],
-                                                       const real_T vp1[250000],
-                                                       real_T y[250000]);
-
-static __global__ void solver_bruteforce_cuda_kernel19(const real_T vd1[625],
-                                                       real_T x[625],
-                                                       real_T vd[625]);
-
-static __global__ void solver_bruteforce_cuda_kernel2(real_T y[400]);
-
-static __global__ void solver_bruteforce_cuda_kernel20(const real_T vp1[250000],
-                                                       const int32_T iindx,
+static __global__ void solver_bruteforce_cuda_kernel10(const real_T theta,
+                                                       const real_T vd[625],
+                                                       const real_T b,
                                                        real_T vo[625]);
 
-static __global__ void solver_bruteforce_cuda_kernel21(const real_T vp1[250000],
+static __global__ void solver_bruteforce_cuda_kernel11(const real_T ua[625],
+                                                       real_T vd1[625]);
+
+static __global__ void solver_bruteforce_cuda_kernel12(const real_T b[400],
+                                                       const real_T q[250000],
+                                                       const real_T x[625],
+                                                       real_T w[250000]);
+
+static __global__ void solver_bruteforce_cuda_kernel13(
+    const real_T b[400], const real_T *sigg, const real_T evp[250000],
+    const real_T w[250000], real_T bp[250000], real_T vp1[250000]);
+
+static __global__ void solver_bruteforce_cuda_kernel14(const real_T vp1[250000],
+                                                       const real_T vd1[625],
+                                                       real_T def[250000]);
+
+static __global__ void solver_bruteforce_cuda_kernel15(const real_T diff,
+                                                       real_T q[250000],
+                                                       real_T evp[250000],
+                                                       real_T w[250000]);
+
+static __global__ void solver_bruteforce_cuda_kernel16(const real_T vp1[250000],
+                                                       real_T vp[250000],
+                                                       real_T w[250000]);
+
+static __global__ void solver_bruteforce_cuda_kernel17(const real_T vd1[625],
+                                                       real_T vd[625],
+                                                       real_T vo[625]);
+
+static __global__ void solver_bruteforce_cuda_kernel18(const int32_T nb0,
+                                                       const real_T vp1[250000],
+                                                       real_T vo[625]);
+
+static __global__ void solver_bruteforce_cuda_kernel19(const real_T vp1[250000],
                                                        real_T vp[250000]);
 
-static __global__ void solver_bruteforce_cuda_kernel22(const real_T vd1[625],
+static __global__ void solver_bruteforce_cuda_kernel20(const real_T vd1[625],
                                                        real_T vd[625]);
 
-static __global__ void solver_bruteforce_cuda_kernel23(const real_T evp[250000],
+static __global__ void solver_bruteforce_cuda_kernel21(const real_T evp[250000],
                                                        real_T q[250000]);
 
-static __global__ void solver_bruteforce_cuda_kernel3(const real_T vd[625],
-                                                      real_T vo[625]);
-
-static __global__ void solver_bruteforce_cuda_kernel4(const struct0_T para,
-                                                      real_T q[250000]);
-
-static __global__ void
-solver_bruteforce_cuda_kernel5(const real_T diff, const real_T *sigg,
-                               const real_T d, const real_T m[625],
-                               const real_T z[625], real_T ua[625]);
-
-static __global__ void solver_bruteforce_cuda_kernel6(const real_T *sigg,
-                                                      const real_T m[625],
-                                                      real_T x[625]);
-
-static __global__ void solver_bruteforce_cuda_kernel7(const real_T pdf[390625],
-                                                      const real_T *betta,
-                                                      const real_T x[625],
-                                                      real_T a[390625]);
-
-static __global__ void solver_bruteforce_cuda_kernel8(const real_T *sigg,
-                                                      const real_T m[625],
-                                                      real_T x[625]);
-
-static __global__ void solver_bruteforce_cuda_kernel9(const real_T pdf[390625],
-                                                      const real_T *betta,
-                                                      const real_T x[625],
-                                                      real_T a[390625]);
-
 // Function Definitions
+static void checkCudaError(cudaError_t errorCode, const char_T *file,
+                           int32_T b_line)
+{
+  if (errorCode != cudaSuccess) {
+    gpuThrowError(errorCode, cudaGetErrorName(errorCode),
+                  cudaGetErrorString(errorCode), file, b_line);
+  }
+}
+
 static real_T emlrt_marshallIn(const mxArray *a__output_of_feval_,
                                const char_T *identifier)
 {
@@ -155,43 +153,54 @@ static real_T emlrt_marshallIn(const mxArray *a__output_of_feval_,
 
 static const mxArray *feval(const mxArray *m1, const mxArray *m2,
                             const mxArray *m3, const mxArray *m4,
+                            const mxArray *m5, emlrtMCInfo *location)
+{
+  const mxArray *pArrays[5];
+  const mxArray *m6;
+  pArrays[0] = m1;
+  pArrays[1] = m2;
+  pArrays[2] = m3;
+  pArrays[3] = m4;
+  pArrays[4] = m5;
+  return emlrtCallMATLABR2012b(emlrtRootTLSGlobal, 1, &m6, 5, &pArrays[0],
+                               "feval", true, location);
+}
+
+static const mxArray *feval(const mxArray *m1, const mxArray *m2,
+                            const mxArray *m3, const mxArray *m4,
                             const mxArray *m5, const mxArray *m6,
                             emlrtMCInfo *location)
 {
   const mxArray *pArrays[6];
-  const mxArray *m;
+  const mxArray *m7;
   pArrays[0] = m1;
   pArrays[1] = m2;
   pArrays[2] = m3;
   pArrays[3] = m4;
   pArrays[4] = m5;
   pArrays[5] = m6;
-  return emlrtCallMATLABR2012b(emlrtRootTLSGlobal, 1, &m, 6, &pArrays[0],
+  return emlrtCallMATLABR2012b(emlrtRootTLSGlobal, 1, &m7, 6, &pArrays[0],
                                "feval", true, location);
 }
 
-static const mxArray *feval(const mxArray *m1, const mxArray *m2,
-                            const mxArray *m3, const mxArray *m4,
-                            const mxArray *m5, emlrtMCInfo *location)
+static void gpuThrowError(uint32_T errorCode, const char_T *errorName,
+                          const char_T *errorString, const char_T *file,
+                          int32_T b_line)
 {
-  const mxArray *pArrays[5];
-  const mxArray *m;
-  pArrays[0] = m1;
-  pArrays[1] = m2;
-  pArrays[2] = m3;
-  pArrays[3] = m4;
-  pArrays[4] = m5;
-  return emlrtCallMATLABR2012b(emlrtRootTLSGlobal, 1, &m, 5, &pArrays[0],
-                               "feval", true, location);
+  emlrtRTEInfo rtInfo;
+  rtInfo.lineNo = b_line;
+  rtInfo.colNo = 0;
+  rtInfo.fName = "";
+  rtInfo.pName = file;
+  emlrtCUDAError(errorCode, (char_T *)errorName, (char_T *)errorString, &rtInfo,
+                 emlrtRootTLSGlobal);
 }
 
-static __global__ __launch_bounds__(32, 1) void solver_bruteforce_cuda_kernel1(
-    const struct0_T para, real_T *sigg, real_T *betta)
+static __global__ __launch_bounds__(32, 1) void solver_bruteforce_cuda_kernel01(
+    const struct0_T para, real_T *betta, real_T *sigg)
 {
-  uint64_T threadId;
   int32_T tmpIdx;
-  threadId = static_cast<uint64_T>(mwGetGlobalThreadIndexInXDimension());
-  tmpIdx = static_cast<int32_T>(threadId);
+  tmpIdx = static_cast<int32_T>(mwGetGlobalThreadIndex());
   if (tmpIdx < 1) {
     *betta = para.betta;
     *sigg = para.sigg;
@@ -199,348 +208,296 @@ static __global__ __launch_bounds__(32, 1) void solver_bruteforce_cuda_kernel1(
 }
 
 static __global__ __launch_bounds__(
-    512, 1) void solver_bruteforce_cuda_kernel10(const real_T vd[625],
-                                                 const real_T d,
-                                                 const real_T theta,
-                                                 real_T vo[625])
+    128, 1) void solver_bruteforce_cuda_kernel02(const real_T b[400],
+                                                 real_T y[400])
 {
-  uint64_T threadId;
   int32_T k;
-  threadId = static_cast<uint64_T>(mwGetGlobalThreadIndexInXDimension());
-  k = static_cast<int32_T>(threadId);
-  if (k < 625) {
-    vo[k] = theta * vo[k] + d * vd[k];
+  k = static_cast<int32_T>(mwGetGlobalThreadIndex());
+  if (k < 400) {
+    y[k] = fabs(b[k]);
+  }
+}
+
+static __global__
+    __launch_bounds__(256,
+                      1) void solver_bruteforce_cuda_kernel03(real_T vp[250000])
+{
+  int32_T bp_tmp;
+  bp_tmp = static_cast<int32_T>(mwGetGlobalThreadIndex());
+  if (bp_tmp < 250000) {
+    vp[bp_tmp] = 0.0;
+  }
+}
+
+static __global__
+    __launch_bounds__(128,
+                      1) void solver_bruteforce_cuda_kernel04(real_T vd[625])
+{
+  int32_T bp_tmp;
+  bp_tmp = static_cast<int32_T>(mwGetGlobalThreadIndex());
+  if (bp_tmp < 625) {
+    vd[bp_tmp] = 0.0;
   }
 }
 
 static __global__ __launch_bounds__(
-    512, 1) void solver_bruteforce_cuda_kernel11(const real_T z[625],
-                                                 const real_T ua[625],
-                                                 real_T x[625], real_T vd1[625])
+    256, 1) void solver_bruteforce_cuda_kernel05(real_T def[250000])
 {
-  uint64_T threadId;
+  int32_T bp_tmp;
+  bp_tmp = static_cast<int32_T>(mwGetGlobalThreadIndex());
+  if (bp_tmp < 250000) {
+    def[bp_tmp] = 0.0;
+  }
+}
+
+static __global__
+    __launch_bounds__(128,
+                      1) void solver_bruteforce_cuda_kernel06(real_T vo[625])
+{
+  int32_T bp_tmp;
+  bp_tmp = static_cast<int32_T>(mwGetGlobalThreadIndex());
+  if (bp_tmp < 625) {
+    vo[bp_tmp] = 0.0;
+  }
+}
+
+static __global__
+    __launch_bounds__(256, 1) void solver_bruteforce_cuda_kernel07(
+        const struct0_T para, real_T q[250000], real_T bp[250000])
+{
+  int32_T bp_tmp;
+  bp_tmp = static_cast<int32_T>(mwGetGlobalThreadIndex());
+  if (bp_tmp < 250000) {
+    bp[bp_tmp] = 0.0;
+    q[bp_tmp] = 1.0 / (para.rstar + 1.0);
+  }
+}
+
+static __global__
+    __launch_bounds__(128, 1) void solver_bruteforce_cuda_kernel08(
+        const real_T z[625], const real_T m[625], const real_T diff,
+        const real_T b, const real_T c, real_T ua[625], real_T x[625])
+{
+  real_T d;
   int32_T k;
-  threadId = static_cast<uint64_T>(mwGetGlobalThreadIndexInXDimension());
-  k = static_cast<int32_T>(threadId);
+  k = static_cast<int32_T>(mwGetGlobalThreadIndex());
   if (k < 625) {
-    vd1[k] += ua[k];
-    x[k] = exp(z[k]);
+    d = exp(z[k]) * m[k];
+    x[k] = d;
+    ua[k] = (pow(d * c, b) - 1.0) / diff;
+  }
+}
+
+static __global__
+    __launch_bounds__(256, 1) void solver_bruteforce_cuda_kernel09(
+        const real_T m[625], const real_T pdf[390625], const real_T *betta,
+        const real_T b, real_T a[390625])
+{
+  uint64_T gThreadId;
+  int32_T bp_tmp;
+  int32_T is;
+  gThreadId = mwGetGlobalThreadIndex();
+  is = static_cast<int32_T>(gThreadId % 625ULL);
+  bp_tmp =
+      static_cast<int32_T>((gThreadId - static_cast<uint64_T>(is)) / 625ULL);
+  if ((bp_tmp < 625) && (is < 625)) {
+    bp_tmp = is + 625 * bp_tmp;
+    a[bp_tmp] = pow(m[is], b) * *betta * pdf[bp_tmp];
   }
 }
 
 static __global__ __launch_bounds__(
-    512, 1) void solver_bruteforce_cuda_kernel12(const real_T m[625],
-                                                 const real_T x[625],
+    128, 1) void solver_bruteforce_cuda_kernel10(const real_T theta,
+                                                 const real_T vd[625],
+                                                 const real_T b, real_T vo[625])
+{
+  int32_T bp_tmp;
+  bp_tmp = static_cast<int32_T>(mwGetGlobalThreadIndex());
+  if (bp_tmp < 625) {
+    vo[bp_tmp] = theta * vo[bp_tmp] + b * vd[bp_tmp];
+  }
+}
+
+static __global__ __launch_bounds__(
+    128, 1) void solver_bruteforce_cuda_kernel11(const real_T ua[625],
+                                                 real_T vd1[625])
+{
+  int32_T bp_tmp;
+  bp_tmp = static_cast<int32_T>(mwGetGlobalThreadIndex());
+  if (bp_tmp < 625) {
+    vd1[bp_tmp] += ua[bp_tmp];
+  }
+}
+
+static __global__ __launch_bounds__(
+    256, 1) void solver_bruteforce_cuda_kernel12(const real_T b[400],
                                                  const real_T q[250000],
+                                                 const real_T x[625],
                                                  real_T w[250000])
 {
-  uint64_T threadId;
-  int32_T ibtile;
+  uint64_T gThreadId;
+  int32_T bp_tmp;
+  int32_T is;
   int32_T k;
-  threadId = static_cast<uint64_T>(mwGetGlobalThreadIndexInXDimension());
-  ibtile = static_cast<int32_T>(threadId % 625ULL);
-  k = static_cast<int32_T>((threadId - static_cast<uint64_T>(ibtile)) / 625ULL);
-  if ((k < 400) && (ibtile < 625)) {
-    w[ibtile + 625 * k] =
-        const_b[k] * q[ibtile + 625 * k] + x[ibtile] * m[ibtile];
+  gThreadId = mwGetGlobalThreadIndex();
+  is = static_cast<int32_T>(gThreadId % 625ULL);
+  bp_tmp =
+      static_cast<int32_T>((gThreadId - static_cast<uint64_T>(is)) / 625ULL);
+  if ((bp_tmp < 400) && (is < 625)) {
+    k = is + 625 * bp_tmp;
+    w[k] = b[bp_tmp] * q[k] + x[is];
   }
 }
 
 static __global__
-    __launch_bounds__(512, 1) void solver_bruteforce_cuda_kernel13(
-        const real_T evp[250000], const real_T *sigg, const real_T w[250000],
-        real_T vp1[250000], real_T bp[250000])
+    __launch_bounds__(256, 1) void solver_bruteforce_cuda_kernel13(
+        const real_T b[400], const real_T *sigg, const real_T evp[250000],
+        const real_T w[250000], real_T bp[250000], real_T vp1[250000])
 {
-  uint64_T threadId;
-  int32_T jtilecol;
-  int32_T k;
-  threadId = static_cast<uint64_T>(mwGetGlobalThreadIndexInXDimension());
-  jtilecol = static_cast<int32_T>(threadId % 400ULL);
-  k = static_cast<int32_T>((threadId - static_cast<uint64_T>(jtilecol)) /
-                           400ULL);
-  if ((k < 625) && (jtilecol < 400)) {
-    real_T tmpmax;
+  real_T c;
+  real_T d;
+  real_T tmpmax;
+  uint64_T gThreadId;
+  int32_T bp_tmp;
+  int32_T i;
+  int32_T ib;
+  int32_T is;
+  gThreadId = mwGetGlobalThreadIndex();
+  ib = static_cast<int32_T>(gThreadId % 400ULL);
+  is = static_cast<int32_T>((gThreadId - static_cast<uint64_T>(ib)) / 400ULL);
+  if ((is < 625) && (ib < 400)) {
     tmpmax = -CUDART_INF;
-    bp[k + 625 * jtilecol] = 0.0;
-    for (int32_T ibtile{0}; ibtile < 400; ibtile++) {
-      real_T u;
-      u = w[k + 625 * ibtile] - const_b[jtilecol];
-      if (u <= 0.0) {
-        u = -CUDART_INF;
+    bp_tmp = is + 625 * ib;
+    bp[bp_tmp] = 1.0;
+    d = b[ib];
+    for (i = 0; i < 400; i++) {
+      ib = is + 625 * i;
+      c = w[ib] - d;
+      if (c > 0.0) {
+        c = (pow(c, 1.0 - *sigg) - 1.0) / (1.0 - *sigg) + evp[ib];
       } else {
-        u = (pow(u, 1.0 - *sigg) - 1.0) / (1.0 - *sigg) + evp[k + 625 * ibtile];
+        c = -CUDART_INF;
       }
-      if (tmpmax < u) {
-        tmpmax = u;
-        bp[k + 625 * jtilecol] = static_cast<real_T>(ibtile) + 1.0;
+      if (c > tmpmax) {
+        tmpmax = c;
+        bp[bp_tmp] = static_cast<real_T>(i) + 1.0;
       }
     }
-    vp1[k + 625 * jtilecol] = tmpmax;
-  }
-}
-
-static __global__ __launch_bounds__(
-    512, 1) void solver_bruteforce_cuda_kernel14(const real_T vd1[625],
-                                                 real_T evp[250000])
-{
-  uint64_T threadId;
-  int32_T jtilecol;
-  int32_T k;
-  threadId = static_cast<uint64_T>(mwGetGlobalThreadIndexInXDimension());
-  k = static_cast<int32_T>(threadId % 625ULL);
-  jtilecol =
-      static_cast<int32_T>((threadId - static_cast<uint64_T>(k)) / 625ULL);
-  if ((jtilecol < 400) && (k < 625)) {
-    evp[jtilecol * 625 + k] = vd1[k];
-  }
-}
-
-static __global__ __launch_bounds__(
-    512, 1) void solver_bruteforce_cuda_kernel15(const real_T evp[250000],
-                                                 const real_T vp1[250000],
-                                                 boolean_T def[250000])
-{
-  uint64_T threadId;
-  int32_T k;
-  threadId = static_cast<uint64_T>(mwGetGlobalThreadIndexInXDimension());
-  k = static_cast<int32_T>(threadId);
-  if (k < 250000) {
-    def[k] = (vp1[k] < evp[k]);
-  }
-}
-
-static __global__ __launch_bounds__(
-    512, 1) void solver_bruteforce_cuda_kernel16(const boolean_T def[250000],
-                                                 const real_T pdf[390625],
-                                                 const real_T diff,
-                                                 real_T evp[250000])
-{
-  uint64_T threadId;
-  int32_T jtilecol;
-  int32_T k;
-  threadId = static_cast<uint64_T>(mwGetGlobalThreadIndexInXDimension());
-  jtilecol = static_cast<int32_T>(threadId % 400ULL);
-  k = static_cast<int32_T>((threadId - static_cast<uint64_T>(jtilecol)) /
-                           400ULL);
-  if ((k < 625) && (jtilecol < 400)) {
-    real_T u;
-    u = 0.0;
-    for (int32_T ibtile{0}; ibtile < 625; ibtile++) {
-      u += pdf[k + 625 * ibtile] *
-           static_cast<real_T>(def[ibtile + 625 * jtilecol]);
-    }
-    evp[k + 625 * jtilecol] = (1.0 - u) / diff;
+    vp1[bp_tmp] = tmpmax;
   }
 }
 
 static __global__
-    __launch_bounds__(512, 1) void solver_bruteforce_cuda_kernel17(
-        const real_T q[250000], const real_T evp[250000], real_T y[250000])
+    __launch_bounds__(256, 1) void solver_bruteforce_cuda_kernel14(
+        const real_T vp1[250000], const real_T vd1[625], real_T def[250000])
 {
-  uint64_T threadId;
-  int32_T k;
-  threadId = static_cast<uint64_T>(mwGetGlobalThreadIndexInXDimension());
-  k = static_cast<int32_T>(threadId);
-  if (k < 250000) {
-    y[k] = fabs(evp[k] - q[k]);
-  }
-}
-
-static __global__
-    __launch_bounds__(512, 1) void solver_bruteforce_cuda_kernel18(
-        const real_T vp[250000], const real_T vp1[250000], real_T y[250000])
-{
-  uint64_T threadId;
-  int32_T k;
-  threadId = static_cast<uint64_T>(mwGetGlobalThreadIndexInXDimension());
-  k = static_cast<int32_T>(threadId);
-  if (k < 250000) {
-    y[k] = fabs(vp1[k] - vp[k]);
+  uint64_T gThreadId;
+  int32_T ib;
+  int32_T is;
+  gThreadId = mwGetGlobalThreadIndex();
+  ib = static_cast<int32_T>(gThreadId % 400ULL);
+  is = static_cast<int32_T>((gThreadId - static_cast<uint64_T>(ib)) / 400ULL);
+  if ((is < 625) && (ib < 400)) {
+    ib = is + 625 * ib;
+    def[ib] = static_cast<real_T>(vp1[ib] < vd1[is]);
   }
 }
 
 static __global__ __launch_bounds__(
-    512, 1) void solver_bruteforce_cuda_kernel19(const real_T vd1[625],
-                                                 real_T x[625], real_T vd[625])
+    256, 1) void solver_bruteforce_cuda_kernel15(const real_T diff,
+                                                 real_T q[250000],
+                                                 real_T evp[250000],
+                                                 real_T w[250000])
 {
-  uint64_T threadId;
+  real_T b;
   int32_T k;
-  threadId = static_cast<uint64_T>(mwGetGlobalThreadIndexInXDimension());
-  k = static_cast<int32_T>(threadId);
+  k = static_cast<int32_T>(mwGetGlobalThreadIndex());
+  if (k < 250000) {
+    b = (1.0 - evp[k]) / diff;
+    evp[k] = b;
+    b -= q[k];
+    q[k] = b;
+    w[k] = fabs(b);
+  }
+}
+
+static __global__
+    __launch_bounds__(256, 1) void solver_bruteforce_cuda_kernel16(
+        const real_T vp1[250000], real_T vp[250000], real_T w[250000])
+{
+  real_T b;
+  int32_T k;
+  k = static_cast<int32_T>(mwGetGlobalThreadIndex());
+  if (k < 250000) {
+    b = vp1[k] - vp[k];
+    vp[k] = b;
+    w[k] = fabs(b);
+  }
+}
+
+static __global__ __launch_bounds__(
+    128, 1) void solver_bruteforce_cuda_kernel17(const real_T vd1[625],
+                                                 real_T vd[625], real_T vo[625])
+{
+  real_T b;
+  int32_T k;
+  k = static_cast<int32_T>(mwGetGlobalThreadIndex());
   if (k < 625) {
-    real_T u;
-    u = vd1[k] - vd[k];
-    vd[k] = u;
-    x[k] = fabs(u);
+    b = vd1[k] - vd[k];
+    vd[k] = b;
+    vo[k] = fabs(b);
   }
 }
 
 static __global__
-    __launch_bounds__(416, 1) void solver_bruteforce_cuda_kernel2(real_T y[400])
+    __launch_bounds__(128, 1) void solver_bruteforce_cuda_kernel18(
+        const int32_T nb0, const real_T vp1[250000], real_T vo[625])
 {
-  uint64_T threadId;
-  int32_T k;
-  threadId = static_cast<uint64_T>(mwGetGlobalThreadIndexInXDimension());
-  k = static_cast<int32_T>(threadId);
-  if (k < 400) {
-    //  dpgrid = b';
-    y[k] = fabs(const_b[k]);
-  }
-}
-
-static __global__
-    __launch_bounds__(512, 1) void solver_bruteforce_cuda_kernel20(
-        const real_T vp1[250000], const int32_T iindx, real_T vo[625])
-{
-  uint64_T threadId;
-  int32_T k;
-  threadId = static_cast<uint64_T>(mwGetGlobalThreadIndexInXDimension());
-  k = static_cast<int32_T>(threadId);
-  if (k < 625) {
-    vo[k] = vp1[k + 625 * iindx];
+  int32_T bp_tmp;
+  bp_tmp = static_cast<int32_T>(mwGetGlobalThreadIndex());
+  if (bp_tmp < 625) {
+    vo[bp_tmp] = vp1[bp_tmp + 625 * nb0];
   }
 }
 
 static __global__ __launch_bounds__(
-    512, 1) void solver_bruteforce_cuda_kernel21(const real_T vp1[250000],
+    256, 1) void solver_bruteforce_cuda_kernel19(const real_T vp1[250000],
                                                  real_T vp[250000])
 {
-  uint64_T threadId;
-  int32_T k;
-  threadId = static_cast<uint64_T>(mwGetGlobalThreadIndexInXDimension());
-  k = static_cast<int32_T>(threadId);
-  if (k < 250000) {
-    vp[k] = vp1[k];
+  int32_T bp_tmp;
+  bp_tmp = static_cast<int32_T>(mwGetGlobalThreadIndex());
+  if (bp_tmp < 250000) {
+    vp[bp_tmp] = vp1[bp_tmp];
   }
 }
 
 static __global__ __launch_bounds__(
-    512, 1) void solver_bruteforce_cuda_kernel22(const real_T vd1[625],
+    128, 1) void solver_bruteforce_cuda_kernel20(const real_T vd1[625],
                                                  real_T vd[625])
 {
-  uint64_T threadId;
-  int32_T k;
-  threadId = static_cast<uint64_T>(mwGetGlobalThreadIndexInXDimension());
-  k = static_cast<int32_T>(threadId);
-  if (k < 625) {
-    vd[k] = vd1[k];
+  int32_T bp_tmp;
+  bp_tmp = static_cast<int32_T>(mwGetGlobalThreadIndex());
+  if (bp_tmp < 625) {
+    vd[bp_tmp] = vd1[bp_tmp];
   }
 }
 
 static __global__ __launch_bounds__(
-    512, 1) void solver_bruteforce_cuda_kernel23(const real_T evp[250000],
+    256, 1) void solver_bruteforce_cuda_kernel21(const real_T evp[250000],
                                                  real_T q[250000])
 {
-  uint64_T threadId;
-  int32_T k;
-  threadId = static_cast<uint64_T>(mwGetGlobalThreadIndexInXDimension());
-  k = static_cast<int32_T>(threadId);
-  if (k < 250000) {
-    q[k] = evp[k];
+  int32_T bp_tmp;
+  bp_tmp = static_cast<int32_T>(mwGetGlobalThreadIndex());
+  if (bp_tmp < 250000) {
+    q[bp_tmp] = evp[bp_tmp];
   }
 }
 
-static __global__ __launch_bounds__(512, 1) void solver_bruteforce_cuda_kernel3(
-    const real_T vd[625], real_T vo[625])
-{
-  uint64_T threadId;
-  int32_T k;
-  threadId = static_cast<uint64_T>(mwGetGlobalThreadIndexInXDimension());
-  k = static_cast<int32_T>(threadId);
-  if (k < 625) {
-    // Initialize the Value functions
-    // continue repaying
-    //  vgood = vp ;
-    vo[k] = vd[k];
-  }
-}
-
-static __global__ __launch_bounds__(512, 1) void solver_bruteforce_cuda_kernel4(
-    const struct0_T para, real_T q[250000])
-{
-  uint64_T threadId;
-  int32_T k;
-  threadId = static_cast<uint64_T>(mwGetGlobalThreadIndexInXDimension());
-  k = static_cast<int32_T>(threadId);
-  if (k < 250000) {
-    // debt policy function (expressed in indices)
-    q[k] = 1.0 / (para.rstar + 1.0);
-  }
-}
-
-static __global__ __launch_bounds__(512, 1) void solver_bruteforce_cuda_kernel5(
-    const real_T diff, const real_T *sigg, const real_T d, const real_T m[625],
-    const real_T z[625], real_T ua[625])
-{
-  uint64_T threadId;
-  int32_T k;
-  threadId = static_cast<uint64_T>(mwGetGlobalThreadIndexInXDimension());
-  k = static_cast<int32_T>(threadId);
-  if (k < 625) {
-    ua[k] = (pow(exp(z[k]) * m[k] * d, 1.0 - *sigg) - 1.0) / diff;
-  }
-}
-
-static __global__ __launch_bounds__(512, 1) void solver_bruteforce_cuda_kernel6(
-    const real_T *sigg, const real_T m[625], real_T x[625])
-{
-  uint64_T threadId;
-  int32_T k;
-  threadId = static_cast<uint64_T>(mwGetGlobalThreadIndexInXDimension());
-  k = static_cast<int32_T>(threadId);
-  if (k < 625) {
-    x[k] = pow(m[k], 1.0 - *sigg);
-  }
-}
-
-static __global__ __launch_bounds__(512, 1) void solver_bruteforce_cuda_kernel7(
-    const real_T pdf[390625], const real_T *betta, const real_T x[625],
-    real_T a[390625])
-{
-  uint64_T threadId;
-  int32_T ibtile;
-  int32_T k;
-  threadId = static_cast<uint64_T>(mwGetGlobalThreadIndexInXDimension());
-  ibtile = static_cast<int32_T>(threadId % 625ULL);
-  k = static_cast<int32_T>((threadId - static_cast<uint64_T>(ibtile)) / 625ULL);
-  if ((k < 625) && (ibtile < 625)) {
-    a[ibtile + 625 * k] = x[ibtile] * *betta * pdf[ibtile + 625 * k];
-  }
-}
-
-static __global__ __launch_bounds__(512, 1) void solver_bruteforce_cuda_kernel8(
-    const real_T *sigg, const real_T m[625], real_T x[625])
-{
-  uint64_T threadId;
-  int32_T k;
-  threadId = static_cast<uint64_T>(mwGetGlobalThreadIndexInXDimension());
-  k = static_cast<int32_T>(threadId);
-  if (k < 625) {
-    x[k] = pow(m[k], 1.0 - *sigg);
-  }
-}
-
-static __global__ __launch_bounds__(512, 1) void solver_bruteforce_cuda_kernel9(
-    const real_T pdf[390625], const real_T *betta, const real_T x[625],
-    real_T a[390625])
-{
-  uint64_T threadId;
-  int32_T ibtile;
-  int32_T k;
-  threadId = static_cast<uint64_T>(mwGetGlobalThreadIndexInXDimension());
-  ibtile = static_cast<int32_T>(threadId % 625ULL);
-  k = static_cast<int32_T>((threadId - static_cast<uint64_T>(ibtile)) / 625ULL);
-  if ((k < 625) && (ibtile < 625)) {
-    a[ibtile + 625 * k] = x[ibtile] * *betta * pdf[ibtile + 625 * k];
-  }
-}
-
-void solver_bruteforce_cuda(solver_bruteforce_cudaStackData *SD,
-                            const real_T b[400], const real_T cpu_z[625],
+void solver_bruteforce_cuda(const real_T cpu_b[400], const real_T cpu_z[625],
                             const real_T cpu_m[625],
                             const real_T cpu_pdf[390625], const struct0_T *para,
                             real_T cpu_q[250000], real_T cpu_bp[250000],
-                            real_T cpu_vp[250000], boolean_T cpu_def[250000],
+                            real_T cpu_vp[250000], real_T cpu_def[250000],
                             real_T *totaltime, real_T *avgtime)
 {
   static const int32_T iv[2]{1, 7};
@@ -559,20 +516,17 @@ void solver_bruteforce_cuda(solver_bruteforce_cudaStackData *SD,
   const mxArray *c_y;
   const mxArray *d_y;
   const mxArray *m;
-  const mxArray *m1;
-  const mxArray *m2;
-  const mxArray *m3;
   const mxArray *y;
   real_T(*gpu_a)[390625];
   real_T(*gpu_pdf)[390625];
-  real_T(*b_gpu_y)[250000];
   real_T(*gpu_bp)[250000];
+  real_T(*gpu_def)[250000];
   real_T(*gpu_evp)[250000];
   real_T(*gpu_q)[250000];
   real_T(*gpu_vp)[250000];
   real_T(*gpu_vp1)[250000];
   real_T(*gpu_w)[250000];
-  real_T cpu_x[625];
+  real_T cpu_vo[625];
   real_T(*gpu_m)[625];
   real_T(*gpu_ua)[625];
   real_T(*gpu_vd)[625];
@@ -581,198 +535,231 @@ void solver_bruteforce_cuda(solver_bruteforce_cudaStackData *SD,
   real_T(*gpu_x)[625];
   real_T(*gpu_z)[625];
   real_T cpu_y[400];
+  real_T(*gpu_b)[400];
   real_T(*gpu_y)[400];
-  real_T d;
+  real_T b;
+  real_T b_ex;
+  real_T c;
   real_T diff;
+  real_T ex;
+  real_T rstar;
   real_T theta;
+  real_T timer_tv_nsec;
+  real_T timer_tv_sec;
   real_T *gpu_betta;
   real_T *gpu_sigg;
-  int32_T iindx;
+  int32_T i;
   int32_T its;
-  boolean_T(*gpu_def)[250000];
-  boolean_T bp_outdatedOnCpu;
-  boolean_T def_outdatedOnCpu;
+  int32_T nb0;
   boolean_T p;
   boolean_T pdf_outdatedOnGpu;
-  boolean_T vp_outdatedOnCpu;
-  cudaMalloc(&b_gpu_y, 2000000ULL);
-  cudaMalloc(&gpu_vp1, 2000000ULL);
-  cudaMalloc(&gpu_w, 2000000ULL);
-  cudaMalloc(&gpu_vd1, 5000ULL);
-  cudaMalloc(&gpu_evp, 2000000ULL);
-  cudaMalloc(&gpu_a, 3125000ULL);
-  cudaMalloc(&gpu_ua, 5000ULL);
-  cudaMalloc(&gpu_x, 5000ULL);
-  cudaMalloc(&gpu_vo, 5000ULL);
-  cudaMalloc(&gpu_vd, 5000ULL);
-  cudaMalloc(&gpu_y, 3200ULL);
-  cudaMalloc(&gpu_sigg, 8ULL);
-  cudaMalloc(&gpu_betta, 8ULL);
-  cudaMalloc(&gpu_def, 250000ULL);
-  cudaMalloc(&gpu_vp, 2000000ULL);
-  cudaMalloc(&gpu_bp, 2000000ULL);
-  cudaMalloc(&gpu_q, 2000000ULL);
-  cudaMalloc(&gpu_pdf, 3125000ULL);
-  cudaMalloc(&gpu_m, 5000ULL);
-  cudaMalloc(&gpu_z, 5000ULL);
-  def_outdatedOnCpu = false;
-  vp_outdatedOnCpu = false;
-  bp_outdatedOnCpu = false;
+  checkCudaError(mwCudaMalloc(&gpu_vp1, 250000ULL * sizeof(real_T)), __FILE__,
+                 __LINE__);
+  checkCudaError(mwCudaMalloc(&gpu_w, 250000ULL * sizeof(real_T)), __FILE__,
+                 __LINE__);
+  checkCudaError(mwCudaMalloc(&gpu_vd1, 625ULL * sizeof(real_T)), __FILE__,
+                 __LINE__);
+  checkCudaError(mwCudaMalloc(&gpu_evp, 250000ULL * sizeof(real_T)), __FILE__,
+                 __LINE__);
+  checkCudaError(mwCudaMalloc(&gpu_a, 390625ULL * sizeof(real_T)), __FILE__,
+                 __LINE__);
+  checkCudaError(mwCudaMalloc(&gpu_ua, 625ULL * sizeof(real_T)), __FILE__,
+                 __LINE__);
+  checkCudaError(mwCudaMalloc(&gpu_x, 625ULL * sizeof(real_T)), __FILE__,
+                 __LINE__);
+  checkCudaError(mwCudaMalloc(&gpu_vo, 625ULL * sizeof(real_T)), __FILE__,
+                 __LINE__);
+  checkCudaError(mwCudaMalloc(&gpu_vd, 625ULL * sizeof(real_T)), __FILE__,
+                 __LINE__);
+  checkCudaError(mwCudaMalloc(&gpu_y, 400ULL * sizeof(real_T)), __FILE__,
+                 __LINE__);
+  checkCudaError(mwCudaMalloc(&gpu_sigg, sizeof(real_T)), __FILE__, __LINE__);
+  checkCudaError(mwCudaMalloc(&gpu_betta, sizeof(real_T)), __FILE__, __LINE__);
+  checkCudaError(mwCudaMalloc(&gpu_def, 250000ULL * sizeof(real_T)), __FILE__,
+                 __LINE__);
+  checkCudaError(mwCudaMalloc(&gpu_vp, 250000ULL * sizeof(real_T)), __FILE__,
+                 __LINE__);
+  checkCudaError(mwCudaMalloc(&gpu_bp, 250000ULL * sizeof(real_T)), __FILE__,
+                 __LINE__);
+  checkCudaError(mwCudaMalloc(&gpu_q, 250000ULL * sizeof(real_T)), __FILE__,
+                 __LINE__);
+  checkCudaError(mwCudaMalloc(&gpu_pdf, 390625ULL * sizeof(real_T)), __FILE__,
+                 __LINE__);
+  checkCudaError(mwCudaMalloc(&gpu_m, 625ULL * sizeof(real_T)), __FILE__,
+                 __LINE__);
+  checkCudaError(mwCudaMalloc(&gpu_z, 625ULL * sizeof(real_T)), __FILE__,
+                 __LINE__);
+  checkCudaError(mwCudaMalloc(&gpu_b, 400ULL * sizeof(real_T)), __FILE__,
+                 __LINE__);
   pdf_outdatedOnGpu = true;
   theta = para->theta;
-  solver_bruteforce_cuda_kernel1<<<dim3(1U, 1U, 1U), dim3(32U, 1U, 1U)>>>(
-      *para, gpu_sigg, gpu_betta);
+  solver_bruteforce_cuda_kernel01<<<dim3(1U, 1U, 1U), dim3(32U, 1U, 1U)>>>(
+      *para, gpu_betta, gpu_sigg);
+  rstar = para->rstar;
   //  dpgrid = b';
-  cudaMemcpyToSymbol(const_b, b, 3200ULL, 0ULL, cudaMemcpyHostToDevice);
-  solver_bruteforce_cuda_kernel2<<<dim3(1U, 1U, 1U), dim3(416U, 1U, 1U)>>>(
-      *gpu_y);
-  iindx = 0;
-  cudaMemcpy(cpu_y, *gpu_y, 3200ULL, cudaMemcpyDeviceToHost);
-  diff = cpu_y[0];
-  for (int32_T i{0}; i < 399; i++) {
-    d = cpu_y[i + 1];
-    if (std::isnan(d)) {
+  checkCudaError(cudaMemcpy(*gpu_b, cpu_b, 400ULL * sizeof(real_T),
+                            cudaMemcpyHostToDevice),
+                 __FILE__, __LINE__);
+  solver_bruteforce_cuda_kernel02<<<dim3(4U, 1U, 1U), dim3(128U, 1U, 1U)>>>(
+      *gpu_b, *gpu_y);
+  nb0 = 0;
+  checkCudaError(cudaMemcpy(cpu_y, *gpu_y, 400ULL * sizeof(real_T),
+                            cudaMemcpyDeviceToHost),
+                 __FILE__, __LINE__);
+  ex = cpu_y[0];
+  for (i = 0; i < 399; i++) {
+    c = cpu_y[i + 1];
+    if (std::isnan(c)) {
       p = false;
-    } else if (std::isnan(diff)) {
+    } else if (std::isnan(ex)) {
       p = true;
     } else {
-      p = (diff > d);
+      p = (ex > c);
     }
     if (p) {
-      diff = d;
-      iindx = i + 1;
+      ex = c;
+      nb0 = i + 1;
     }
   }
   // Initialize the Value functions
+  solver_bruteforce_cuda_kernel03<<<dim3(977U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
+      *gpu_vp);
   // continue repaying
+  solver_bruteforce_cuda_kernel04<<<dim3(5U, 1U, 1U), dim3(128U, 1U, 1U)>>>(
+      *gpu_vd);
+  solver_bruteforce_cuda_kernel05<<<dim3(977U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
+      *gpu_def);
   //  vgood = vp ;
-  solver_bruteforce_cuda_kernel3<<<dim3(2U, 1U, 1U), dim3(512U, 1U, 1U)>>>(
-      *gpu_vd, *gpu_vo);
+  solver_bruteforce_cuda_kernel06<<<dim3(5U, 1U, 1U), dim3(128U, 1U, 1U)>>>(
+      *gpu_vo);
   // debt policy function (expressed in indices)
-  solver_bruteforce_cuda_kernel4<<<dim3(489U, 1U, 1U), dim3(512U, 1U, 1U)>>>(
-      *para, *gpu_q);
+  solver_bruteforce_cuda_kernel07<<<dim3(977U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
+      *para, *gpu_q, *gpu_bp);
   // q is price of debt; it is a function of  (y_t, d_{t+1})
   //  u = zeros(1,nb) ;
-  cudaMemcpy(*gpu_m, cpu_m, 5000ULL, cudaMemcpyHostToDevice);
-  cudaMemcpy(*gpu_z, cpu_z, 5000ULL, cudaMemcpyHostToDevice);
-  solver_bruteforce_cuda_kernel5<<<dim3(2U, 1U, 1U), dim3(512U, 1U, 1U)>>>(
-      1.0 - para->sigg, gpu_sigg, 1.0 - para->phi0, *gpu_m, *gpu_z, *gpu_ua);
-  //
+  b = 1.0 - para->sigg;
+  checkCudaError(cudaMemcpy(*gpu_z, cpu_z, 625ULL * sizeof(real_T),
+                            cudaMemcpyHostToDevice),
+                 __FILE__, __LINE__);
+  checkCudaError(cudaMemcpy(*gpu_m, cpu_m, 625ULL * sizeof(real_T),
+                            cudaMemcpyHostToDevice),
+                 __FILE__, __LINE__);
+  solver_bruteforce_cuda_kernel08<<<dim3(5U, 1U, 1U), dim3(128U, 1U, 1U)>>>(
+      *gpu_z, *gpu_m, 1.0 - para->sigg, 1.0 - para->sigg, 1.0 - para->phi0,
+      *gpu_ua, *gpu_x);
   diff = 1.0;
   its = 1;
   expl_temp = coder::tic();
+  timer_tv_sec = expl_temp.tv_sec;
+  timer_tv_nsec = expl_temp.tv_nsec;
   //  <----- Start the timer
   while ((diff > 1.0E-7) && (its < 1000)) {
-    real_T beta1;
-    real_T maxval;
-    solver_bruteforce_cuda_kernel6<<<dim3(2U, 1U, 1U), dim3(512U, 1U, 1U)>>>(
-        gpu_sigg, *gpu_m, *gpu_x);
     if (pdf_outdatedOnGpu) {
-      cudaMemcpy(*gpu_pdf, cpu_pdf, 3125000ULL, cudaMemcpyHostToDevice);
+      checkCudaError(cudaMemcpy(*gpu_pdf, cpu_pdf, 390625ULL * sizeof(real_T),
+                                cudaMemcpyHostToDevice),
+                     __FILE__, __LINE__);
     }
-    solver_bruteforce_cuda_kernel7<<<dim3(763U, 1U, 1U), dim3(512U, 1U, 1U)>>>(
-        *gpu_pdf, gpu_betta, *gpu_x, *gpu_a);
+    solver_bruteforce_cuda_kernel09<<<dim3(1526U, 1U, 1U),
+                                      dim3(256U, 1U, 1U)>>>(
+        *gpu_m, *gpu_pdf, gpu_betta, b, *gpu_a);
     diff = 1.0;
-    beta1 = 0.0;
+    ex = 0.0;
     cublasDgemm(getCublasGlobalHandle(), CUBLAS_OP_N, CUBLAS_OP_N, 625, 400,
-                625, (double *)&diff, (double *)&(*gpu_a)[0], 625,
-                (double *)&(*gpu_vp)[0], 625, (double *)&beta1,
-                (double *)&(*gpu_evp)[0], 625);
-    solver_bruteforce_cuda_kernel8<<<dim3(2U, 1U, 1U), dim3(512U, 1U, 1U)>>>(
-        gpu_sigg, *gpu_m, *gpu_x);
-    solver_bruteforce_cuda_kernel9<<<dim3(763U, 1U, 1U), dim3(512U, 1U, 1U)>>>(
-        *gpu_pdf, gpu_betta, *gpu_x, *gpu_a);
-    solver_bruteforce_cuda_kernel10<<<dim3(2U, 1U, 1U), dim3(512U, 1U, 1U)>>>(
-        *gpu_vd, 1.0 - theta, theta, *gpu_vo);
+                625, &diff, &(*gpu_a)[0], 625, &(*gpu_vp)[0], 625, &ex,
+                &(*gpu_evp)[0], 625);
+    solver_bruteforce_cuda_kernel10<<<dim3(5U, 1U, 1U), dim3(128U, 1U, 1U)>>>(
+        theta, *gpu_vd, 1.0 - theta, *gpu_vo);
     cublasDgemm(getCublasGlobalHandle(), CUBLAS_OP_N, CUBLAS_OP_N, 625, 1, 625,
-                (double *)&diff, (double *)&(*gpu_a)[0], 625,
-                (double *)&(*gpu_vo)[0], 625, (double *)&beta1,
-                (double *)&(*gpu_vd1)[0], 625);
-    solver_bruteforce_cuda_kernel11<<<dim3(2U, 1U, 1U), dim3(512U, 1U, 1U)>>>(
-        *gpu_z, *gpu_ua, *gpu_x, *gpu_vd1);
-    solver_bruteforce_cuda_kernel12<<<dim3(489U, 1U, 1U), dim3(512U, 1U, 1U)>>>(
-        *gpu_m, *gpu_x, *gpu_q, *gpu_w);
-    solver_bruteforce_cuda_kernel13<<<dim3(489U, 1U, 1U), dim3(512U, 1U, 1U)>>>(
-        *gpu_evp, gpu_sigg, *gpu_w, *gpu_vp1, *gpu_bp);
-    bp_outdatedOnCpu = true;
-    solver_bruteforce_cuda_kernel14<<<dim3(489U, 1U, 1U), dim3(512U, 1U, 1U)>>>(
-        *gpu_vd1, *gpu_evp);
-    solver_bruteforce_cuda_kernel15<<<dim3(489U, 1U, 1U), dim3(512U, 1U, 1U)>>>(
-        *gpu_evp, *gpu_vp1, *gpu_def);
-    def_outdatedOnCpu = true;
+                &diff, &(*gpu_a)[0], 625, &(*gpu_vo)[0], 625, &ex,
+                &(*gpu_vd1)[0], 625);
+    solver_bruteforce_cuda_kernel11<<<dim3(5U, 1U, 1U), dim3(128U, 1U, 1U)>>>(
+        *gpu_ua, *gpu_vd1);
+    solver_bruteforce_cuda_kernel12<<<dim3(977U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
+        *gpu_b, *gpu_q, *gpu_x, *gpu_w);
+    solver_bruteforce_cuda_kernel13<<<dim3(977U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
+        *gpu_b, gpu_sigg, *gpu_evp, *gpu_w, *gpu_bp, *gpu_vp1);
+    //  def = vp1 < repmat(vd1,1,nb);
+    solver_bruteforce_cuda_kernel14<<<dim3(977U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
+        *gpu_vp1, *gpu_vd1, *gpu_def);
     pdf_outdatedOnGpu = false;
-    solver_bruteforce_cuda_kernel16<<<dim3(489U, 1U, 1U), dim3(512U, 1U, 1U)>>>(
-        *gpu_def, *gpu_pdf, para->rstar + 1.0, *gpu_evp);
-    solver_bruteforce_cuda_kernel17<<<dim3(489U, 1U, 1U), dim3(512U, 1U, 1U)>>>(
-        *gpu_q, *gpu_evp, *b_gpu_y);
-    cudaMemcpy(SD->f0.cpu_y, *b_gpu_y, 2000000ULL, cudaMemcpyDeviceToHost);
-    beta1 = SD->f0.cpu_y[0];
-    for (int32_T i{0}; i < 249999; i++) {
-      d = SD->f0.cpu_y[i + 1];
-      if (std::isnan(d)) {
+    cublasDgemm(getCublasGlobalHandle(), CUBLAS_OP_N, CUBLAS_OP_N, 625, 400,
+                625, &diff, &(*gpu_pdf)[0], 625, &(*gpu_def)[0], 625, &ex,
+                &(*gpu_evp)[0], 625);
+    solver_bruteforce_cuda_kernel15<<<dim3(977U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
+        rstar + 1.0, *gpu_q, *gpu_evp, *gpu_w);
+    checkCudaError(cudaMemcpy(cpu_vp, *gpu_w, 250000ULL * sizeof(real_T),
+                              cudaMemcpyDeviceToHost),
+                   __FILE__, __LINE__);
+    ex = cpu_vp[0];
+    for (i = 0; i < 249999; i++) {
+      c = cpu_vp[i + 1];
+      if (std::isnan(c)) {
         p = false;
-      } else if (std::isnan(beta1)) {
+      } else if (std::isnan(ex)) {
         p = true;
       } else {
-        p = (beta1 < d);
+        p = (ex < c);
       }
       if (p) {
-        beta1 = d;
+        ex = c;
       }
     }
-    solver_bruteforce_cuda_kernel18<<<dim3(489U, 1U, 1U), dim3(512U, 1U, 1U)>>>(
-        *gpu_vp, *gpu_vp1, *b_gpu_y);
-    cudaMemcpy(SD->f0.cpu_y, *b_gpu_y, 2000000ULL, cudaMemcpyDeviceToHost);
-    maxval = SD->f0.cpu_y[0];
-    for (int32_T i{0}; i < 249999; i++) {
-      d = SD->f0.cpu_y[i + 1];
-      if (std::isnan(d)) {
+    solver_bruteforce_cuda_kernel16<<<dim3(977U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
+        *gpu_vp1, *gpu_vp, *gpu_w);
+    checkCudaError(cudaMemcpy(cpu_vp, *gpu_w, 250000ULL * sizeof(real_T),
+                              cudaMemcpyDeviceToHost),
+                   __FILE__, __LINE__);
+    b_ex = cpu_vp[0];
+    for (i = 0; i < 249999; i++) {
+      c = cpu_vp[i + 1];
+      if (std::isnan(c)) {
         p = false;
-      } else if (std::isnan(maxval)) {
+      } else if (std::isnan(b_ex)) {
         p = true;
       } else {
-        p = (maxval < d);
+        p = (b_ex < c);
       }
       if (p) {
-        maxval = d;
+        b_ex = c;
       }
     }
-    solver_bruteforce_cuda_kernel19<<<dim3(2U, 1U, 1U), dim3(512U, 1U, 1U)>>>(
-        *gpu_vd1, *gpu_x, *gpu_vd);
-    cudaMemcpy(cpu_x, *gpu_x, 5000ULL, cudaMemcpyDeviceToHost);
-    diff = cpu_x[0];
-    for (int32_T i{0}; i < 624; i++) {
-      d = cpu_x[i + 1];
-      if (std::isnan(d)) {
+    solver_bruteforce_cuda_kernel17<<<dim3(5U, 1U, 1U), dim3(128U, 1U, 1U)>>>(
+        *gpu_vd1, *gpu_vd, *gpu_vo);
+    checkCudaError(cudaMemcpy(cpu_vo, *gpu_vo, 625ULL * sizeof(real_T),
+                              cudaMemcpyDeviceToHost),
+                   __FILE__, __LINE__);
+    diff = cpu_vo[0];
+    for (i = 0; i < 624; i++) {
+      c = cpu_vo[i + 1];
+      if (std::isnan(c)) {
         p = false;
       } else if (std::isnan(diff)) {
         p = true;
       } else {
-        p = (diff < d);
+        p = (diff < c);
       }
       if (p) {
-        diff = d;
+        diff = c;
       }
     }
-    diff += beta1 + maxval;
-    solver_bruteforce_cuda_kernel20<<<dim3(2U, 1U, 1U), dim3(512U, 1U, 1U)>>>(
-        *gpu_vp1, iindx, *gpu_vo);
-    solver_bruteforce_cuda_kernel21<<<dim3(489U, 1U, 1U), dim3(512U, 1U, 1U)>>>(
+    diff += ex + b_ex;
+    solver_bruteforce_cuda_kernel18<<<dim3(5U, 1U, 1U), dim3(128U, 1U, 1U)>>>(
+        nb0, *gpu_vp1, *gpu_vo);
+    solver_bruteforce_cuda_kernel19<<<dim3(977U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
         *gpu_vp1, *gpu_vp);
-    vp_outdatedOnCpu = true;
-    solver_bruteforce_cuda_kernel22<<<dim3(2U, 1U, 1U), dim3(512U, 1U, 1U)>>>(
+    solver_bruteforce_cuda_kernel20<<<dim3(5U, 1U, 1U), dim3(128U, 1U, 1U)>>>(
         *gpu_vd1, *gpu_vd);
-    solver_bruteforce_cuda_kernel23<<<dim3(489U, 1U, 1U), dim3(512U, 1U, 1U)>>>(
+    solver_bruteforce_cuda_kernel21<<<dim3(977U, 1U, 1U), dim3(256U, 1U, 1U)>>>(
         *gpu_evp, *gpu_q);
     if (std::fmod(static_cast<real_T>(its), 50.0) == 0.0) {
       c_y = nullptr;
-      m2 = emlrtCreateCharArray(2, &iv2[0]);
-      emlrtInitCharArrayR2013a(emlrtRootTLSGlobal, 7, m2, &u[0]);
-      emlrtAssign(&c_y, m2);
+      m = emlrtCreateCharArray(2, &iv2[0]);
+      emlrtInitCharArrayR2013a(emlrtRootTLSGlobal, 7, m, &u[0]);
+      emlrtAssign(&c_y, m);
       d_y = nullptr;
-      m3 = emlrtCreateCharArray(2, &iv3[0]);
-      emlrtInitCharArrayR2013a(emlrtRootTLSGlobal, 17, m3, &c_u[0]);
-      emlrtAssign(&d_y, m3);
+      m = emlrtCreateCharArray(2, &iv3[0]);
+      emlrtInitCharArrayR2013a(emlrtRootTLSGlobal, 17, m, &c_u[0]);
+      emlrtAssign(&d_y, m);
       emlrt_marshallIn(feval(c_y, emlrt_marshallOut(1.0), d_y,
                              emlrt_marshallOut(static_cast<real_T>(its)),
                              emlrt_marshallOut(diff), &emlrtMCI),
@@ -780,51 +767,53 @@ void solver_bruteforce_cuda(solver_bruteforce_cudaStackData *SD,
     }
     its++;
   }
-  *totaltime = coder::toc(expl_temp.tv_sec, expl_temp.tv_nsec);
+  *totaltime = coder::toc(timer_tv_sec, timer_tv_nsec);
   *avgtime = *totaltime / (static_cast<real_T>(its) - 1.0);
   y = nullptr;
   m = emlrtCreateCharArray(2, &iv[0]);
   emlrtInitCharArrayR2013a(emlrtRootTLSGlobal, 7, m, &u[0]);
   emlrtAssign(&y, m);
   b_y = nullptr;
-  m1 = emlrtCreateCharArray(2, &iv1[0]);
-  emlrtInitCharArrayR2013a(emlrtRootTLSGlobal, 42, m1, &b_u[0]);
-  emlrtAssign(&b_y, m1);
+  m = emlrtCreateCharArray(2, &iv1[0]);
+  emlrtInitCharArrayR2013a(emlrtRootTLSGlobal, 42, m, &b_u[0]);
+  emlrtAssign(&b_y, m);
   emlrt_marshallIn(feval(y, emlrt_marshallOut(1.0), b_y,
                          emlrt_marshallOut(static_cast<real_T>(its) - 1.0),
                          emlrt_marshallOut(*totaltime),
                          emlrt_marshallOut(*avgtime), &emlrtMCI),
                    "<output of feval>");
-  cudaMemcpy(cpu_q, *gpu_q, 2000000ULL, cudaMemcpyDeviceToHost);
-  if (bp_outdatedOnCpu) {
-    cudaMemcpy(cpu_bp, *gpu_bp, 2000000ULL, cudaMemcpyDeviceToHost);
-  }
-  if (vp_outdatedOnCpu) {
-    cudaMemcpy(cpu_vp, *gpu_vp, 2000000ULL, cudaMemcpyDeviceToHost);
-  }
-  if (def_outdatedOnCpu) {
-    cudaMemcpy(cpu_def, *gpu_def, 250000ULL, cudaMemcpyDeviceToHost);
-  }
-  cudaFree(*gpu_z);
-  cudaFree(*gpu_m);
-  cudaFree(*gpu_pdf);
-  cudaFree(*gpu_q);
-  cudaFree(*gpu_bp);
-  cudaFree(*gpu_vp);
-  cudaFree(*gpu_def);
-  cudaFree(gpu_betta);
-  cudaFree(gpu_sigg);
-  cudaFree(*gpu_y);
-  cudaFree(*gpu_vd);
-  cudaFree(*gpu_vo);
-  cudaFree(*gpu_x);
-  cudaFree(*gpu_ua);
-  cudaFree(*gpu_a);
-  cudaFree(*gpu_evp);
-  cudaFree(*gpu_vd1);
-  cudaFree(*gpu_w);
-  cudaFree(*gpu_vp1);
-  cudaFree(*b_gpu_y);
+  checkCudaError(cudaMemcpy(cpu_q, *gpu_q, 250000ULL * sizeof(real_T),
+                            cudaMemcpyDeviceToHost),
+                 __FILE__, __LINE__);
+  checkCudaError(cudaMemcpy(cpu_bp, *gpu_bp, 250000ULL * sizeof(real_T),
+                            cudaMemcpyDeviceToHost),
+                 __FILE__, __LINE__);
+  checkCudaError(cudaMemcpy(cpu_vp, *gpu_vp, 250000ULL * sizeof(real_T),
+                            cudaMemcpyDeviceToHost),
+                 __FILE__, __LINE__);
+  checkCudaError(cudaMemcpy(cpu_def, *gpu_def, 250000ULL * sizeof(real_T),
+                            cudaMemcpyDeviceToHost),
+                 __FILE__, __LINE__);
+  checkCudaError(mwCudaFree(*gpu_b), __FILE__, __LINE__);
+  checkCudaError(mwCudaFree(*gpu_z), __FILE__, __LINE__);
+  checkCudaError(mwCudaFree(*gpu_m), __FILE__, __LINE__);
+  checkCudaError(mwCudaFree(*gpu_pdf), __FILE__, __LINE__);
+  checkCudaError(mwCudaFree(*gpu_q), __FILE__, __LINE__);
+  checkCudaError(mwCudaFree(*gpu_bp), __FILE__, __LINE__);
+  checkCudaError(mwCudaFree(*gpu_vp), __FILE__, __LINE__);
+  checkCudaError(mwCudaFree(*gpu_def), __FILE__, __LINE__);
+  checkCudaError(mwCudaFree(gpu_betta), __FILE__, __LINE__);
+  checkCudaError(mwCudaFree(gpu_sigg), __FILE__, __LINE__);
+  checkCudaError(mwCudaFree(*gpu_y), __FILE__, __LINE__);
+  checkCudaError(mwCudaFree(*gpu_vd), __FILE__, __LINE__);
+  checkCudaError(mwCudaFree(*gpu_vo), __FILE__, __LINE__);
+  checkCudaError(mwCudaFree(*gpu_x), __FILE__, __LINE__);
+  checkCudaError(mwCudaFree(*gpu_ua), __FILE__, __LINE__);
+  checkCudaError(mwCudaFree(*gpu_a), __FILE__, __LINE__);
+  checkCudaError(mwCudaFree(*gpu_evp), __FILE__, __LINE__);
+  checkCudaError(mwCudaFree(*gpu_vd1), __FILE__, __LINE__);
+  checkCudaError(mwCudaFree(*gpu_w), __FILE__, __LINE__);
+  checkCudaError(mwCudaFree(*gpu_vp1), __FILE__, __LINE__);
 }
 
 // End of code generation (solver_bruteforce_cuda.cu)

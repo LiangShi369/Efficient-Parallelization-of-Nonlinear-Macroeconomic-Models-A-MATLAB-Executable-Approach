@@ -39,9 +39,8 @@ w = b' .* q + exp(z).*m ;
 
 parfor is = 1:ns
     for ib = 1:nb
-        
         c1 = w(is,:) - b(ib) ;
-        u = (c1.^(1-sigg) -1) / (1-sigg) ;
+        u = 1 - 1./c1 ;
         u(c1<=0) = - Inf ;
         [vp1(is,ib), bp(is,ib)] = max( u + evp(is,:)) ;
 

@@ -22,6 +22,11 @@
 #include <string.h>
 
 /* Function Declarations */
+emlrtCTX emlrtGetRootTLSGlobal(void);
+
+void emlrtLockerFunction(EmlrtLockeeFunction aLockee, emlrtConstCTX aTLS,
+                         void *aData);
+
 void solver_bruteforce(solver_bruteforceStackData *SD, const emlrtStack *sp,
                        const real_T b[400], const real_T z[625],
                        const real_T m[625], const real_T pdf[390625],

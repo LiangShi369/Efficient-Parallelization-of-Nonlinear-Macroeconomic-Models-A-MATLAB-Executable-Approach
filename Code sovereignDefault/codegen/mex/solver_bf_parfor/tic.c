@@ -16,12 +16,10 @@
 #include "emlrt.h"
 
 /* Variable Definitions */
-static emlrtRSInfo j_emlrtRSI = {
-    31,    /* lineNo */
-    "tic", /* fcnName */
-    "C:\\Program "
-    "Files\\MATLAB\\R2023b\\toolbox\\eml\\lib\\matlab\\timefun\\tic.m" /* pathName
-                                                                        */
+static emlrtRSInfo i_emlrtRSI = {
+    32,                                                           /* lineNo */
+    "tic",                                                        /* fcnName */
+    "D:\\Matlab_2026a\\toolbox\\eml\\lib\\matlab\\timefun\\tic.m" /* pathName */
 };
 
 /* Function Definitions */
@@ -35,17 +33,17 @@ emlrtTimespec tic(const emlrtStack *sp)
   int32_T status;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &j_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   d_st.prev = &c_st;
   d_st.tls = c_st.tls;
-  b_st.site = &k_emlrtRSI;
-  c_st.site = &l_emlrtRSI;
+  st.site = &i_emlrtRSI;
+  b_st.site = &j_emlrtRSI;
+  c_st.site = &k_emlrtRSI;
   status = emlrtClockGettimeMonotonic(&tstart);
-  d_st.site = &m_emlrtRSI;
+  d_st.site = &l_emlrtRSI;
   if (status != 0) {
     emlrtErrorWithMessageIdR2018a(
         &d_st, &b_emlrtRTEI, "Coder:toolbox:CoderTimeCallFailed",

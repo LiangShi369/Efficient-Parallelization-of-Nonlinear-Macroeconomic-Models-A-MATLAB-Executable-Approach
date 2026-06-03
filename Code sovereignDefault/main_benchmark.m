@@ -122,7 +122,7 @@ if run_mex
 disp(['Mex parfor time total: ', num2str(totaltime)]) ;
 disp(['Mex parfor time average: ', num2str(avgtime)]) ;
 
-reset(gpuDevice)
+wait(gpuDevice)
 
 [vp,vd,q_mexcuda,bp,bpr,default,rr,totaltime,avgtime] = solver_benchmark_cuda_mex( z,m,b,pdf_joint,para) ;
 

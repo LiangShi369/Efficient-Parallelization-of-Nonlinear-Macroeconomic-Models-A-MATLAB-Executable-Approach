@@ -82,7 +82,7 @@ for is = 1:ns  % to calculate the value of default
               if c <= 0
                   W(i, ib, is) = - Inf; 
               else
-                  W(i, ib, is) = 1 - c.^(-1) + evp(is,i) ;
+                  W(i, ib, is) = 1 - 1/c + evp(is,i) ;
               end
 
             else
@@ -99,6 +99,8 @@ for is = 1:ns % to incorporate taste shocks on debt choice
     for ib = 1:nb
         sumExp = 0;
         sumExpQ = 0;
+
+        coder.gpu.nokernel();
         for i = 1:nb
             coder.gpu.constantMemory(W); 
             coder.gpu.constantMemory(vpnew);
@@ -118,6 +120,8 @@ end
 coder.gpu.kernel()
 for is = 1:ns 
     maxWW = -inf;  % To store the maximum value of WW
+
+    coder.gpu.nokernel();
     for ib = 1:nb 
         coder.gpu.constantMemory(vpnew);
         coder.gpu.constantMemory(vaut);
@@ -140,6 +144,8 @@ for is = 1:ns
     sumExp = 0;
     probDcre_is = 0;
     probVp_is = 0;
+
+    coder.gpu.nokernel();
     for ib = 1:nb
         coder.gpu.constantMemory(WW);
         coder.gpu.constantMemory(Gamma);
@@ -197,7 +203,8 @@ for is = 1:ns
 
     maxWW = -inf;  % Initialize maximum WW
     maxIdx = 1;    % Initialize index for maximum WW
-
+    
+    coder.gpu.nokernel();
     for ib = 1:nb 
 
         Dsov = max(0, vpnew(is, ib) - vaut(is));

@@ -9,7 +9,7 @@ format compact
 run_compile = 1 ;
 run_mex = 1 ;
 
-n_a    = 1501; % Num of grid points, choose n_a = 1001 or 1501
+n_a    = 2001; % Num of grid points, choose n_a = 1001 or 1501
 
 %% Set folders
 ResFolder = 'results'; % Folder to save results
@@ -153,7 +153,7 @@ make_table(ResFolder,Outputs_parfor_mex,Params) ;
 
 %% run Mex cuda
 
-reset(gpuDevice)
+wait(gpuDevice)
 smctime = tic;
 if heteroagentoptions.do_GE==1
     % Find GE prices

@@ -13,33 +13,52 @@
 #include "_coder_solver_bruteforce_mex.h"
 #include "_coder_solver_bruteforce_api.h"
 #include "rt_nonfinite.h"
+#include "solver_bruteforce.h"
 #include "solver_bruteforce_data.h"
 #include "solver_bruteforce_initialize.h"
 #include "solver_bruteforce_terminate.h"
 #include "solver_bruteforce_types.h"
+#include "omp.h"
 
 /* Function Definitions */
 void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
                  const mxArray *prhs[])
 {
+  static jmp_buf emlrtJBEnviron;
+  emlrtStack st = {
+      NULL, /* site */
+      NULL, /* tls */
+      NULL  /* prev */
+  };
   solver_bruteforceStackData *c_solver_bruteforceStackDataGlo = NULL;
   c_solver_bruteforceStackDataGlo = (solver_bruteforceStackData *)emlrtMxCalloc(
       (size_t)1, (size_t)1U * sizeof(solver_bruteforceStackData));
   mexAtExit(&solver_bruteforce_atexit);
-  /* Module initialization. */
+  /* Initialize the memory manager. */
+  omp_init_lock(&emlrtLockGlobal);
+  omp_init_nest_lock(&solver_bruteforce_nestLockGlobal);
   solver_bruteforce_initialize();
-  /* Dispatch the entry-point. */
-  solver_bruteforce_mexFunction(c_solver_bruteforceStackDataGlo, nlhs, plhs,
-                                nrhs, prhs);
-  /* Module termination. */
-  solver_bruteforce_terminate();
+  st.tls = emlrtRootTLSGlobal;
+  emlrtSetJmpBuf(&st, &emlrtJBEnviron);
+  if (setjmp(emlrtJBEnviron) == 0) {
+    solver_bruteforce_mexFunction(c_solver_bruteforceStackDataGlo, nlhs, plhs,
+                                  nrhs, prhs);
+    solver_bruteforce_terminate();
+    omp_destroy_lock(&emlrtLockGlobal);
+    omp_destroy_nest_lock(&solver_bruteforce_nestLockGlobal);
+  } else {
+    omp_destroy_lock(&emlrtLockGlobal);
+    omp_destroy_nest_lock(&solver_bruteforce_nestLockGlobal);
+    emlrtReportParallelRunTimeError(&st);
+  }
   emlrtMxFree(c_solver_bruteforceStackDataGlo);
 }
 
 emlrtCTX mexFunctionCreateRootTLS(void)
 {
-  emlrtCreateRootTLSR2022a(&emlrtRootTLSGlobal, &emlrtContextGlobal, NULL, 1,
-                           NULL, "windows-1252", true);
+  emlrtCreateRootTLSR2022a(&emlrtRootTLSGlobal, &emlrtContextGlobal,
+                           &emlrtLockerFunction, omp_get_num_procs(), NULL,
+                           "windows-1252", true);
   return emlrtRootTLSGlobal;
 }
 

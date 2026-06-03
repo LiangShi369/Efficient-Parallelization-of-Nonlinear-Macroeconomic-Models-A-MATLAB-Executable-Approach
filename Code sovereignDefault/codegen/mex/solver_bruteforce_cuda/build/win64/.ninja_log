@@ -1,15 +1,15 @@
-# ninja log v5
-55	320	7882077248682626	build/win64/_coder_solver_bruteforce_cuda_info.obj	8e9757faebc1ae00
-0	5325	7882077273847512	build/win64/MWCUBLASUtils.obj	519219d876d0dfe3
-60	5986	7882077301918271	build/win64/cpp_mexapi_version.obj	c7645f1f839829aa
-5	6619	7882077311397358	build/win64/rt_nonfinite.obj	823a395dfe9f0ec4
-24	6883	7882077313983662	build/win64/_coder_solver_bruteforce_cuda_api.obj	aaf0346fa2d3bb87
-19	6904	7882077314243672	build/win64/toc.obj	901f3dc89d327717
-42	6922	7882077314433653	build/win64/tic.obj	f6a58ce57ffbaf1a
-67	6946	7882077314673673	build/win64/solver_bruteforce_cuda_mexutil.obj	ef10425c087571aa
-14	6973	7882077314958701	build/win64/solver_bruteforce_cuda_data.obj	e8f3c00b2da638be
-9	6977	7882077314943662	build/win64/solver_bruteforce_cuda_initialize.obj	d6fb2fde645ff5ae
-30	7085	7882077316112319	build/win64/_coder_solver_bruteforce_cuda_mex.obj	f1e696beac8c40e9
-37	7256	7882077317842337	build/win64/solver_bruteforce_cuda_terminate.obj	647e2615aaf1823a
-48	7462	7882077319895180	build/win64/solver_bruteforce_cuda.obj	215ece91151dc8fa
-7465	9436	7882077335786919	solver_bf_cuda_mex.mexw64	dff7d27619c91f91
+# ninja log v7
+39	108	8022141730646385	build/win64/_coder_solver_bruteforce_cuda_info.obj	92b53b6ecedd272c
+1	1186	8022141730256381	build/win64/MWCUBLASUtils.obj	7a333b71e36a62f1
+42	1244	8022141730676394	build/win64/cpp_mexapi_version.obj	c7d3fbcd64c8404f
+9	1725	8022141730346384	build/win64/rt_nonfinite.obj	f09cab8b175c1c25
+6	1765	8022141730316454	build/win64/solver_bruteforce_cuda_data.obj	2c8b42e33188ad92
+30	1819	8022141730546384	build/win64/_coder_solver_bruteforce_cuda_api.obj	588a5a67af78f953
+26	1821	8022141730516376	build/win64/toc.obj	5b2f7d5675926311
+36	1822	8022141730616377	build/win64/solver_bruteforce_cuda_mexutil.obj	1cf4d8d7d0dfa2f8
+23	1829	8022141730486379	build/win64/tic.obj	a6b9fbd2df20a9
+33	1991	8022141730586387	build/win64/_coder_solver_bruteforce_cuda_mex.obj	b2c29b511f2fdabe
+16	2055	8022141730406377	build/win64/solver_bruteforce_cuda_terminate.obj	6008ed8f16704d83
+12	2064	8022141730376380	build/win64/solver_bruteforce_cuda_initialize.obj	4bc6c291a61defd9
+19	2114	8022141730446380	build/win64/solver_bruteforce_cuda.obj	1ceed89c081de98
+2115	3213	8022141751411761	solver_bf_cuda_mex.mexw64	b9cefa6ee76c95d7

@@ -89,6 +89,8 @@ cfg = coder.config('mex');
 cfg.GenerateReport = true;
 codegen -config cfg solver_bruteforce -args {b,z,m,pdf,para} -o solver_bruteforce_mex
 
+cfg = coder.config('mex');
+cfg.GenerateReport = true;
 codegen -config cfg solver_bf_parfor -args {b,z,m,pdf,para } -o solver_bf_parfor_mex
 
 cfg = coder.gpuConfig('mex');
@@ -108,7 +110,7 @@ disp(['BruteForce mex time average: ', num2str(avgtime)]) ;
 disp(['BruteForce mex parfor time total: ', num2str(totaltime)]) ;
 disp(['BruteForce mex parfor time average: ', num2str(avgtime)]) ;
 
-reset(gpuDevice)
+wait(gpuDevice)
 [q1,bp,vp,def,totaltime,avgtime] = solver_bf_cuda_mex(b,z,m,pdf,para);
 disp(['BruteForce mex cuda time total: ', num2str(totaltime)]) ;
 disp(['BruteForce mex cuda time average: ', num2str(avgtime)]) ;
@@ -159,7 +161,7 @@ disp(['Binary mex serial time average: ', num2str(avgtime)]) ;
 disp(['Binary mex parfor time total: ', num2str(totaltime)]) ;
 disp(['Binary mex parfor time average: ', num2str(avgtime)]) ;
 
-reset(gpuDevice)
+wait(gpuDevice)
 [q_12,bp_12,vp_12,def_12,totaltime,avgtime] = solver_divide_cuda_mex(b,z,m,pdf,para);
 disp(['Binary mex cuda time total: ', num2str(totaltime)]) ;
 disp(['Binary mex cuda time average: ', num2str(avgtime)]) ;

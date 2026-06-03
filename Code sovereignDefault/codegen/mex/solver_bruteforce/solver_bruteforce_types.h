@@ -37,11 +37,11 @@ typedef struct {
 } b_solver_bruteforce;
 #endif /* typedef_b_solver_bruteforce */
 
-#ifndef typedef_solver_bruteforceStackData
-#define typedef_solver_bruteforceStackData
+#ifndef c_typedef_solver_bruteforceStac
+#define c_typedef_solver_bruteforceStac
 typedef struct {
   b_solver_bruteforce f0;
 } solver_bruteforceStackData;
-#endif /* typedef_solver_bruteforceStackData */
+#endif /* c_typedef_solver_bruteforceStac */
 
 /* End of code generation (solver_bruteforce_types.h) */

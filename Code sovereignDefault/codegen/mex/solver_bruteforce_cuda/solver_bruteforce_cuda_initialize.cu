@@ -15,20 +15,29 @@
 #include "solver_bruteforce_cuda_data.h"
 #include "MWCUBLASUtils.hpp"
 
+// Function Declarations
+static void solver_bruteforce_cuda_once();
+
 // Function Definitions
-void solver_bruteforce_cuda_initialize()
+static void solver_bruteforce_cuda_once()
 {
   mex_InitInfAndNan();
+  emlrtInitGPU(emlrtRootTLSGlobal);
+  cudaGetLastError();
+  cublasEnsureInitialization(CUBLAS_POINTER_MODE_HOST);
+}
+
+void solver_bruteforce_cuda_initialize()
+{
   mexFunctionCreateRootTLS();
   emlrtClearAllocCountR2012b(emlrtRootTLSGlobal, false, 0U, nullptr);
   emlrtEnterRtStackR2012b(emlrtRootTLSGlobal);
   emlrtLicenseCheckR2022a(emlrtRootTLSGlobal,
                           "EMLRT:runTime:MexFunctionNeedsLicense",
                           "distrib_computing_toolbox", 2);
-  cublasEnsureInitialization(CUBLAS_POINTER_MODE_HOST);
-  emlrtFirstTimeR2012b(emlrtRootTLSGlobal);
-  emlrtInitGPU(emlrtRootTLSGlobal);
-  cudaGetLastError();
+  if (emlrtFirstTimeR2012b(emlrtRootTLSGlobal)) {
+    solver_bruteforce_cuda_once();
+  }
 }
 
 // End of code generation (solver_bruteforce_cuda_initialize.cu)

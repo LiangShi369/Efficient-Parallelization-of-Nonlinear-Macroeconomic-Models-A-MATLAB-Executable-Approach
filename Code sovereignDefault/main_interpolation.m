@@ -3,8 +3,8 @@ clear
 format compact
 
 run_matlab = 1 ;  % 0 for false, 1 for true
-compile_mex = 0 ;
-run_mex = 0 ;
+compile_mex = 1 ;
+run_mex = 1 ;
 
 nz = 25 ;   % number of transitory shock grids
 nm = 25 ;   % number of trend shock grids
@@ -94,15 +94,16 @@ end
 
 if run_mex
 
-% [q,bp,vp,def,totaltime,avgtime] = solver_interp_serial_mex(b,z,m,pdf,para) ;
-% disp(['Mex serial time total: ', num2str(totaltime)]) ;
-% disp(['Mex serial time average: ', num2str(avgtime)]) ;
+[q,bp,vp,def,totaltime,avgtime] = solver_interp_serial_mex(b,z,m,pdf,para) ;
+disp(['Mex serial time total: ', num2str(totaltime)]) ;
+disp(['Mex serial time average: ', num2str(avgtime)]) ;
 
-% [q,bp,vp,def,totaltime,avgtime] = solver_interp_parfor_mex(b,z,m,pdf,para) ;
-% disp(['Mex parfor time total: ', num2str(totaltime)]) ;
-% disp(['Mex parfor time average: ', num2str(avgtime)]) ;
+[q,bp,vp,def,totaltime,avgtime] = solver_interp_parfor_mex(b,z,m,pdf,para) ;
+disp(['Mex parfor time total: ', num2str(totaltime)]) ;
+disp(['Mex parfor time average: ', num2str(avgtime)]) ;
 
-reset(gpuDevice)
+wait(gpuDevice)
+
 [q,bp,vp,def,totaltime,avgtime] = solver_interp_cuda_mex(b,z,m,pdf,para) ;
 disp(['Mex cuda time total: ', num2str(totaltime)]) ;
 disp(['Mex cuda time average: ', num2str(avgtime)]) ;

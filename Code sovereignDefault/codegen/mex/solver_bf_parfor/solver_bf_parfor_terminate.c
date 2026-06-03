@@ -14,20 +14,45 @@
 #include "_coder_solver_bf_parfor_mex.h"
 #include "rt_nonfinite.h"
 #include "solver_bf_parfor_data.h"
+#include "omp.h"
+
+/* Function Declarations */
+static void emlrtExitTimeCleanupDtorFcn(const void *r);
 
 /* Function Definitions */
+static void emlrtExitTimeCleanupDtorFcn(const void *r)
+{
+  emlrtExitTimeCleanup(&emlrtContextGlobal);
+}
+
 void solver_bf_parfor_atexit(void)
 {
+  static jmp_buf emlrtJBEnviron;
   emlrtStack st = {
       NULL, /* site */
       NULL, /* tls */
       NULL  /* prev */
   };
   mexFunctionCreateRootTLS();
+  /* Initialize the memory manager. */
+  omp_init_lock(&emlrtLockGlobal);
+  omp_init_nest_lock(&solver_bf_parfor_nestLockGlobal);
   st.tls = emlrtRootTLSGlobal;
-  emlrtEnterRtStackR2012b(&st);
-  emlrtDestroyRootTLS(&emlrtRootTLSGlobal);
-  emlrtExitTimeCleanup(&emlrtContextGlobal);
+  emlrtSetJmpBuf(&st, &emlrtJBEnviron);
+  if (setjmp(emlrtJBEnviron) == 0) {
+    emlrtPushHeapReferenceStackR2021a(&st, false, NULL,
+                                      (void *)&emlrtExitTimeCleanupDtorFcn,
+                                      NULL, NULL, NULL);
+    emlrtEnterRtStackR2012b(&st);
+    emlrtDestroyRootTLS(&emlrtRootTLSGlobal);
+    emlrtExitTimeCleanup(&emlrtContextGlobal);
+    omp_destroy_lock(&emlrtLockGlobal);
+    omp_destroy_nest_lock(&solver_bf_parfor_nestLockGlobal);
+  } else {
+    omp_destroy_lock(&emlrtLockGlobal);
+    omp_destroy_nest_lock(&solver_bf_parfor_nestLockGlobal);
+    emlrtReportParallelRunTimeError(&st);
+  }
 }
 
 void solver_bf_parfor_terminate(void)

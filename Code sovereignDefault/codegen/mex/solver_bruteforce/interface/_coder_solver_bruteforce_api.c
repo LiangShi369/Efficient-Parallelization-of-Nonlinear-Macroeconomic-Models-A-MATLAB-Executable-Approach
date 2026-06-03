@@ -18,12 +18,12 @@
 #include "solver_bruteforce_types.h"
 
 /* Function Declarations */
-static const mxArray *b_emlrt_marshallOut(const real_T u[250000]);
+static const mxArray *b_emlrt_marshallOut(real_T u[250000]);
 
 static real_T (*c_emlrt_marshallIn(const emlrtStack *sp, const mxArray *nullptr,
                                    const char_T *identifier))[400];
 
-static const mxArray *c_emlrt_marshallOut(const boolean_T u[250000]);
+static const mxArray *c_emlrt_marshallOut(boolean_T u[250000]);
 
 static real_T (*d_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
                                    const emlrtMsgIdentifier *parentId))[400];
@@ -57,15 +57,20 @@ static real_T (*n_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
                                    const emlrtMsgIdentifier *msgId))[390625];
 
 /* Function Definitions */
-static const mxArray *b_emlrt_marshallOut(const real_T u[250000])
+static const mxArray *b_emlrt_marshallOut(real_T u[250000])
 {
   static const int32_T iv[2] = {0, 0};
   static const int32_T iv1[2] = {625, 400};
   const mxArray *m;
   const mxArray *y;
+  void *existingData;
   y = NULL;
   m = emlrtCreateNumericArray(2, (const void *)&iv[0], mxDOUBLE_CLASS, mxREAL);
-  emlrtMxSetData((mxArray *)m, (void *)&u[0]);
+  existingData = emlrtMxGetData((mxArray *)m);
+  if (existingData != (void *)&u[0]) {
+    emlrtFreeMex(existingData);
+  }
+  emlrtMxSetData((mxArray *)m, &u[0]);
   emlrtSetDimensions((mxArray *)m, &iv1[0], 2);
   emlrtAssign(&y, m);
   return y;
@@ -84,15 +89,20 @@ static real_T (*c_emlrt_marshallIn(const emlrtStack *sp, const mxArray *nullptr,
   return y;
 }
 
-static const mxArray *c_emlrt_marshallOut(const boolean_T u[250000])
+static const mxArray *c_emlrt_marshallOut(boolean_T u[250000])
 {
   static const int32_T iv[2] = {0, 0};
   static const int32_T iv1[2] = {625, 400};
   const mxArray *m;
   const mxArray *y;
+  void *existingData;
   y = NULL;
   m = emlrtCreateLogicalArray(2, &iv[0]);
-  emlrtMxSetData((mxArray *)m, (void *)&u[0]);
+  existingData = emlrtMxGetData((mxArray *)m);
+  if (existingData != (void *)&u[0]) {
+    emlrtFreeMex(existingData);
+  }
+  emlrtMxSetData((mxArray *)m, &u[0]);
   emlrtSetDimensions((mxArray *)m, &iv1[0], 2);
   emlrtAssign(&y, m);
   return y;

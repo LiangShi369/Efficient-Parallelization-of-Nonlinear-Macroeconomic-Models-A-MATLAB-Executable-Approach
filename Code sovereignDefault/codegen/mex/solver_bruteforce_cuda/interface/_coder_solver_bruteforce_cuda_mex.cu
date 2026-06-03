@@ -15,7 +15,6 @@
 #include "solver_bruteforce_cuda_data.h"
 #include "solver_bruteforce_cuda_initialize.h"
 #include "solver_bruteforce_cuda_terminate.h"
-#include "solver_bruteforce_cuda_types.h"
 #include <stdexcept>
 
 void emlrtExceptionBridge();
@@ -27,24 +26,15 @@ void emlrtExceptionBridge()
 void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
                  const mxArray *prhs[])
 {
-  solver_bruteforce_cudaStackData *c_solver_bruteforce_cudaStackDa{nullptr};
-  c_solver_bruteforce_cudaStackDa =
-      static_cast<solver_bruteforce_cudaStackData *>(
-          new solver_bruteforce_cudaStackData);
   mexAtExit(&solver_bruteforce_cuda_atexit);
-  // Module initialization.
   solver_bruteforce_cuda_initialize();
   try {
-    // Dispatch the entry-point.
-    unsafe_solver_bruteforce_cuda_mexFunction(c_solver_bruteforce_cudaStackDa,
-                                              nlhs, plhs, nrhs, prhs);
-    // Module termination.
+    unsafe_solver_bruteforce_cuda_mexFunction(nlhs, plhs, nrhs, prhs);
     solver_bruteforce_cuda_terminate();
   } catch (...) {
     emlrtCleanupOnException((emlrtCTX *)emlrtRootTLSGlobal);
     throw;
   }
-  delete c_solver_bruteforce_cudaStackDa;
 }
 
 emlrtCTX mexFunctionCreateRootTLS()
@@ -54,9 +44,9 @@ emlrtCTX mexFunctionCreateRootTLS()
   return emlrtRootTLSGlobal;
 }
 
-void unsafe_solver_bruteforce_cuda_mexFunction(
-    solver_bruteforce_cudaStackData *SD, int32_T nlhs, mxArray *plhs[6],
-    int32_T nrhs, const mxArray *prhs[5])
+void unsafe_solver_bruteforce_cuda_mexFunction(int32_T nlhs, mxArray *plhs[6],
+                                               int32_T nrhs,
+                                               const mxArray *prhs[5])
 {
   const mxArray *outputs[6];
   int32_T b;
@@ -71,7 +61,7 @@ void unsafe_solver_bruteforce_cuda_mexFunction(
                         "solver_bruteforce_cuda");
   }
   // Call the function.
-  solver_bruteforce_cuda_api(SD, prhs, nlhs, outputs);
+  solver_bruteforce_cuda_api(prhs, nlhs, outputs);
   // Copy over outputs to the caller.
   if (nlhs < 1) {
     b = 1;

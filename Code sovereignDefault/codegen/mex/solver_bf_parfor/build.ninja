@@ -1,12 +1,12 @@
-# CompilerName=msvc160
+# CompilerName=msvc170
 # Mode=optim
 ninja_required_version = 1.3
 
 # Basic folders
 root = .
 builddir = $root\build\win64
-matlabdir = C:\Program Files\MATLAB\R2023b
-startdir = D:\GitHub\Efficient-Parallelization-of-Nonlinear-Macroeconomic-Models-A-MATLAB-Executable-Approach\Code sovereignDefault
+matlabdir = D:\Matlab_2026a
+startdir = D:\BaiduSyncdisk\working papers\Parallel computation with Mex\code_github\Code sovereignDefault
 
 # Toolchain information
 cc = cl
@@ -16,9 +16,11 @@ linkerxx = link
 
 cflags =  /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I "$root" /I "$startdir" /I "$root\interface" /I "$matlabdir\extern\include" /I "." -DMODEL=solver_bf_parfor_mex /openmp /wd4101 
 
-cxxflags =   /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I "$root" /I "$startdir" /I "$root\interface" /I "$matlabdir\extern\include" /I "." -DMODEL=solver_bf_parfor_mex /openmp /wd4101 
+cxxflags =  /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I "$root" /I "$startdir" /I "$root\interface" /I "$matlabdir\extern\include" /I "." -DMODEL=solver_bf_parfor_mex /openmp /wd4101 
 
-ldflags =  /nologo /manifest   /DLL /LIBPATH:"$matlabdir\extern\lib\win64\microsoft" libmx.lib libmex.lib libmat.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib  /out:"solver_bf_parfor_mex.mexw64" /LIBPATH:"$matlabdir\extern\lib\win64\microsoft" libmwblas.lib libemlrt.lib libcovrt.lib libut.lib libmwmathutil.lib libiomp5md.lib /nodefaultlib:vcomp /LIBPATH:"$matlabdir\bin\win64" /export:mexFunction /export:mexfilerequiredapiversion /export:emlrtMexFcnProperties /export:solver_bf_parfor /export:solver_bf_parfor_initialize /export:solver_bf_parfor_terminate /export:solver_bf_parfor_atexit /export:emlrt_marshallOut /export:b_emlrt_marshallIn /export:k_emlrt_marshallIn
+ldflags =  /nologo    /DLL /LIBPATH:"$matlabdir\extern\lib\win64\microsoft" libmx.lib libmex.lib libmat.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib  /out:"solver_bf_parfor_mex.mexw64" /LIBPATH:"$matlabdir\extern\lib\win64\microsoft" libmwblas.lib libemlrt.lib libcovrt.lib libut.lib libmwmathutil.lib libiomp5md.lib /nodefaultlib:vcomp /LIBPATH:"$matlabdir\bin\win64" /export:mexFunction /export:mexfilerequiredapiversion /export:emlrtMexFcnProperties /export:solver_bf_parfor /export:solver_bf_parfor_initialize /export:solver_bf_parfor_terminate /export:solver_bf_parfor_atexit /export:b_emlrt_marshallIn /export:k_emlrt_marshallIn /export:emlrt_marshallOut
+
+ldxxflags =  /nologo    /DLL /LIBPATH:"$matlabdir\extern\lib\win64\microsoft" libmx.lib libmex.lib libmat.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib libMatlabDataArray.lib libMatlabEngine.lib  /out:"solver_bf_parfor_mex.mexw64" /LIBPATH:"$matlabdir\extern\lib\win64\microsoft" libmwblas.lib libemlrt.lib libcovrt.lib libut.lib libmwmathutil.lib libiomp5md.lib /nodefaultlib:vcomp /LIBPATH:"$matlabdir\bin\win64" /export:mexFunction /export:mexfilerequiredapiversion /export:emlrtMexFcnProperties /export:solver_bf_parfor /export:solver_bf_parfor_initialize /export:solver_bf_parfor_terminate /export:solver_bf_parfor_atexit /export:b_emlrt_marshallIn /export:k_emlrt_marshallIn /export:emlrt_marshallOut
 
 linkobjs = 
 
@@ -35,7 +37,7 @@ rule link
     rspfile_content = $in
 
 rule linkxx
-    command = $linkerxx $in $linkobjs $ldflags
+    command = $linkerxx $in $linkobjs $ldxxflags
 
 # Build
 build $builddir\solver_bf_parfor_data.obj : cc $root\solver_bf_parfor_data.c

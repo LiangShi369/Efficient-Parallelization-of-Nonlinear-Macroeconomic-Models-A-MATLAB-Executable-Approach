@@ -15,6 +15,7 @@
 #include "rtwtypes.h"
 #include "emlrt.h"
 #include "mex.h"
+#include "omp.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,6 +29,8 @@ extern emlrtRSInfo i_emlrtRSI;
 extern emlrtRSInfo k_emlrtRSI;
 extern emlrtRSInfo l_emlrtRSI;
 extern emlrtRSInfo m_emlrtRSI;
+extern omp_lock_t emlrtLockGlobal;
+extern omp_nest_lock_t solver_bruteforce_nestLockGlobal;
 extern emlrtRTEInfo emlrtRTEI;
 extern emlrtRTEInfo b_emlrtRTEI;
 extern const char_T cv[26];

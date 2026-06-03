@@ -14,15 +14,14 @@ nb = size(b,1);
 [~,nb0] = min(abs(b));
 
 %Initialize the Value functions
-vp = coder.nullcopy(zeros(ns,nb) ) ;  %continue repaying
-vd = coder.nullcopy(zeros(ns,1)) ; 
-def = coder.nullcopy(false(ns,nb)) ; 
-
+vp = zeros(ns,nb) ;  %continue repaying
+vd = zeros(ns,1) ; 
+def = zeros(ns,nb) ; 
 % vgood = vp ;
 vo = vd;
 vp1 = vp;  
 
-bp = coder.nullcopy(zeros(ns,nb)) ; %debt policy function (expressed in indices)  
+bp = zeros(ns,nb) ; %debt policy function (expressed in indices)  
 q = ones(ns,nb)/(1+rstar); %q is price of debt; it is a function of  (y_t, d_{t+1}) 
 % u = zeros(1,nb) ;
 
@@ -46,24 +45,40 @@ w = b' .* q + exp(z).*m ;
 coder.gpu.kernel()
 for is = 1:ns
     for ib = 1:nb
-        tmpmax = - Inf ; 
-        maxidx = 0 ;
-        coder.gpu.constantMemory(b); 
+        tmpmax = -Inf;
+        maxidx = 1;
+
         for i = 1:nb
-            c =  w(is,i)  - b(ib) ;
-            if c <= 0
-                u = - Inf ; 
+            c = w(is,i) - b(ib);
+
+            if c > 0
+                u = 1 - 1/c + evp(is,i);
             else
-                u = (c^(1-sigg)-1)/(1-sigg) + evp(is,i);
+                u = -Inf;
             end
-            if tmpmax < u; tmpmax = u; maxidx = i ;end
+
+            if u > tmpmax
+                tmpmax = u;
+                maxidx = i;
+            end
         end
+
         vp1(is,ib) = tmpmax;
         bp(is,ib) = maxidx;
     end
 end
 
-def = vp1 < repmat(vd1,1,nb); 
+% def = vp1 < repmat(vd1,1,nb); 
+coder.gpu.kernel()
+for is = 1:ns
+    for ib = 1:nb
+        if vp1(is,ib) < vd1(is)
+            def(is,ib) = 1;
+        else
+            def(is,ib) = 0;
+        end
+    end
+end
 
 qnew = (1- pdf*def)/(1+rstar);
 

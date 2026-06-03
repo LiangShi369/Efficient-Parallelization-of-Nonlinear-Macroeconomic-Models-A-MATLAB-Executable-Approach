@@ -1,0 +1,15 @@
+# ninja log v7
+39	101	8022144538144057	build/win64/_coder_solve_benchmark_cuda_info.obj	56a89598bf6a2e40
+42	1337	8022144538184047	build/win64/cpp_mexapi_version.obj	8de2bd81da23373d
+1	1461	8022144537774047	build/win64/MWCUBLASUtils.obj	9484c56fa1795057
+8	1901	8022144537844050	build/win64/rt_nonfinite.obj	1db6c9c9afc5351f
+5	1915	8022144537814042	build/win64/solve_benchmark_cuda_data.obj	cc3b2aac08203e29
+21	1916	8022144537974041	build/win64/tic.obj	e5e1ba7f1da9fce1
+24	1944	8022144538004044	build/win64/toc.obj	1de4e30a622ebe44
+35	1947	8022144538114049	build/win64/solve_benchmark_cuda_mexutil.obj	44bd78070d2cb459
+28	1949	8022144538044063	build/win64/_coder_solve_benchmark_cuda_api.obj	2f09aba5c20521d9
+31	2116	8022144538074051	build/win64/_coder_solve_benchmark_cuda_mex.obj	5ec34bcf383120a5
+10	2134	8022144537864056	build/win64/solve_benchmark_cuda_initialize.obj	7e245c01083937c2
+14	2151	8022144537904049	build/win64/solve_benchmark_cuda_terminate.obj	a3180a5abeb4342e
+17	2318	8022144537934040	build/win64/solve_benchmark_cuda.obj	ac00e4ee07c63050
+2319	3565	8022144560950972	solver_benchmark_cuda_mex.mexw64	6bb36d376684d7d3

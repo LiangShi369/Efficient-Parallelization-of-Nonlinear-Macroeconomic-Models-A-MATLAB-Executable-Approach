@@ -1,0 +1,61 @@
+# CompilerName=msvc170
+# Mode=optim
+ninja_required_version = 1.3
+
+# Basic folders
+root = .
+builddir = $root\build\win64
+matlabdir = D:\Matlab_2026a
+startdir = D:\BaiduSyncdisk\working papers\Parallel computation with Mex\code_github\Code sovereignDefault
+
+# Toolchain information
+cc = cl
+cxx = cl
+linker = link
+linkerxx = link
+
+cflags =  /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I "$root" /I "$startdir" /I "$root\interface" /I "$matlabdir\extern\include" /I "." -DMODEL=solver_interp_parfor_mex /openmp /wd4101 
+
+cxxflags =  /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I "$root" /I "$startdir" /I "$root\interface" /I "$matlabdir\extern\include" /I "." -DMODEL=solver_interp_parfor_mex /openmp /wd4101 
+
+ldflags =  /nologo    /DLL /LIBPATH:"$matlabdir\extern\lib\win64\microsoft" libmx.lib libmex.lib libmat.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib  /out:"solver_interp_parfor_mex.mexw64" /LIBPATH:"$matlabdir\extern\lib\win64\microsoft" libmwblas.lib libemlrt.lib libcovrt.lib libut.lib libmwmathutil.lib libiomp5md.lib /nodefaultlib:vcomp /LIBPATH:"$matlabdir\bin\win64" /export:mexFunction /export:mexfilerequiredapiversion /export:emlrtMexFcnProperties /export:solver_interp_parfor /export:solver_interp_parfor_initialize /export:solver_interp_parfor_terminate /export:solver_interp_parfor_atexit /export:emlrtInitThreadStackData /export:emlrtGetThreadStackData /export:b_emlrt_marshallIn /export:k_emlrt_marshallIn /export:emlrt_marshallOut /export:emlrtFreeThreadStackData
+
+ldxxflags =  /nologo    /DLL /LIBPATH:"$matlabdir\extern\lib\win64\microsoft" libmx.lib libmex.lib libmat.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib libMatlabDataArray.lib libMatlabEngine.lib  /out:"solver_interp_parfor_mex.mexw64" /LIBPATH:"$matlabdir\extern\lib\win64\microsoft" libmwblas.lib libemlrt.lib libcovrt.lib libut.lib libmwmathutil.lib libiomp5md.lib /nodefaultlib:vcomp /LIBPATH:"$matlabdir\bin\win64" /export:mexFunction /export:mexfilerequiredapiversion /export:emlrtMexFcnProperties /export:solver_interp_parfor /export:solver_interp_parfor_initialize /export:solver_interp_parfor_terminate /export:solver_interp_parfor_atexit /export:emlrtInitThreadStackData /export:emlrtGetThreadStackData /export:b_emlrt_marshallIn /export:k_emlrt_marshallIn /export:emlrt_marshallOut /export:emlrtFreeThreadStackData
+
+linkobjs = 
+
+# Build Rules
+rule cc
+    command = $cc $cflags $in /Fo$out
+
+rule cxx
+    command = $cxx $cxxflags $in /Fo$out
+
+rule link
+    command = $linker @$out.rsp $linkobjs $ldflags
+    rspfile = $out.rsp
+    rspfile_content = $in
+
+rule linkxx
+    command = $linkerxx $in $linkobjs $ldxxflags
+
+# Build
+build $builddir\solver_interp_parfor_data.obj : cc $root\solver_interp_parfor_data.c
+build $builddir\rt_nonfinite.obj : cc $root\rt_nonfinite.c
+build $builddir\solver_interp_parfor_initialize.obj : cc $root\solver_interp_parfor_initialize.c
+build $builddir\solver_interp_parfor_terminate.obj : cc $root\solver_interp_parfor_terminate.c
+build $builddir\solver_interp_parfor.obj : cc $root\solver_interp_parfor.c
+build $builddir\power.obj : cc $root\power.c
+build $builddir\tic.obj : cc $root\tic.c
+build $builddir\mtimes.obj : cc $root\mtimes.c
+build $builddir\interp1_scal.obj : cc $root\interp1_scal.c
+build $builddir\toc.obj : cc $root\toc.c
+build $builddir\_coder_solver_interp_parfor_api.obj : cc $root\interface\_coder_solver_interp_parfor_api.c
+build $builddir\_coder_solver_interp_parfor_mex.obj : cc $root\interface\_coder_solver_interp_parfor_mex.c
+build $builddir\brent_min.obj : cc $root\brent_min.c
+build $builddir\solver_interp_parfor_mexutil.obj : cc $root\solver_interp_parfor_mexutil.c
+build $builddir\_coder_solver_interp_parfor_info.obj : cc $root\interface\_coder_solver_interp_parfor_info.c
+build $builddir\c_mexapi_version.obj : cc $matlabdir\extern\version\c_mexapi_version.c
+
+# Link
+build $root\solver_interp_parfor_mex.mexw64 : link $builddir\solver_interp_parfor_data.obj $builddir\rt_nonfinite.obj $builddir\solver_interp_parfor_initialize.obj $builddir\solver_interp_parfor_terminate.obj $builddir\solver_interp_parfor.obj $builddir\power.obj $builddir\tic.obj $builddir\mtimes.obj $builddir\interp1_scal.obj $builddir\toc.obj $builddir\_coder_solver_interp_parfor_api.obj $builddir\_coder_solver_interp_parfor_mex.obj $builddir\brent_min.obj $builddir\solver_interp_parfor_mexutil.obj $builddir\_coder_solver_interp_parfor_info.obj $builddir\c_mexapi_version.obj 

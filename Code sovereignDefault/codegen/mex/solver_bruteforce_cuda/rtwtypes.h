@@ -10,6 +10,40 @@
 
 #pragma once
 
+/*=======================================================================*
+ * Complex types for GPU Coder:                                          *
+ *   creal32_T                      - complex float with align           *
+ *   creal64_T                      - complex double with align          *
+ *=======================================================================*/
+
+#ifndef __gpu_align__
+#ifdef _MSC_VER
+#define __gpu_align__(n) __declspec(align(n))
+#else
+#define __gpu_align__(n) __attribute__((aligned(n)))
+#endif
+#endif
+
+#ifndef CREAL32_T
+typedef struct __gpu_align__(8) {
+  float re, im;
+} creal32_T;
+#define CREAL32_T creal32_T
+#endif
+
+#ifndef CREAL64_T
+typedef struct __gpu_align__(16) {
+  double re, im;
+} creal64_T;
+#define CREAL64_T creal64_T
+#endif
+
+#ifndef CREAL_T
+typedef struct __gpu_align__(16) {
+  double re, im;
+} creal_T;
+#define CREAL_T creal_T
+#endif
 // Include files
 #include "tmwtypes.h"
 

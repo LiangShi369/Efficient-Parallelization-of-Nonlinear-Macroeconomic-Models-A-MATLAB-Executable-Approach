@@ -5,8 +5,8 @@ clear
 
 format compact
 
-nz = 101;    % Grid size 
-nk = 200;  % grid points + 1
+nz = 201;    % Grid size 
+nk = 500;  % grid points + 1
 
 compile_mexparfor = 0 ;
 compile_mexparfor_vs = 0 ;
@@ -92,7 +92,7 @@ cfg.GenerateReport = true;
 codegen -config cfg rbc_solver_interp_cuda -args {c0,k,pdfz } -o rbc_solver_interp_cuda_mex
 end 
 
-reset(gpuDevice)
+wait(gpuDevice)
 
 tic
 [v_cuda, pol_kp_val_cuda] = rbc_solver_interp_cuda_mex( c0,k,pdfz) ;
@@ -111,7 +111,7 @@ vs_pdfz = coder.typeof(pdfz,[500,500],1) ;
 codegen -config cfg rbc_solver_interp_cuda -args {vs_c0, vs_k, vs_pdfz } -o rbc_solver_interp_cuda_mex_vs
 end 
 
-reset(gpuDevice)
+wait(gpuDevice)
 
 tic
 [v_cuda, pol_kp_val_cuda] = rbc_solver_interp_cuda_mex_vs( c0,k,pdfz) ;

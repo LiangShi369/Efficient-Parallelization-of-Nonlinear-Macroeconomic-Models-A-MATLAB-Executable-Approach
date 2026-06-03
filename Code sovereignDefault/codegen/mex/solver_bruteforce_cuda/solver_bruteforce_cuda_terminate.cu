@@ -15,27 +15,56 @@
 #include "solver_bruteforce_cuda_data.h"
 #include "MWCUBLASUtils.hpp"
 
+// Function Declarations
+static void checkCudaError(cudaError_t errorCode);
+
+static void emlrtExitTimeCleanupDtorFcn(const void *r);
+
+static void gpuThrowError(uint32_T errorCode, const char_T *errorName,
+                          const char_T *errorString);
+
 // Function Definitions
+static void checkCudaError(cudaError_t errorCode)
+{
+  if (errorCode != cudaSuccess) {
+    gpuThrowError(errorCode, cudaGetErrorName(errorCode),
+                  cudaGetErrorString(errorCode));
+  }
+}
+
+static void emlrtExitTimeCleanupDtorFcn(const void *r)
+{
+  emlrtExitTimeCleanup(&emlrtContextGlobal);
+}
+
+static void gpuThrowError(uint32_T errorCode, const char_T *errorName,
+                          const char_T *errorString)
+{
+  emlrtThinCUDAError(errorCode, (char_T *)errorName, (char_T *)errorString,
+                     (char_T *)"SafeBuild", emlrtRootTLSGlobal);
+}
+
 void solver_bruteforce_cuda_atexit()
 {
   mexFunctionCreateRootTLS();
-  emlrtEnterRtStackR2012b(emlrtRootTLSGlobal);
-  emlrtDestroyRootTLS(&emlrtRootTLSGlobal);
-  emlrtExitTimeCleanup(&emlrtContextGlobal);
+  try {
+    emlrtPushHeapReferenceStackR2021a(emlrtRootTLSGlobal, false, nullptr,
+                                      (void *)&emlrtExitTimeCleanupDtorFcn,
+                                      nullptr, nullptr, nullptr);
+    emlrtEnterRtStackR2012b(emlrtRootTLSGlobal);
+    emlrtDestroyRootTLS(&emlrtRootTLSGlobal);
+    emlrtExitTimeCleanup(&emlrtContextGlobal);
+  } catch (...) {
+    emlrtCleanupOnException((emlrtCTX *)emlrtRootTLSGlobal);
+    throw;
+  }
+  cublasEnsureDestruction();
 }
 
 void solver_bruteforce_cuda_terminate()
 {
-  cudaError_t errCode;
-  errCode = cudaGetLastError();
-  if (errCode != cudaSuccess) {
-    emlrtThinCUDAError(static_cast<uint32_T>(errCode),
-                       (char_T *)cudaGetErrorName(errCode),
-                       (char_T *)cudaGetErrorString(errCode),
-                       (char_T *)"SafeBuild", emlrtRootTLSGlobal);
-  }
+  checkCudaError(cudaGetLastError());
   emlrtDestroyRootTLS(&emlrtRootTLSGlobal);
-  cublasEnsureDestruction();
 }
 
 // End of code generation (solver_bruteforce_cuda_terminate.cu)

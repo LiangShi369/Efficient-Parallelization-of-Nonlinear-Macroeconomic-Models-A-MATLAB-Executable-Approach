@@ -25,12 +25,8 @@
 #undef printf
 #endif
 
-// Type Declarations
-struct solver_bruteforce_cudaStackData;
-
 // Function Declarations
-void solver_bruteforce_cuda_api(solver_bruteforce_cudaStackData *SD,
-                                const mxArray *const prhs[5], int32_T nlhs,
+void solver_bruteforce_cuda_api(const mxArray *const prhs[5], int32_T nlhs,
                                 const mxArray *plhs[6]);
 
 // End of code generation (_coder_solver_bruteforce_cuda_api.h)

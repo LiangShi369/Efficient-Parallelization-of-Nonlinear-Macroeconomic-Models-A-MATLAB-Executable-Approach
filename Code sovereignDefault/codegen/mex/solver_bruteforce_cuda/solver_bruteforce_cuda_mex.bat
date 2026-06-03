@@ -1,4 +1,4 @@
 @echo off
 call setEnv.bat
-"C:\Program Files\MATLAB\R2023b\toolbox\shared\coder\ninja\win64\ninja.exe" -t compdb cc cxx cudac > compile_commands.json
-"C:\Program Files\MATLAB\R2023b\toolbox\shared\coder\ninja\win64\ninja.exe" -v %*
+"D:\Matlab_2026a\toolbox\shared\coder\ninja\win64\ninja.exe" -t compdb cc cxx cudac > compile_commands.json
+"D:\Matlab_2026a\toolbox\shared\coder\ninja\win64\ninja.exe" -v %*

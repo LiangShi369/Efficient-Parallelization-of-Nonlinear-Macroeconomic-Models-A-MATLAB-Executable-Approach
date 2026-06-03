@@ -12,7 +12,6 @@
 
 // Include files
 #include "rtwtypes.h"
-#include "solver_bruteforce_cuda_types.h"
 #include "emlrt.h"
 #include "mex.h"
 #include <cmath>
@@ -32,8 +31,8 @@ MEXFUNCTION_LINKAGE void mexFunction(int32_T nlhs, mxArray *plhs[],
 
 emlrtCTX mexFunctionCreateRootTLS();
 
-void unsafe_solver_bruteforce_cuda_mexFunction(
-    solver_bruteforce_cudaStackData *SD, int32_T nlhs, mxArray *plhs[6],
-    int32_T nrhs, const mxArray *prhs[5]);
+void unsafe_solver_bruteforce_cuda_mexFunction(int32_T nlhs, mxArray *plhs[6],
+                                               int32_T nrhs,
+                                               const mxArray *prhs[5]);
 
 // End of code generation (_coder_solver_bruteforce_cuda_mex.h)

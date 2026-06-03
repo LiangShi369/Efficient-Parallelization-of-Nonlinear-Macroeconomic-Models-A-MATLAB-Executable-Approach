@@ -17,11 +17,9 @@
 
 /* Variable Definitions */
 static emlrtRSInfo j_emlrtRSI = {
-    31,    /* lineNo */
-    "tic", /* fcnName */
-    "C:\\Program "
-    "Files\\MATLAB\\R2023b\\toolbox\\eml\\lib\\matlab\\timefun\\tic.m" /* pathName
-                                                                        */
+    32,                                                           /* lineNo */
+    "tic",                                                        /* fcnName */
+    "D:\\Matlab_2026a\\toolbox\\eml\\lib\\matlab\\timefun\\tic.m" /* pathName */
 };
 
 /* Function Definitions */
@@ -35,13 +33,13 @@ emlrtTimespec tic(const emlrtStack *sp)
   int32_T status;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &j_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   d_st.prev = &c_st;
   d_st.tls = c_st.tls;
+  st.site = &j_emlrtRSI;
   b_st.site = &k_emlrtRSI;
   c_st.site = &l_emlrtRSI;
   status = emlrtClockGettimeMonotonic(&tstart);

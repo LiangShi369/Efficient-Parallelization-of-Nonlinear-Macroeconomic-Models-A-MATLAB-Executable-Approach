@@ -29,12 +29,4 @@ struct struct0_T {
   real_T betta;
 };
 
-struct b_solver_bruteforce_cuda {
-  real_T cpu_y[250000];
-};
-
-struct solver_bruteforce_cudaStackData {
-  b_solver_bruteforce_cuda f0;
-};
-
 // End of code generation (solver_bruteforce_cuda_types.h)

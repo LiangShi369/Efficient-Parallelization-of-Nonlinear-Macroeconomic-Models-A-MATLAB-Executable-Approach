@@ -16,12 +16,10 @@
 #include "emlrt.h"
 
 /* Variable Definitions */
-static emlrtRSInfo r_emlrtRSI = {
-    36,    /* lineNo */
-    "toc", /* fcnName */
-    "C:\\Program "
-    "Files\\MATLAB\\R2023b\\toolbox\\eml\\lib\\matlab\\timefun\\toc.m" /* pathName
-                                                                        */
+static emlrtRSInfo q_emlrtRSI = {
+    37,                                                           /* lineNo */
+    "toc",                                                        /* fcnName */
+    "D:\\Matlab_2026a\\toolbox\\eml\\lib\\matlab\\timefun\\toc.m" /* pathName */
 };
 
 /* Function Definitions */
@@ -35,17 +33,17 @@ real_T toc(const emlrtStack *sp, real_T tstart_tv_sec, real_T tstart_tv_nsec)
   int32_T status;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &r_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   d_st.prev = &c_st;
   d_st.tls = c_st.tls;
-  b_st.site = &k_emlrtRSI;
-  c_st.site = &l_emlrtRSI;
+  st.site = &q_emlrtRSI;
+  b_st.site = &j_emlrtRSI;
+  c_st.site = &k_emlrtRSI;
   status = emlrtClockGettimeMonotonic(&tnow);
-  d_st.site = &m_emlrtRSI;
+  d_st.site = &l_emlrtRSI;
   if (status != 0) {
     emlrtErrorWithMessageIdR2018a(
         &d_st, &b_emlrtRTEI, "Coder:toolbox:CoderTimeCallFailed",

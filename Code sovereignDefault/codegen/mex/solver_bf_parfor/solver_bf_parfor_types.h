@@ -37,11 +37,11 @@ typedef struct {
 } b_solver_bf_parfor;
 #endif /* typedef_b_solver_bf_parfor */
 
-#ifndef typedef_solver_bf_parforStackData
-#define typedef_solver_bf_parforStackData
+#ifndef c_typedef_solver_bf_parforStack
+#define c_typedef_solver_bf_parforStack
 typedef struct {
   b_solver_bf_parfor f0;
 } solver_bf_parforStackData;
-#endif /* typedef_solver_bf_parforStackData */
+#endif /* c_typedef_solver_bf_parforStack */
 
 /* End of code generation (solver_bf_parfor_types.h) */

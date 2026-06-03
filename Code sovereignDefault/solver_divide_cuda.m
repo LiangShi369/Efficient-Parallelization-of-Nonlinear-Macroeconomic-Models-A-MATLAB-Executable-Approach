@@ -13,14 +13,14 @@ nb = size(b,1);
 [~,nb0] = min(abs(b));  % index of b=0 ?
 
 % Initialize
-vp  = coder.nullcopy(zeros(ns,nb)) ;  % continue repaying
-vd  = coder.nullcopy(zeros(ns,1)) ;   % default region
+vp  = zeros(ns,nb) ;  % continue repaying
+vd  = zeros(ns,1) ;   % default region
 vo  = vd;
 vp1 = vp;  
-bp  = coder.nullcopy(ones(ns,nb)) ;  % debt policy function (indices)
+bp  = ones(ns,nb) ;  % debt policy function (indices)
 q   = ones(ns,nb) / (1 + rstar) ; 
-def = coder.nullcopy(false(ns,nb)) ;
-def1 = coder.nullcopy(false(ns,nb)) ;
+def = zeros(ns,nb) ;
+def1 = zeros(ns,nb) ;
 
 ua = ( (exp(z).*m *(1-phi0)).^(1-sigg) - 1) / (1-sigg)  ;
 
@@ -44,7 +44,7 @@ w = b' .* q + exp(z).*m ;
         [vp1(is,:), bp(is,:), def1(is,:)] = bmonoNonRec(b, w(is,:), evp(is,:), nb, vd1(is), def(is,:) ) ;
     end
 
-qnew = (1 - pdf*def1) / (1+rstar);
+qnew = (1 - pdf*def) / (1+rstar);
 
 diff = max(abs(qnew(:) - q(:))) + max(abs(vp1(:) - vp(:))) + ...
         max(abs(vd1(:) - vd(:)));
