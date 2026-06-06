@@ -16,13 +16,11 @@
 #include "fun_VFI_parfor2_data.h"
 #include "fun_VFI_parfor2_initialize.h"
 #include "fun_VFI_parfor2_terminate.h"
-#include "fun_VFI_parfor2_types.h"
 #include "rt_nonfinite.h"
 #include "omp.h"
 
 /* Function Definitions */
-void fun_VFI_parfor2_mexFunction(fun_VFI_parfor2StackData *SD, int32_T nlhs,
-                                 mxArray *plhs[3], int32_T nrhs,
+void fun_VFI_parfor2_mexFunction(int32_T nlhs, mxArray *plhs[3], int32_T nrhs,
                                  const mxArray *prhs[6])
 {
   emlrtStack st = {
@@ -43,7 +41,7 @@ void fun_VFI_parfor2_mexFunction(fun_VFI_parfor2StackData *SD, int32_T nlhs,
                         "fun_VFI_parfor2");
   }
   /* Call the function. */
-  fun_VFI_parfor2_api(SD, prhs, nlhs, outputs);
+  fun_VFI_parfor2_api(prhs, nlhs, outputs);
   /* Copy over outputs to the caller. */
   if (nlhs < 1) {
     i = 1;
@@ -62,9 +60,6 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
       NULL, /* tls */
       NULL  /* prev */
   };
-  fun_VFI_parfor2StackData *fun_VFI_parfor2StackDataGlobal = NULL;
-  fun_VFI_parfor2StackDataGlobal = (fun_VFI_parfor2StackData *)emlrtMxCalloc(
-      (size_t)1, (size_t)1U * sizeof(fun_VFI_parfor2StackData));
   mexAtExit(&fun_VFI_parfor2_atexit);
   /* Initialize the memory manager. */
   omp_init_lock(&emlrtLockGlobal);
@@ -73,8 +68,7 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
   st.tls = emlrtRootTLSGlobal;
   emlrtSetJmpBuf(&st, &emlrtJBEnviron);
   if (setjmp(emlrtJBEnviron) == 0) {
-    fun_VFI_parfor2_mexFunction(fun_VFI_parfor2StackDataGlobal, nlhs, plhs,
-                                nrhs, prhs);
+    fun_VFI_parfor2_mexFunction(nlhs, plhs, nrhs, prhs);
     fun_VFI_parfor2_terminate();
     omp_destroy_lock(&emlrtLockGlobal);
     omp_destroy_nest_lock(&fun_VFI_parfor2_nestLockGlobal);
@@ -83,7 +77,6 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
     omp_destroy_nest_lock(&fun_VFI_parfor2_nestLockGlobal);
     emlrtReportParallelRunTimeError(&st);
   }
-  emlrtMxFree(fun_VFI_parfor2StackDataGlobal);
 }
 
 emlrtCTX mexFunctionCreateRootTLS(void)

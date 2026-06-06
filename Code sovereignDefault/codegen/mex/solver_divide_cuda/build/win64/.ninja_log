@@ -1,0 +1,15 @@
+# ninja log v7
+37	104	8023839644522583	build/win64/_coder_solver_divide_cuda_info.obj	1bbbe8b9e1d0bfdc
+1	1191	8023839644162573	build/win64/MWCUBLASUtils.obj	b31b4c1428473792
+39	1278	8023839644542582	build/win64/cpp_mexapi_version.obj	29cc219f1873b06b
+8	1722	8023839644232564	build/win64/rt_nonfinite.obj	3d6fca89809ff74a
+5	1777	8023839644202586	build/win64/solver_divide_cuda_data.obj	b1119f3e3e924c2e
+28	1826	8023839644432581	build/win64/_coder_solver_divide_cuda_api.obj	6f4da5d60071fb25
+34	1828	8023839644492580	build/win64/solver_divide_cuda_mexutil.obj	a5d268753988d47a
+25	1842	8023839644402582	build/win64/toc.obj	1cc5129bdbaa134e
+21	1876	8023839644362578	build/win64/tic.obj	12cacb0df3e678c0
+31	1956	8023839644462579	build/win64/_coder_solver_divide_cuda_mex.obj	7059302687cf926a
+11	1975	8023839644262570	build/win64/solver_divide_cuda_initialize.obj	33fc863af0bdd7c9
+14	2086	8023839644292645	build/win64/solver_divide_cuda_terminate.obj	33305dd699021170
+18	2093	8023839644332575	build/win64/solver_divide_cuda.obj	b91483209e51a2db
+2094	3220	8023839665096506	solver_divide_cuda_mex.mexw64	cc14040040c1e553

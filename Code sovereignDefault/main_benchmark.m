@@ -2,7 +2,7 @@ clear
 
 format compact
 
-nb = 400 ;         % change number of nb within vector [200, 400]
+nb = 200 ;         % change number of nb within vector [200, 400]
 
 run_matlab = 1 ;   % 0 for false              % Run native matlab, can be very slow for matlab parfor, use average
 
@@ -117,18 +117,17 @@ end
 
 if run_mex
 
+%%
 [vp,vd,q_mexparfor,bp,bpr,default,rr,totaltime,avgtime] = solve_benchmark_parfor_mex( z,m,b,pdf_joint,para  ) ;
 
 disp(['Mex parfor time total: ', num2str(totaltime)]) ;
 disp(['Mex parfor time average: ', num2str(avgtime)]) ;
 
 wait(gpuDevice)
-
 [vp,vd,q_mexcuda,bp,bpr,default,rr,totaltime,avgtime] = solver_benchmark_cuda_mex( z,m,b,pdf_joint,para) ;
 
 disp(['Mex cuda time total: ', num2str(totaltime)]) ;
 disp(['Mex cuda time average: ', num2str(avgtime)]) ;
-
 
 diff = norm(q_mexparfor - q_mexcuda) 
 

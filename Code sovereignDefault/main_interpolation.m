@@ -98,6 +98,7 @@ if run_mex
 disp(['Mex serial time total: ', num2str(totaltime)]) ;
 disp(['Mex serial time average: ', num2str(avgtime)]) ;
 
+%%
 [q,bp,vp,def,totaltime,avgtime] = solver_interp_parfor_mex(b,z,m,pdf,para) ;
 disp(['Mex parfor time total: ', num2str(totaltime)]) ;
 disp(['Mex parfor time average: ', num2str(avgtime)]) ;

@@ -1,0 +1,122 @@
+[
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\\codegen\\mex\\solve_benchmark",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solve_benchmarkVS_mex /openmp /wd4101  solve_benchmark_data.c /Fobuild\\win64\\solve_benchmark_data.obj",
+    "file": "solve_benchmark_data.c",
+    "output": "build/win64/solve_benchmark_data.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\\codegen\\mex\\solve_benchmark",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solve_benchmarkVS_mex /openmp /wd4101  rt_nonfinite.c /Fobuild\\win64\\rt_nonfinite.obj",
+    "file": "rt_nonfinite.c",
+    "output": "build/win64/rt_nonfinite.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\\codegen\\mex\\solve_benchmark",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solve_benchmarkVS_mex /openmp /wd4101  solve_benchmark_initialize.c /Fobuild\\win64\\solve_benchmark_initialize.obj",
+    "file": "solve_benchmark_initialize.c",
+    "output": "build/win64/solve_benchmark_initialize.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\\codegen\\mex\\solve_benchmark",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solve_benchmarkVS_mex /openmp /wd4101  solve_benchmark_terminate.c /Fobuild\\win64\\solve_benchmark_terminate.obj",
+    "file": "solve_benchmark_terminate.c",
+    "output": "build/win64/solve_benchmark_terminate.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\\codegen\\mex\\solve_benchmark",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solve_benchmarkVS_mex /openmp /wd4101  solve_benchmark.c /Fobuild\\win64\\solve_benchmark.obj",
+    "file": "solve_benchmark.c",
+    "output": "build/win64/solve_benchmark.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\\codegen\\mex\\solve_benchmark",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solve_benchmarkVS_mex /openmp /wd4101  tic.c /Fobuild\\win64\\tic.obj",
+    "file": "tic.c",
+    "output": "build/win64/tic.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\\codegen\\mex\\solve_benchmark",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solve_benchmarkVS_mex /openmp /wd4101  eml_mtimes_helper.c /Fobuild\\win64\\eml_mtimes_helper.obj",
+    "file": "eml_mtimes_helper.c",
+    "output": "build/win64/eml_mtimes_helper.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\\codegen\\mex\\solve_benchmark",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solve_benchmarkVS_mex /openmp /wd4101  mtimes.c /Fobuild\\win64\\mtimes.obj",
+    "file": "mtimes.c",
+    "output": "build/win64/mtimes.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\\codegen\\mex\\solve_benchmark",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solve_benchmarkVS_mex /openmp /wd4101  abs.c /Fobuild\\win64\\abs.obj",
+    "file": "abs.c",
+    "output": "build/win64/abs.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\\codegen\\mex\\solve_benchmark",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solve_benchmarkVS_mex /openmp /wd4101  mpower.c /Fobuild\\win64\\mpower.obj",
+    "file": "mpower.c",
+    "output": "build/win64/mpower.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\\codegen\\mex\\solve_benchmark",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solve_benchmarkVS_mex /openmp /wd4101  repmat.c /Fobuild\\win64\\repmat.obj",
+    "file": "repmat.c",
+    "output": "build/win64/repmat.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\\codegen\\mex\\solve_benchmark",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solve_benchmarkVS_mex /openmp /wd4101  ixfun.c /Fobuild\\win64\\ixfun.obj",
+    "file": "ixfun.c",
+    "output": "build/win64/ixfun.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\\codegen\\mex\\solve_benchmark",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solve_benchmarkVS_mex /openmp /wd4101  toc.c /Fobuild\\win64\\toc.obj",
+    "file": "toc.c",
+    "output": "build/win64/toc.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\\codegen\\mex\\solve_benchmark",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solve_benchmarkVS_mex /openmp /wd4101  interface\\_coder_solve_benchmark_api.c /Fobuild\\win64\\_coder_solve_benchmark_api.obj",
+    "file": "interface/_coder_solve_benchmark_api.c",
+    "output": "build/win64/_coder_solve_benchmark_api.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\\codegen\\mex\\solve_benchmark",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solve_benchmarkVS_mex /openmp /wd4101  interface\\_coder_solve_benchmark_mex.c /Fobuild\\win64\\_coder_solve_benchmark_mex.obj",
+    "file": "interface/_coder_solve_benchmark_mex.c",
+    "output": "build/win64/_coder_solve_benchmark_mex.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\\codegen\\mex\\solve_benchmark",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solve_benchmarkVS_mex /openmp /wd4101  exp.c /Fobuild\\win64\\exp.obj",
+    "file": "exp.c",
+    "output": "build/win64/exp.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\\codegen\\mex\\solve_benchmark",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solve_benchmarkVS_mex /openmp /wd4101  solve_benchmark_emxutil.c /Fobuild\\win64\\solve_benchmark_emxutil.obj",
+    "file": "solve_benchmark_emxutil.c",
+    "output": "build/win64/solve_benchmark_emxutil.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\\codegen\\mex\\solve_benchmark",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solve_benchmarkVS_mex /openmp /wd4101  solve_benchmark_mexutil.c /Fobuild\\win64\\solve_benchmark_mexutil.obj",
+    "file": "solve_benchmark_mexutil.c",
+    "output": "build/win64/solve_benchmark_mexutil.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\\codegen\\mex\\solve_benchmark",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solve_benchmarkVS_mex /openmp /wd4101  interface\\_coder_solve_benchmark_info.c /Fobuild\\win64\\_coder_solve_benchmark_info.obj",
+    "file": "interface/_coder_solve_benchmark_info.c",
+    "output": "build/win64/_coder_solve_benchmark_info.obj"
+  },
+  {
+    "directory": "D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\\codegen\\mex\\solve_benchmark",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I \".\" /I \"D:\\BaiduSyncdisk\\working papers\\Parallel computation with Mex\\code_gitrepo\\Code sovereignDefault\" /I \".\\interface\" /I \"D:\\Matlab_2026a\\extern\\include\" /I \".\" -DMODEL=solve_benchmarkVS_mex /openmp /wd4101  D:\\Matlab_2026a\\extern\\version\\c_mexapi_version.c /Fobuild\\win64\\c_mexapi_version.obj",
+    "file": "D:/Matlab_2026a/extern/version/c_mexapi_version.c",
+    "output": "build/win64/c_mexapi_version.obj"
+  }
+]

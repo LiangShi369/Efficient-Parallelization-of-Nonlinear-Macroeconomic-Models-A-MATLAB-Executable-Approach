@@ -99,6 +99,8 @@ end
 
 if run_compile
 
+configure_msvc_env();
+
 vs_a_grid = coder.typeof(a_grid,[3001,1],1) ;
 
 cfg = coder.config('mex');
@@ -108,14 +110,6 @@ codegen -config cfg fun_VFI_parfor2 -args {zeros(1,2), vs_a_grid, z_grid, pi_z, 
 cfg = coder.gpuConfig('mex');
 cfg.GenerateReport = true;
 codegen -config cfg fun_VFI_cuda -args {zeros(1,2), vs_a_grid, z_grid, pi_z, Params, vfoptions} -o fun_VFI_cudaVS_mex
-
-cfg = coder.gpuConfig('mex');
-cfg.GenerateReport = true;
-codegen -config cfg fun_return_cuda -args {zeros(1,2), vs_a_grid, z_grid, Params, vfoptions} -o fun_return_cudaVS_mex
-
-cfg = coder.config('mex');
-cfg.GenerateReport = true;
-codegen -config cfg fun_VFIonly_parfor -args {vs_a_grid, z_grid, pi_z, Params, vfoptions, vs_return, zeros(1,1)} -o fun_VFIonly_parforVS_mex
 
 end
 

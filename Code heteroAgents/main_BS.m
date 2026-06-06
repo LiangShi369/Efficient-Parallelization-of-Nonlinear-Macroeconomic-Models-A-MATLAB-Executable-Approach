@@ -11,7 +11,7 @@ run_compile = 0 ;
 run_mex = 0 ;
 run_matlab = 1 ;
 
-n_a    = 2001; % Num of grid points 1001, 1501
+n_a    = 1501; % Num of grid points 1001, 1501
 
 %% Set folders
 ResFolder = 'results'; % Folder to save results
@@ -187,6 +187,8 @@ end
 
 if run_compile
 
+configure_msvc_env();
+
 cfg = coder.config('mex');
 cfg.GenerateReport = true;
 codegen -config cfg fun_VFI -args {zeros(1,2), a_grid, z_grid, pi_z, Params, vfoptions} -o fun_VFI_mex
@@ -198,12 +200,6 @@ codegen -config cfg fun_VFI_parfor2 -args {zeros(1,2), a_grid, z_grid, pi_z, Par
 cfg = coder.gpuConfig('mex');
 cfg.GenerateReport = true;
 codegen -config cfg fun_VFI_cuda -args {zeros(1,2), a_grid, z_grid, pi_z, Params, vfoptions} -o fun_VFI_cuda_mex
-
-cfg = coder.gpuConfig('mex');
-cfg.GenerateReport = true;
-codegen -config cfg model_subfuns_cuda_fused ...
-    -args {zeros(1,2), a_grid, z_grid, pi_z, Params, vfoptions, simoptions, heteroagentoptions} ...
-    -o model_subfuns_cuda_fused_mex
 
 end
 
@@ -263,27 +259,7 @@ Outputs_cuda = compute_targets(a_grid, z_grid, pi_z, Policy, StatDist, Params, p
 totaltime_cuda = toc(smctime)
 make_table(ResFolder,Outputs_cuda,Params) ;
 
-
-%% run Mex cuda fused
-
-smctime = tic;
-if heteroagentoptions.do_GE==1
-    % Find GE prices
-    minoptions = optimset('TolX',heteroagentoptions.toleranceGEprices,'TolFun',heteroagentoptions.toleranceGEcondns,'MaxFunEvals',heteroagentoptions.maxiter);
-    p_eqm = fminsearch(@(p) model_subfuns_cuda_fused_mex(p, a_grid, z_grid, pi_z, Params, vfoptions, simoptions, heteroagentoptions),GEPrices0,minoptions);
-    [~,V,Policy,StatDist] = model_subfuns_cuda_fused_mex(p_eqm, a_grid, z_grid, pi_z, Params, vfoptions, simoptions, heteroagentoptions); % Recompute model objects at GE prices
-elseif heteroagentoptions.do_GE==0
-    p_eqm = GEPrices0;
-    [~,V,Policy,StatDist] = model_subfuns_cuda(p_eqm, a_grid, z_grid, pi_z, Params, vfoptions, simoptions, heteroagentoptions);
 end
-
-Outputs_cuda = compute_targets(a_grid, z_grid, pi_z, Policy, StatDist, Params, p_eqm) ;
-totaltime_cuda = toc(smctime)
-make_table(ResFolder,Outputs_cuda,Params) ;
-
-end
-
-
 %% Replicate Figure 2 of BS2013
 
 if do_replication==1
@@ -386,4 +362,3 @@ print(fullfile(ResFolder,'fig2_BS2013'),'-dpng')
 save (fullfile(ResFolder,"data_all.mat")) 
 
 end %end if do_replication
-

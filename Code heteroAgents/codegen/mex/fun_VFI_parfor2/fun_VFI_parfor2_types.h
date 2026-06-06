@@ -42,20 +42,19 @@ typedef struct {
 } struct1_T;
 #endif /* typedef_struct1_T */
 
-#ifndef typedef_b_fun_VFI_parfor2
-#define typedef_b_fun_VFI_parfor2
-typedef struct {
-  real_T ReturnMatrix[160160040];
-  real_T V0[80040];
-  real_T EV[80040];
-} b_fun_VFI_parfor2;
-#endif /* typedef_b_fun_VFI_parfor2 */
-
-#ifndef c_typedef_fun_VFI_parfor2StackD
-#define c_typedef_fun_VFI_parfor2StackD
-typedef struct {
-  b_fun_VFI_parfor2 f0;
-} fun_VFI_parfor2StackData;
-#endif /* c_typedef_fun_VFI_parfor2StackD */
+#ifndef struct_emxArray_real_T
+#define struct_emxArray_real_T
+struct emxArray_real_T {
+  real_T *data;
+  int32_T *size;
+  int32_T allocatedSize;
+  int32_T numDimensions;
+  boolean_T canFreeData;
+};
+#endif /* struct_emxArray_real_T */
+#ifndef typedef_emxArray_real_T
+#define typedef_emxArray_real_T
+typedef struct emxArray_real_T emxArray_real_T;
+#endif /* typedef_emxArray_real_T */
 
 /* End of code generation (fun_VFI_parfor2_types.h) */

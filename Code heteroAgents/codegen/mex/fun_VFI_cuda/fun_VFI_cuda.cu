@@ -28,7 +28,7 @@ static emlrtMCInfo emlrtMCI{
     5,              // colNo
     "fun_VFI_cuda", // fName
     "D:\\BaiduSyncdisk\\working papers\\Parallel computation with "
-    "Mex\\code_github\\Code heteroAgents\\fun_VFI_cuda.m" // pName
+    "Mex\\code_gitrepo\\Code heteroAgents\\fun_VFI_cuda.m" // pName
 };
 
 static emlrtRTEInfo emlrtRTEI{
@@ -36,7 +36,7 @@ static emlrtRTEInfo emlrtRTEI{
     1,              // colNo
     "fun_VFI_cuda", // fName
     "D:\\BaiduSyncdisk\\working papers\\Parallel computation with "
-    "Mex\\code_github\\Code heteroAgents\\fun_VFI_cuda.m" // pName
+    "Mex\\code_gitrepo\\Code heteroAgents\\fun_VFI_cuda.m" // pName
 };
 
 __constant__ static real_T const_z_grid[40];

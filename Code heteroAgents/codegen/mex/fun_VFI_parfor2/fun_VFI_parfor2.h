@@ -27,10 +27,10 @@ emlrtCTX emlrtGetRootTLSGlobal(void);
 void emlrtLockerFunction(EmlrtLockeeFunction aLockee, emlrtConstCTX aTLS,
                          void *aData);
 
-void fun_VFI_parfor2(fun_VFI_parfor2StackData *SD, const emlrtStack *sp,
-                     const real_T p_eqm[2], const real_T a_grid[2001],
+void fun_VFI_parfor2(const emlrtStack *sp, const real_T p_eqm[2],
+                     const real_T a_grid_data[], const int32_T a_grid_size[1],
                      const real_T z_grid[40], const real_T pi_z[1600],
                      struct0_T *Params, const struct1_T *vfoptions,
-                     real_T V[80040], real_T Policy[80040]);
+                     emxArray_real_T *V, emxArray_real_T *Policy);
 
 /* End of code generation (fun_VFI_parfor2.h) */

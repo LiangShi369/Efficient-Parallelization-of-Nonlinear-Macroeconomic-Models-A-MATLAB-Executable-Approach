@@ -1,7 +1,7 @@
 clear
 format compact
 
-nb = 200 ;    % change number of nb within vector [200, 400]
+nb = 400 ;    % change number of nb within vector [200, 400]
 
 generate_mexserial = 0 ;    % 0 for false        % Generate CPU MEX code
 run_mexserial = 0 ;         % 0 for false            % Run MEX/CUDA compiled solvers
@@ -105,17 +105,17 @@ end
 
 if run_mex
 
+    %%
 [vp,vd,q_mexparfor,bp,bpr,default,rr,totaltime,avgtime] = solve_benchmarkVS_parfor_mex( z,m,b,pdf_joint,para  ) ;
 
 disp(['Mex parfor time total: ', num2str(totaltime)]) ;
 disp(['Mex parfor time average: ', num2str(avgtime)]) ;
 
-reset(gpuDevice)
+wait(gpuDevice)
 [vp,vd,q_mexcuda,bp,bpr,default,rr,totaltime,avgtime] = solver_benchmarkVS_cuda_mex( z,m,b,pdf_joint,para) ;
 
 disp(['Mex cuda time total: ', num2str(totaltime)]) ;
 disp(['Mex cuda time average: ', num2str(avgtime)]) ;
-
 
 diff = norm(q_mexparfor - q_mexcuda) 
 

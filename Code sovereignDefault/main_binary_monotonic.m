@@ -19,11 +19,11 @@ run_binarymonotonic_mex = 1 ;
 
 %% define parameters
 para.phi0 = 0.028  ; 
-para.rstar = 0.01 ;  %quarterly risk-free interest rate (Chatterjee and Eyigungor, AER 2012). 
-para.theta = 0.0385 ; %probability of reentyy (USG  and Chatterjee and Eyigungor, AER 2012). 
-para.sigg = 2; %intertemporal elasticity of consumption substitution 
-para.betta = 0.85 ;  %discount factor
-nz = 25 ; % number of transitory shock grids
+para.rstar = 0.01 ;   % quarterly risk-free interest rate (Chatterjee and Eyigungor, AER 2012). 
+para.theta = 0.0385 ; % probability of reentyy (USG  and Chatterjee and Eyigungor, AER 2012). 
+para.sigg = 2;        % intertemporal elasticity of consumption substitution 
+para.betta = 0.85 ;   % discount factor
+nz = 25 ;             % number of transitory shock grids
 nm = 25 ;
 
 %% preparation
@@ -106,6 +106,7 @@ if run_bruteforce_mex
 disp(['BruteForce mex time total: ', num2str(totaltime)]) ;
 disp(['BruteForce mex time average: ', num2str(avgtime)]) ;
 
+%%
 [q,bp,vp,def,totaltime,avgtime] = solver_bf_parfor_mex(b,z,m,pdf,para);
 disp(['BruteForce mex parfor time total: ', num2str(totaltime)]) ;
 disp(['BruteForce mex parfor time average: ', num2str(avgtime)]) ;
@@ -157,6 +158,7 @@ if run_binarymonotonic_mex
 disp(['Binary mex serial time total: ', num2str(totaltime)]) ;
 disp(['Binary mex serial time average: ', num2str(avgtime)]) ;
 
+%%
 [q_11,bp_11,vp_11,def_11,totaltime,avgtime] = solver_divide_parfor_mex(b,z,m,pdf,para);
 disp(['Binary mex parfor time total: ', num2str(totaltime)]) ;
 disp(['Binary mex parfor time average: ', num2str(avgtime)]) ;

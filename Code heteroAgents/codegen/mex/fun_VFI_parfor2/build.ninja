@@ -6,7 +6,7 @@ ninja_required_version = 1.3
 root = .
 builddir = $root\build\win64
 matlabdir = D:\Matlab_2026a
-startdir = D:\BaiduSyncdisk\working papers\Parallel computation with Mex\code_github\Code heteroAgents
+startdir = D:\BaiduSyncdisk\working papers\Parallel computation with Mex\code_gitrepo\Code heteroAgents
 
 # Toolchain information
 cc = cl
@@ -14,13 +14,13 @@ cxx = cl
 linker = link
 linkerxx = link
 
-cflags =  /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I "$root" /I "$startdir" /I "$root\interface" /I "$matlabdir\extern\include" /I "." -DMODEL=fun_VFI_parfor_mex /openmp /wd4101 
+cflags =  /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I "$root" /I "$startdir" /I "$root\interface" /I "$matlabdir\extern\include" /I "." -DMODEL=fun_VFI_parforVS_mex /openmp /wd4101 
 
-cxxflags =  /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I "$root" /I "$startdir" /I "$root\interface" /I "$matlabdir\extern\include" /I "." -DMODEL=fun_VFI_parfor_mex /openmp /wd4101 
+cxxflags =  /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I "$root" /I "$startdir" /I "$root\interface" /I "$matlabdir\extern\include" /I "." -DMODEL=fun_VFI_parforVS_mex /openmp /wd4101 
 
-ldflags =  /nologo    /DLL /LIBPATH:"$matlabdir\extern\lib\win64\microsoft" libmx.lib libmex.lib libmat.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib  /out:"fun_VFI_parfor_mex.mexw64" /LIBPATH:"$matlabdir\extern\lib\win64\microsoft" libmwblas.lib libemlrt.lib libcovrt.lib libut.lib libmwmathutil.lib libiomp5md.lib /nodefaultlib:vcomp /LIBPATH:"$matlabdir\bin\win64" /export:mexFunction /export:mexfilerequiredapiversion /export:emlrtMexFcnProperties /export:fun_VFI_parfor2 /export:fun_VFI_parfor2_initialize /export:fun_VFI_parfor2_terminate /export:fun_VFI_parfor2_atexit
+ldflags =  /nologo    /DLL /LIBPATH:"$matlabdir\extern\lib\win64\microsoft" libmx.lib libmex.lib libmat.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib  /out:"fun_VFI_parforVS_mex.mexw64" /LIBPATH:"$matlabdir\extern\lib\win64\microsoft" libmwblas.lib libemlrt.lib libcovrt.lib libut.lib libmwmathutil.lib libiomp5md.lib /nodefaultlib:vcomp /LIBPATH:"$matlabdir\bin\win64" /export:mexFunction /export:mexfilerequiredapiversion /export:emlrtMexFcnProperties /export:fun_VFI_parfor2 /export:fun_VFI_parfor2_initialize /export:fun_VFI_parfor2_terminate /export:fun_VFI_parfor2_atexit /export:emxInit_real_T /export:emxEnsureCapacity_real_T /export:emxFree_real_T
 
-ldxxflags =  /nologo    /DLL /LIBPATH:"$matlabdir\extern\lib\win64\microsoft" libmx.lib libmex.lib libmat.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib libMatlabDataArray.lib libMatlabEngine.lib  /out:"fun_VFI_parfor_mex.mexw64" /LIBPATH:"$matlabdir\extern\lib\win64\microsoft" libmwblas.lib libemlrt.lib libcovrt.lib libut.lib libmwmathutil.lib libiomp5md.lib /nodefaultlib:vcomp /LIBPATH:"$matlabdir\bin\win64" /export:mexFunction /export:mexfilerequiredapiversion /export:emlrtMexFcnProperties /export:fun_VFI_parfor2 /export:fun_VFI_parfor2_initialize /export:fun_VFI_parfor2_terminate /export:fun_VFI_parfor2_atexit
+ldxxflags =  /nologo    /DLL /LIBPATH:"$matlabdir\extern\lib\win64\microsoft" libmx.lib libmex.lib libmat.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib libMatlabDataArray.lib libMatlabEngine.lib  /out:"fun_VFI_parforVS_mex.mexw64" /LIBPATH:"$matlabdir\extern\lib\win64\microsoft" libmwblas.lib libemlrt.lib libcovrt.lib libut.lib libmwmathutil.lib libiomp5md.lib /nodefaultlib:vcomp /LIBPATH:"$matlabdir\bin\win64" /export:mexFunction /export:mexfilerequiredapiversion /export:emlrtMexFcnProperties /export:fun_VFI_parfor2 /export:fun_VFI_parfor2_initialize /export:fun_VFI_parfor2_terminate /export:fun_VFI_parfor2_atexit /export:emxInit_real_T /export:emxEnsureCapacity_real_T /export:emxFree_real_T
 
 linkobjs = 
 
@@ -49,8 +49,9 @@ build $builddir\mtimes.obj : cc $root\mtimes.c
 build $builddir\_coder_fun_VFI_parfor2_api.obj : cc $root\interface\_coder_fun_VFI_parfor2_api.c
 build $builddir\_coder_fun_VFI_parfor2_mex.obj : cc $root\interface\_coder_fun_VFI_parfor2_mex.c
 build $builddir\fun_VFI_parfor2.obj : cc $root\fun_VFI_parfor2.c
+build $builddir\fun_VFI_parfor2_emxutil.obj : cc $root\fun_VFI_parfor2_emxutil.c
 build $builddir\_coder_fun_VFI_parfor2_info.obj : cc $root\interface\_coder_fun_VFI_parfor2_info.c
 build $builddir\c_mexapi_version.obj : cc $matlabdir\extern\version\c_mexapi_version.c
 
 # Link
-build $root\fun_VFI_parfor_mex.mexw64 : link $builddir\fun_VFI_parfor2_data.obj $builddir\rt_nonfinite.obj $builddir\fun_VFI_parfor2_initialize.obj $builddir\fun_VFI_parfor2_terminate.obj $builddir\solve_entre.obj $builddir\mtimes.obj $builddir\_coder_fun_VFI_parfor2_api.obj $builddir\_coder_fun_VFI_parfor2_mex.obj $builddir\fun_VFI_parfor2.obj $builddir\_coder_fun_VFI_parfor2_info.obj $builddir\c_mexapi_version.obj 
+build $root\fun_VFI_parforVS_mex.mexw64 : link $builddir\fun_VFI_parfor2_data.obj $builddir\rt_nonfinite.obj $builddir\fun_VFI_parfor2_initialize.obj $builddir\fun_VFI_parfor2_terminate.obj $builddir\solve_entre.obj $builddir\mtimes.obj $builddir\_coder_fun_VFI_parfor2_api.obj $builddir\_coder_fun_VFI_parfor2_mex.obj $builddir\fun_VFI_parfor2.obj $builddir\fun_VFI_parfor2_emxutil.obj $builddir\_coder_fun_VFI_parfor2_info.obj $builddir\c_mexapi_version.obj 

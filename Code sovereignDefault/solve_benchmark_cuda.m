@@ -16,22 +16,22 @@ sigg = 2 ;
 ns = length(z) ;
 nb = length(b);
 
-vp = coder.nullcopy(zeros(ns,nb));  
-vd = coder.nullcopy(zeros(ns,1));  vdnew = coder.nullcopy(zeros(ns,1));
-V = coder.nullcopy(zeros(ns,nb)); 
-vpnew = coder.nullcopy(zeros(ns,nb)); 
+vp = zeros(ns,nb);  
+vd = zeros(ns,1);  vdnew = zeros(ns,1);
+V = zeros(ns,nb); 
+vpnew = zeros(ns,nb); 
 
-bp = coder.nullcopy(zeros(ns,nb)); %debt policy function (expressed in indices)  
-bpr = coder.nullcopy(zeros(ns,1)); % debt policy (index) when decided renegotiate (right after every default)
+bp = zeros(ns,nb); %debt policy function (expressed in indices)  
+bpr = zeros(ns,1); % debt policy (index) when decided renegotiate (right after every default)
 q = ones(ns,nb)/(1+rstar); %q is price of debt; it is a function of  (y_t, d_{t+1}) 
-qnew = coder.nullcopy(zeros(ns,nb));
+qnew = zeros(ns,nb);
 rr = 0.5*ones(ns,nb)/(1+rstar);   
-pdef = coder.nullcopy(zeros(ns,nb)); 
+pdef = zeros(ns,nb); 
 
-W = coder.nullcopy(zeros(nb,nb,ns)) ;
-WW = coder.nullcopy(zeros(nb,ns)) ;
-Gamma = coder.nullcopy(zeros(ns,1)) ;
-Dcre = coder.nullcopy(zeros(ns,nb)) ;
+W = zeros(nb,nb,ns) ;
+WW = zeros(nb,ns) ;
+Gamma = zeros(ns,1) ;
+Dcre = zeros(ns,nb) ;
 
 % pdf = sparse(pdf_joint) ;
 
@@ -49,8 +49,7 @@ smctime   = tic;
 totaltime = 0;
 avgtime = 0;
 
-dist = 1;    vaut = coder.nullcopy(zeros(ns,1));  
-
+dist = 1;    vaut = zeros(ns,1);  
 while dist > 1e-8
     vautnew = ua + m.^(1-sigg).*pdf*betta*vaut ; 
     dist = max(abs(vautnew(:)-vaut(:))) ;

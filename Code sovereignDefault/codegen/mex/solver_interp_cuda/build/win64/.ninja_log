@@ -1,0 +1,15 @@
+# ninja log v7
+35	99	8023843406073512	build/win64/_coder_solver_interp_cuda_info.obj	9e880616c58f4d02
+0	1165	8023843405723518	build/win64/MWCUBLASUtils.obj	79746a4b3baa9c12
+38	1279	8023843406103516	build/win64/cpp_mexapi_version.obj	5bffe9bea9826b8b
+6	1739	8023843405783513	build/win64/rt_nonfinite.obj	22527380173f5052
+4	1794	8023843405763510	build/win64/solver_interp_cuda_data.obj	e6d3fcf7fa0f1dd5
+19	1822	8023843405913584	build/win64/tic.obj	55fe59a18d24a55d
+26	1823	8023843405983512	build/win64/_coder_solver_interp_cuda_api.obj	2a5454064e779a7f
+23	1835	8023843405943582	build/win64/toc.obj	bd2525ad8021e2bc
+32	1846	8023843406043510	build/win64/solver_interp_cuda_mexutil.obj	d5130a9e3945592f
+29	2011	8023843406013511	build/win64/_coder_solver_interp_cuda_mex.obj	2657c1b766e717ee
+9	2012	8023843405813512	build/win64/solver_interp_cuda_initialize.obj	f999fb027bd79755
+13	2034	8023843405853577	build/win64/solver_interp_cuda_terminate.obj	eca50f9f8a53c6ed
+16	2169	8023843405883501	build/win64/solver_interp_cuda.obj	33031ec4e4336526
+2170	3316	8023843427429086	solver_interp_cuda_mex.mexw64	d713b1e193a88ca6

@@ -1,0 +1,65 @@
+# CompilerName=msvc170
+# Mode=optim
+ninja_required_version = 1.3
+
+# Basic folders
+root = .
+builddir = $root\build\win64
+matlabdir = D:\Matlab_2026a
+startdir = D:\BaiduSyncdisk\working papers\Parallel computation with Mex\code_gitrepo\Code sovereignDefault
+
+# Toolchain information
+cc = cl
+cxx = cl
+linker = link
+linkerxx = link
+
+cflags =  /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I "$root" /I "$startdir" /I "$root\interface" /I "$matlabdir\extern\include" /I "." -DMODEL=solve_benchmarkVS_parfor_mex /openmp /wd4101 
+
+cxxflags =  /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /utf-8 /I "$root" /I "$startdir" /I "$root\interface" /I "$matlabdir\extern\include" /I "." -DMODEL=solve_benchmarkVS_parfor_mex /openmp /wd4101 
+
+ldflags =  /nologo    /DLL /LIBPATH:"$matlabdir\extern\lib\win64\microsoft" libmx.lib libmex.lib libmat.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib  /out:"solve_benchmarkVS_parfor_mex.mexw64" /LIBPATH:"$matlabdir\extern\lib\win64\microsoft" libmwblas.lib libemlrt.lib libcovrt.lib libut.lib libmwmathutil.lib libiomp5md.lib /nodefaultlib:vcomp /LIBPATH:"$matlabdir\bin\win64" /export:mexFunction /export:mexfilerequiredapiversion /export:emlrtMexFcnProperties /export:solve_benchmark_parfor /export:solve_benchmark_parfor_initialize /export:solve_benchmark_parfor_terminate /export:solve_benchmark_parfor_atexit /export:b_emlrt_marshallOut /export:emxInit_boolean_T /export:emxInit_real_T /export:emxEnsureCapacity_real_T /export:emxEnsureCapacity_boolean_T /export:emxFree_boolean_T /export:emxFree_real_T
+
+ldxxflags =  /nologo    /DLL /LIBPATH:"$matlabdir\extern\lib\win64\microsoft" libmx.lib libmex.lib libmat.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib libMatlabDataArray.lib libMatlabEngine.lib  /out:"solve_benchmarkVS_parfor_mex.mexw64" /LIBPATH:"$matlabdir\extern\lib\win64\microsoft" libmwblas.lib libemlrt.lib libcovrt.lib libut.lib libmwmathutil.lib libiomp5md.lib /nodefaultlib:vcomp /LIBPATH:"$matlabdir\bin\win64" /export:mexFunction /export:mexfilerequiredapiversion /export:emlrtMexFcnProperties /export:solve_benchmark_parfor /export:solve_benchmark_parfor_initialize /export:solve_benchmark_parfor_terminate /export:solve_benchmark_parfor_atexit /export:b_emlrt_marshallOut /export:emxInit_boolean_T /export:emxInit_real_T /export:emxEnsureCapacity_real_T /export:emxEnsureCapacity_boolean_T /export:emxFree_boolean_T /export:emxFree_real_T
+
+linkobjs = 
+
+# Build Rules
+rule cc
+    command = $cc $cflags $in /Fo$out
+
+rule cxx
+    command = $cxx $cxxflags $in /Fo$out
+
+rule link
+    command = $linker @$out.rsp $linkobjs $ldflags
+    rspfile = $out.rsp
+    rspfile_content = $in
+
+rule linkxx
+    command = $linkerxx $in $linkobjs $ldxxflags
+
+# Build
+build $builddir\solve_benchmark_parfor_data.obj : cc $root\solve_benchmark_parfor_data.c
+build $builddir\rt_nonfinite.obj : cc $root\rt_nonfinite.c
+build $builddir\solve_benchmark_parfor_initialize.obj : cc $root\solve_benchmark_parfor_initialize.c
+build $builddir\solve_benchmark_parfor_terminate.obj : cc $root\solve_benchmark_parfor_terminate.c
+build $builddir\solve_benchmark_parfor.obj : cc $root\solve_benchmark_parfor.c
+build $builddir\tic.obj : cc $root\tic.c
+build $builddir\eml_mtimes_helper.obj : cc $root\eml_mtimes_helper.c
+build $builddir\mtimes.obj : cc $root\mtimes.c
+build $builddir\abs.obj : cc $root\abs.c
+build $builddir\mpower.obj : cc $root\mpower.c
+build $builddir\repmat.obj : cc $root\repmat.c
+build $builddir\ixfun.obj : cc $root\ixfun.c
+build $builddir\toc.obj : cc $root\toc.c
+build $builddir\_coder_solve_benchmark_parfor_api.obj : cc $root\interface\_coder_solve_benchmark_parfor_api.c
+build $builddir\_coder_solve_benchmark_parfor_mex.obj : cc $root\interface\_coder_solve_benchmark_parfor_mex.c
+build $builddir\exp.obj : cc $root\exp.c
+build $builddir\solve_benchmark_parfor_emxutil.obj : cc $root\solve_benchmark_parfor_emxutil.c
+build $builddir\solve_benchmark_parfor_mexutil.obj : cc $root\solve_benchmark_parfor_mexutil.c
+build $builddir\_coder_solve_benchmark_parfor_info.obj : cc $root\interface\_coder_solve_benchmark_parfor_info.c
+build $builddir\c_mexapi_version.obj : cc $matlabdir\extern\version\c_mexapi_version.c
+
+# Link
+build $root\solve_benchmarkVS_parfor_mex.mexw64 : link $builddir\solve_benchmark_parfor_data.obj $builddir\rt_nonfinite.obj $builddir\solve_benchmark_parfor_initialize.obj $builddir\solve_benchmark_parfor_terminate.obj $builddir\solve_benchmark_parfor.obj $builddir\tic.obj $builddir\eml_mtimes_helper.obj $builddir\mtimes.obj $builddir\abs.obj $builddir\mpower.obj $builddir\repmat.obj $builddir\ixfun.obj $builddir\toc.obj $builddir\_coder_solve_benchmark_parfor_api.obj $builddir\_coder_solve_benchmark_parfor_mex.obj $builddir\exp.obj $builddir\solve_benchmark_parfor_emxutil.obj $builddir\solve_benchmark_parfor_mexutil.obj $builddir\_coder_solve_benchmark_parfor_info.obj $builddir\c_mexapi_version.obj 

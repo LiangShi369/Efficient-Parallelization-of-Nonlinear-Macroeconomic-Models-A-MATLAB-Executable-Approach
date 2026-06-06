@@ -12,7 +12,6 @@
 #pragma once
 
 /* Include files */
-#include "fun_VFI_parfor2_types.h"
 #include "rtwtypes.h"
 #include "emlrt.h"
 #include "mex.h"
@@ -22,8 +21,7 @@
 #include <string.h>
 
 /* Function Declarations */
-void fun_VFI_parfor2_api(fun_VFI_parfor2StackData *SD,
-                         const mxArray *const prhs[6], int32_T nlhs,
+void fun_VFI_parfor2_api(const mxArray *const prhs[6], int32_T nlhs,
                          const mxArray *plhs[3]);
 
 /* End of code generation (_coder_fun_VFI_parfor2_api.h) */

@@ -64,6 +64,7 @@ if run_matlab
 disp(['Matlab vec time total: ', num2str(totaltime)]) ;
 disp(['Matlab vec time average: ', num2str(avgtime)]) ;
 
+%%
 wait(gpuDevice)
 [q1,bp1,vp1,def1,totaltime1,avgtime1] = solver_vec_gpu(b,z,m,pdf,para) ;
 disp(['gpuArray time total: ', num2str(totaltime1)]) ;
@@ -71,7 +72,7 @@ disp(['gpuArray time average: ', num2str(avgtime1)]) ;
 
 end
 
-%% Matlab native GPU
+%% Mex cuda
 
 if compile_mex
 
@@ -84,6 +85,7 @@ end
 
 if run_mex
 
+    %%
 wait(gpuDevice)
 [q,bp,vp,def,totaltime,avgtime] = solver_vec_cuda_mex(b,z,m,pdf,para) ;
 disp(['Mex vec cuda time total: ', num2str(totaltime)]) ;

@@ -12,6 +12,7 @@
 #pragma once
 
 /* Include files */
+#include "fun_VFI_parfor2_types.h"
 #include "rtwtypes.h"
 #include "emlrt.h"
 #include "mex.h"
@@ -21,6 +22,7 @@
 #include <string.h>
 
 /* Function Declarations */
-void mtimes(const real_T A[80040], const real_T B[1600], real_T C[80040]);
+void mtimes(const emlrtStack *sp, const emxArray_real_T *A,
+            const real_T B[1600], emxArray_real_T *C);
 
 /* End of code generation (mtimes.h) */

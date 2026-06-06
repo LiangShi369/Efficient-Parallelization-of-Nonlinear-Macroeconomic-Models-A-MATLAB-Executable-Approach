@@ -30,7 +30,7 @@ emlrtContext emlrtContextGlobal = {
     NULL                                                  /* fSigMem */
 };
 
-emlrtRSInfo k_emlrtRSI = {
+emlrtRSInfo l_emlrtRSI = {
     71,                                                         /* lineNo */
     "power",                                                    /* fcnName */
     "D:\\Matlab_2026a\\toolbox\\eml\\lib\\matlab\\ops\\power.m" /* pathName */
