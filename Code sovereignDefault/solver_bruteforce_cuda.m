@@ -8,7 +8,6 @@ sigg = para.sigg ;
 rstar = para.rstar ;
 phi0 = para.phi0 ;
 
-% dpgrid = b';
 ns = length(z) ;
 nb = size(b,1);
 [~,nb0] = min(abs(b));
@@ -17,14 +16,11 @@ nb = size(b,1);
 vp = zeros(ns,nb) ;  %continue repaying
 vd = zeros(ns,1) ; 
 def = zeros(ns,nb) ; 
-% vgood = vp ;
 vo = vd;
 vp1 = vp;  
 
 bp = zeros(ns,nb) ; %debt policy function (expressed in indices)  
 q = ones(ns,nb)/(1+rstar); %q is price of debt; it is a function of  (y_t, d_{t+1}) 
-% u = zeros(1,nb) ;
-
 ua = ( (exp(z).*m *(1-phi0)).^(1-sigg) - 1) / (1-sigg)  ;
 
 %%

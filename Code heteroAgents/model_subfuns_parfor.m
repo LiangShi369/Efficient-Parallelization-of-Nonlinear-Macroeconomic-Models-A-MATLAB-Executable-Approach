@@ -1,7 +1,7 @@
 function [val,V,Policy,StatDist] = model_subfuns_parfor(p_eqm, a_grid, z_grid, pi_z, Params,vfoptions,simoptions,heteroagentoptions)
 
 % fun_VFI_parfor uses parfor native Matlab
-[V,Policy,Params] = fun_VFI_parfor2(p_eqm, a_grid, z_grid, pi_z,Params,vfoptions) ;
+[V,Policy,Params] = fun_VFI_parfor(p_eqm, a_grid, z_grid, pi_z,Params,vfoptions) ;
 
 % Policy is (n_a,n_z)
 [StatDist, GE_eqns_vec] = fun_dist_agg(Policy, a_grid, z_grid, pi_z,Params, simoptions) ;

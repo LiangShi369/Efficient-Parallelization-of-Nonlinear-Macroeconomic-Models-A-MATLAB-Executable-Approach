@@ -104,10 +104,12 @@ disp(['Mex parfor time total: ', num2str(totaltime)]) ;
 disp(['Mex parfor time average: ', num2str(avgtime)]) ;
 
 wait(gpuDevice)
-[q,bp,vp,def,totaltime,avgtime] = solver_interp_cuda_mex(b,z,m,pdf,para) ;
+[q_cuda,bp_cuda,vp_cuda,def_cuda,totaltime_cuda,avgtime_cuda] ...
+    = solver_interp_cuda_mex(b,z,m,pdf,para) ;
 disp(['Mex cuda time total: ', num2str(totaltime)]) ;
 disp(['Mex cuda time average: ', num2str(avgtime)]) ;
 
 end
 
-
+[max(abs(vp(:)-vp_cuda(:))), max(abs(q(:)-q_cuda(:))), max(abs(bp(:)-bp_cuda(:))),...
+    max(abs(def(:)-def_cuda(:)))]

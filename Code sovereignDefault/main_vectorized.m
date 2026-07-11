@@ -7,7 +7,7 @@ run_matlab = 1 ;  % 0 for false, 1 for true
 compile_mex = 0 ;
 run_mex = 0 ;
 
-nb = 200 ; % 200 or 400 ;
+nb = 400 ; % 200 or 400 ;
 %%
 phi0 = 0.028  ; 
 rstar = 0.01 ;  

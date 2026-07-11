@@ -5,7 +5,7 @@ clear
 format compact
 
 %%
-nb = 400;   % change number of nb within vector [200, 400]
+nb = 200;   % change number of nb within vector [200, 400]
 
 run_bruteforce_matlab = 0 ;  % 0 for false, 1 for true
 
@@ -71,10 +71,10 @@ end
 
 if run_bruteforce_matlab
 
+    %%
 [q,bp,vp,def,totaltime,avgtime] = solver_bruteforce(b,z,m,pdf,para);
 disp(['BruteForce serial time total: ', num2str(totaltime)]) ;
 disp(['BruteForce serial time average: ', num2str(avgtime)]) ;
-
 
 [q,bp,vp,def,totaltime,avgtime] = solver_bf_parfor(b,z,m,pdf,para);
 disp(['BruteForce parfor time total: ', num2str(totaltime)]) ;
@@ -106,17 +106,19 @@ if run_bruteforce_mex
 disp(['BruteForce mex time total: ', num2str(totaltime)]) ;
 disp(['BruteForce mex time average: ', num2str(avgtime)]) ;
 
-%%
 [q,bp,vp,def,totaltime,avgtime] = solver_bf_parfor_mex(b,z,m,pdf,para);
 disp(['BruteForce mex parfor time total: ', num2str(totaltime)]) ;
 disp(['BruteForce mex parfor time average: ', num2str(avgtime)]) ;
 
 wait(gpuDevice)
-[q1,bp,vp,def,totaltime,avgtime] = solver_bf_cuda_mex(b,z,m,pdf,para);
-disp(['BruteForce mex cuda time total: ', num2str(totaltime)]) ;
-disp(['BruteForce mex cuda time average: ', num2str(avgtime)]) ;
+[q_cuda,bp_cuda,vp_cuda,def_cuda,totaltime_cuda,avgtime_cuda] = solver_bf_cuda_mex(b,z,m,pdf,para);
+disp(['BruteForce mex cuda time total: ', num2str(totaltime_cuda)]) ;
+disp(['BruteForce mex cuda time average: ', num2str(avgtime_cuda)]) ;
 
 end
+
+[max(abs(vp(:)-vp_cuda(:))), max(abs(q(:)-q_cuda(:))), max(abs(bp(:)-bp_cuda(:))),...
+    max(abs(def(:)-def_cuda(:)))]
 
 %% 2. Divide and Conquer (binary monotonic)
 
@@ -124,6 +126,7 @@ end
 
 if run_binarymonotonic_matlab
 
+    %%
 [q_1,bp_1,vp_1,def_1,totaltime,avgtime] = solver_divide(b,z,m,pdf,para);
 disp(['Binary serial time total: ', num2str(totaltime)]) ;
 disp(['Binary serial time average: ', num2str(avgtime)]) ;
@@ -154,20 +157,21 @@ end
 
 if run_binarymonotonic_mex
 
-[q_11,bp_11,vp_11,def_11,totaltime,avgtime] = solver_divide_mex(b,z,m,pdf,para);
+    %%
+[q,bp,vp,def,totaltime,avgtime] = solver_divide_mex(b,z,m,pdf,para);
 disp(['Binary mex serial time total: ', num2str(totaltime)]) ;
 disp(['Binary mex serial time average: ', num2str(avgtime)]) ;
 
-%%
-[q_11,bp_11,vp_11,def_11,totaltime,avgtime] = solver_divide_parfor_mex(b,z,m,pdf,para);
+[q,bp,vp,def,totaltime,avgtime] = solver_divide_parfor_mex(b,z,m,pdf,para);
 disp(['Binary mex parfor time total: ', num2str(totaltime)]) ;
 disp(['Binary mex parfor time average: ', num2str(avgtime)]) ;
 
 wait(gpuDevice)
-[q_12,bp_12,vp_12,def_12,totaltime,avgtime] = solver_divide_cuda_mex(b,z,m,pdf,para);
+[q_cuda,bp_cuda,vp_cuda,def_cuda,totaltime_cuda,avgtime_cuda] = solver_divide_cuda_mex(b,z,m,pdf,para);
 disp(['Binary mex cuda time total: ', num2str(totaltime)]) ;
 disp(['Binary mex cuda time average: ', num2str(avgtime)]) ;
 
 end
 
-
+[max(abs(vp(:)-vp_cuda(:))), max(abs(q(:)-q_cuda(:))), max(abs(bp(:)-bp_cuda(:))),...
+    max(abs(def(:)-def_cuda(:)))]

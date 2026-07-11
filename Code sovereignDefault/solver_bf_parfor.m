@@ -19,7 +19,6 @@ vp1 = vp;
 
 bp = zeros(ns,nb); %debt policy function (expressed in indices)  
 q = ones(ns,nb)/(1+rstar); %q is price of debt; it is a function of  (y_t, d_{t+1}) 
-
 ua = ( (exp(z).*m *(1-phi0)).^(1-sigg) - 1) / (1-sigg)  ;
 
 %%

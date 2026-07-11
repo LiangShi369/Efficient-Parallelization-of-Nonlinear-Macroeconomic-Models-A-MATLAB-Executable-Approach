@@ -1,4 +1,4 @@
-function [V,Policy,Params] = fun_VFI_parfor2(p_eqm, a_grid, z_grid, pi_z, Params, vfoptions)
+function [V,Policy,Params] = fun_VFI_parfor(p_eqm, a_grid, z_grid, pi_z, Params, vfoptions)
 
 Params.r = p_eqm(1);
 Params.w = p_eqm(2);

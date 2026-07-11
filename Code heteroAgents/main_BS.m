@@ -108,22 +108,22 @@ end
 
 if run_matlab
 
-% smctime = tic;
-% 
-% if heteroagentoptions.do_GE==1
-%     % Find GE prices
-%     minoptions = optimset('TolX',heteroagentoptions.toleranceGEprices,'TolFun',heteroagentoptions.toleranceGEcondns,'MaxFunEvals',heteroagentoptions.maxiter);
-%     p_eqm = fminsearch(@(p) model_subfuns(p, a_grid, z_grid, pi_z, Params, vfoptions, simoptions, heteroagentoptions),GEPrices0,minoptions);
-%     [~,V,Policy,StatDist] = model_subfuns(p_eqm, a_grid, z_grid, pi_z, Params, vfoptions, simoptions, heteroagentoptions); % Recompute model objects at GE prices
-% elseif heteroagentoptions.do_GE==0
-%     p_eqm = GEPrices0;
-%     [~,V,Policy,StatDist] = model_subfuns(p_eqm, a_grid, z_grid, pi_z, Params, vfoptions, simoptions, heteroagentoptions);
-% end
-% 
-% Outputs_serial = compute_targets(a_grid, z_grid, pi_z, Policy, StatDist, Params, p_eqm) ;
-% totaltime_serial = toc(smctime)
-% 
-% make_table(ResFolder,Outputs_serial,Params) ;
+smctime = tic;
+
+if heteroagentoptions.do_GE==1
+    % Find GE prices
+    minoptions = optimset('TolX',heteroagentoptions.toleranceGEprices,'TolFun',heteroagentoptions.toleranceGEcondns,'MaxFunEvals',heteroagentoptions.maxiter);
+    p_eqm = fminsearch(@(p) model_subfuns(p, a_grid, z_grid, pi_z, Params, vfoptions, simoptions, heteroagentoptions),GEPrices0,minoptions);
+    [~,V,Policy,StatDist] = model_subfuns(p_eqm, a_grid, z_grid, pi_z, Params, vfoptions, simoptions, heteroagentoptions); % Recompute model objects at GE prices
+elseif heteroagentoptions.do_GE==0
+    p_eqm = GEPrices0;
+    [~,V,Policy,StatDist] = model_subfuns(p_eqm, a_grid, z_grid, pi_z, Params, vfoptions, simoptions, heteroagentoptions);
+end
+
+Outputs_serial = compute_targets(a_grid, z_grid, pi_z, Policy, StatDist, Params, p_eqm) ;
+totaltime_serial = toc(smctime)
+
+make_table(ResFolder,Outputs_serial,Params) ;
 
 %% Matlab parfor
 
@@ -248,16 +248,20 @@ smctime = tic;
 if heteroagentoptions.do_GE==1
     % Find GE prices
     minoptions = optimset('TolX',heteroagentoptions.toleranceGEprices,'TolFun',heteroagentoptions.toleranceGEcondns,'MaxFunEvals',heteroagentoptions.maxiter);
-    p_eqm = fminsearch(@(p) model_subfuns_cuda(p, a_grid, z_grid, pi_z, Params, vfoptions, simoptions, heteroagentoptions),GEPrices0,minoptions);
-    [~,V,Policy,StatDist] = model_subfuns_cuda(p_eqm, a_grid, z_grid, pi_z, Params, vfoptions, simoptions, heteroagentoptions); % Recompute model objects at GE prices
+    p_eqm_cuda = fminsearch(@(p) model_subfuns_cuda(p, a_grid, z_grid, pi_z, Params, vfoptions, simoptions, heteroagentoptions),GEPrices0,minoptions);
+    [~,V_cuda,Policy_cuda,StatDist_cuda] = model_subfuns_cuda(p_eqm_cuda, a_grid, z_grid, pi_z, Params, vfoptions, simoptions, heteroagentoptions); % Recompute model objects at GE prices
 elseif heteroagentoptions.do_GE==0
-    p_eqm = GEPrices0;
-    [~,V,Policy,StatDist] = model_subfuns_cuda(p_eqm, a_grid, z_grid, pi_z, Params, vfoptions, simoptions, heteroagentoptions);
+    p_eqm_cuda = GEPrices0;
+    [~,V_cuda,Policy_cuda,StatDist_cuda] = model_subfuns_cuda(p_eqm_cuda, a_grid, z_grid, pi_z, Params, vfoptions, simoptions, heteroagentoptions);
 end
 
-Outputs_cuda = compute_targets(a_grid, z_grid, pi_z, Policy, StatDist, Params, p_eqm) ;
+Outputs_cuda = compute_targets(a_grid, z_grid, pi_z, Policy_cuda, StatDist_cuda, Params, p_eqm_cuda) ;
 totaltime_cuda = toc(smctime)
 make_table(ResFolder,Outputs_cuda,Params) ;
+
+%%
+[max(abs(V(:)-V_cuda(:))), max(abs(Policy(:)-Policy_cuda(:))), max(abs(StatDist(:)-StatDist_cuda(:))), ...
+    max(abs(p_eqm(:)-p_eqm_cuda(:)))]
 
 end
 %% Replicate Figure 2 of BS2013

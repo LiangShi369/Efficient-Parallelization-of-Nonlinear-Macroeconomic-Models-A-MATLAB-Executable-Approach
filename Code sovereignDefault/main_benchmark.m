@@ -2,7 +2,7 @@ clear
 
 format compact
 
-nb = 200 ;         % change number of nb within vector [200, 400]
+nb = 400 ;         % change number of nb within vector [200, 400]
 
 run_matlab = 1 ;   % 0 for false              % Run native matlab, can be very slow for matlab parfor, use average
 
@@ -75,13 +75,15 @@ end
 %% --- matlab native solve ---
 
 if run_matlab
-% [vp,vd,q_serial,bp,bpr,default,rr,totaltime,avgtime] = solve_benchmark(z,m,b,pdf_joint,para) ;
-% disp(['Serial time total: ', num2str(totaltime)]) ;
-% disp(['Serial time average: ', num2str(avgtime)]) ;
+[vp,vd,q_serial,bp,bpr,default,rr,totaltime,avgtime] = solve_benchmark(z,m,b,pdf_joint,para) ;
+disp(['Serial time total: ', num2str(totaltime)]) ;
+disp(['Serial time average: ', num2str(avgtime)]) ;
 
+%%
 [vp,vd,q_parfor,bp,bpr,default,rr,totaltime,avgtime] = solve_benchmark_parfor( z,m,b,pdf_joint,para ) ;
 disp(['Parfor time total: ', num2str(totaltime)]) ;
 disp(['Parfor time average: ', num2str(avgtime)]) ;
+
 end
 
 %% --- matlab mex serial solve ---
@@ -115,23 +117,23 @@ codegen -config cfg solve_benchmark_cuda -args {z,m,b,pdf_joint,para } -o solver
 
 end
 
+%%
 if run_mex
 
-%%
-[vp,vd,q_mexparfor,bp,bpr,default,rr,totaltime,avgtime] = solve_benchmark_parfor_mex( z,m,b,pdf_joint,para  ) ;
+[vp,vd,q,bp,bpr,default,rr,totaltime,avgtime] = solve_benchmark_parfor_mex( z,m,b,pdf_joint,para  ) ;
 
 disp(['Mex parfor time total: ', num2str(totaltime)]) ;
 disp(['Mex parfor time average: ', num2str(avgtime)]) ;
 
 wait(gpuDevice)
-[vp,vd,q_mexcuda,bp,bpr,default,rr,totaltime,avgtime] = solver_benchmark_cuda_mex( z,m,b,pdf_joint,para) ;
+[vp_mexcuda,vd_mexcuda,q_mexcuda,bp_mexcuda,bpr_mexcuda,default_mexcuda,rr_mexcuda,...
+    totaltime_mexcuda,avgtime_mexcuda] = solver_benchmark_cuda_mex(z,m,b,pdf_joint,para) ;
 
-disp(['Mex cuda time total: ', num2str(totaltime)]) ;
-disp(['Mex cuda time average: ', num2str(avgtime)]) ;
-
-diff = norm(q_mexparfor - q_mexcuda) 
+disp(['Mex cuda time total: ', num2str(totaltime_mexcuda)]) ;
+disp(['Mex cuda time average: ', num2str(avgtime_mexcuda)]) ;
 
 end
 
-
+[max(abs(vp(:)-vp_mexcuda(:))), max(abs(q(:)-q_mexcuda(:))), max(abs(bp(:)-bp_mexcuda(:))),...
+    max(abs(default(:)-default_mexcuda(:)))]
 
